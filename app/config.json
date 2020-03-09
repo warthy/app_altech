@@ -1,0 +1,9 @@
+{
+  "database": {
+    "host": "localhost",
+    "username": "root",
+    "password": "",
+    "database": "altech"
+  },
+  "password_hash": "bcrypt"
+}

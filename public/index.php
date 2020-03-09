@@ -1,6 +1,8 @@
 <?php
 
 // Get url
+$request  = Request::createFromGlobals();
+
 
 // Get Controller
 
