@@ -1,7 +1,9 @@
 <?php
+namespace Altech\Controller;
 
+use App\Component\Controller;
 
-class ClientController
+class ClientController extends Controller
 {
 
 }

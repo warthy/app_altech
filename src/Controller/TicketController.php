@@ -1,7 +1,16 @@
 <?php
+namespace Altech\Controller;
 
+use App\Component\Controller;
 
-class TicketController
+class TicketController extends Controller
 {
 
+    public function index(){
+        die('oui');
+    }
+
+    public function view($id){
+        
+    }
 }

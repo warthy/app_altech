@@ -1,7 +1,9 @@
 <?php
+namespace Altech\Controller;
 
+use App\Component\Controller;
 
-class CandidateController
+class CandidateController extends Controller
 {
 
 }

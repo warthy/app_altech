@@ -1,8 +1,9 @@
 <?php
 
+namespace App\KernelFoundation;
 
-class Kernel
-{
+class Kernel {
+
     private $request;
     private $router;
 
@@ -11,10 +12,12 @@ class Kernel
 
     }
 
-    public function handle(Request $request){
+    public function handle(Request $request): Response
+    {
         $this->request = $request;
+        Router::GenerateRoutes();
         $this->router = Router::getInstance($request);
 
-        $this->router->dispatch();
+        return $this->router->dispatch();
     }
 }

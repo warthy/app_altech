@@ -1,2 +1,4 @@
 /.idea/
 altech.iml
+/vendor/
+/var/

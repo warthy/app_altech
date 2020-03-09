@@ -1,12 +1,14 @@
 <?php
+namespace App\KernelFoundation;
 
+use Exception;
 
 class ParameterBag
 {
 
     private $parameters = [];
 
-    public function __construct(array $data)
+    public function __construct(array $data = [])
     {
         $this->parameters = $data;
     }

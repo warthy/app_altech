@@ -1,5 +1,5 @@
 <?php
-
+namespace App\KernelFoundation;
 
 class Database
 {
