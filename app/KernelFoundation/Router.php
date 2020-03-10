@@ -62,16 +62,6 @@ class Router
         return substr($route, 0, $pos);
     }
 
-
-    public static function getInstance(Request $req): self
-    {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new Router($req);
-        }
-
-        return self::$_instance;
-    }
-
     public static function GenerateRoutes()
     {
         if (file_exists('../../var/cache/routesGenerated.php')) {
@@ -97,5 +87,14 @@ class Router
 
             fwrite($handle, $content);
         }
+    }
+
+    public static function getInstance(Request $req): self
+    {
+        if (is_null(self::$_instance)) {
+            self::$_instance = new Router($req);
+        }
+
+        return self::$_instance;
     }
 }
