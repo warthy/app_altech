@@ -20,25 +20,33 @@ abstract class Controller
     }
 
 
-    protected function render(string $view, array $param = [], string $layout = self::DEFAULT_LAYOUT, Response $response = null): Response
+    protected function render(string $view, array $param = [], Response $response = null, $layout = self::DEFAULT_LAYOUT): Response
     {
         // Check that file does exist otherwise throw exception
         if (!file_exists(View::PATH_TO_VIEWS . $view)) {
             throw new Exception('no template file ' . $view . ' present in directory ' . View::PATH_TO_VIEWS);
         }
 
-        // Start output buffer
-        ob_start();
-        extract($param);
-        include View::PATH_TO_VIEWS . $view;
-        $body = ob_get_contents();
-        ob_end_clean();
-
-        ob_start();
-        include View::PATH_TO_VIEWS . $layout;
-        $content = ob_get_contents();
-        ob_end_clean();
         //Generate html page
+        if($layout){
+            // Start output buffer
+            ob_start();
+            extract($param);
+            include View::PATH_TO_VIEWS . $view;
+            $body = ob_get_contents();
+            ob_end_clean();
+
+            ob_start();
+            include View::PATH_TO_VIEWS . $layout;
+            $content = ob_get_contents();
+            ob_end_clean();
+        }else {
+            ob_start();
+            include View::PATH_TO_VIEWS . $view;
+            $content = ob_get_contents();
+            ob_end_clean();
+        }
+
 
         $response = $response ?? new Response();
         $response->setContent($content);

@@ -1,4 +1,8 @@
 {
+  "/": {
+    "controller": "HomeController::index"
+  },
+
   "/client": {
     "controller": "ClientController::index"
   },

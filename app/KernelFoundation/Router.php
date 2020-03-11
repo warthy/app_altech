@@ -20,11 +20,12 @@ class Router
     public function dispatch(): Response
     {
         foreach (self::$routes as $route => $conf) {
-            ['controller' => $handler, 'requirements' => $requirements, 'regex_pattern' => $pattern] = $conf;
+            ['controller' => $handler, 'regex_pattern' => $pattern] = $conf;
             if(preg_match($pattern, $this->request->uri)){
                 [$class, $method] = explode("::", $handler);
 
                 $args = [];
+                $requirements = $conf['requirements'] ?? [];
                 foreach ($requirements as $name => $val){
                     $start = strpos($route, ':'.$name);
                     $end = strpos($this->request->uri, '/', $start);
@@ -40,26 +41,7 @@ class Router
             }
         }
 
-        return new Response("", [], 404);
-    }
-
-
-    /**
-     * Removes trailing forward slashes from the right of the route.
-     * @param string $route
-     * @return string
-     */
-    private function formatRoute(string $route): string
-    {
-        //Remove last slash
-        $result = rtrim($route, '/');
-        if ($result === '') {
-            return '/';
-        }
-
-        //Remove url params from uri
-        $pos = strpos($route, "?");
-        return substr($route, 0, $pos);
+        return new Response([], 404);
     }
 
     public static function GenerateRoutes()
@@ -79,7 +61,7 @@ class Router
 
                 $conf["regex_pattern"] = $regex_uri;
                 $conf["controller"] = "Altech\\Controller\\".$conf["controller"];
-                self::$routes = [$route => $conf];
+                self::$routes[$route] = $conf;
             }
 
             $handle = fopen('../var/cache/routesGenerated.php', 'w') or die('Cannot open file routesGenerated');

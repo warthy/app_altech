@@ -33,7 +33,7 @@ class Kernel
         if (file_exists('../../var/cache/KernelConf.php')) {
             self::$conf = require '../../var/cache/KernelConf.php';
         } else {
-            self::$conf = json_decode(file_get_contents(__DIR__ . '/../routes.json', true), true);
+            self::$conf = json_decode(file_get_contents(__DIR__ . '/../config.json', true), true);
 
             $handle = fopen('../var/cache/KernelConf.php', 'w') or die('Cannot open file routesGenerated');
             $content = "<?php return " . var_export(self::$conf, true) . ";";
@@ -45,6 +45,6 @@ class Kernel
     private function connectDatabase()
     {
         $credentials = self::$conf["database"];
-        $this->database = Database::getInstance(...$credentials);
+        $this->database = Database::getInstance(...array_values($credentials));
     }
 }
