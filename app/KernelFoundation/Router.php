@@ -4,6 +4,7 @@ namespace App\KernelFoundation;
 
 class Router
 {
+	
     private static $_instance = null;
     private static $routes = [];
     private $request;
