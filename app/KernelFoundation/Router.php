@@ -20,6 +20,7 @@ class Router
      */
     public function dispatch(): Response
     {
+
         foreach (self::$routes as $route => $conf) {
             ['controller' => $handler, 'regex_pattern' => $pattern] = $conf;
             if(preg_match($pattern, $this->request->uri)){
