@@ -4,7 +4,7 @@ namespace App\KernelFoundation;
 
 class Router
 {
-	
+
     private static $_instance = null;
     private static $routes = [];
     private $request;
@@ -20,6 +20,7 @@ class Router
      */
     public function dispatch(): Response
     {
+    	// Check each route to see if one's valid
         foreach (self::$routes as $route => $conf) {
             ['controller' => $handler, 'regex_pattern' => $pattern] = $conf;
             if(preg_match($pattern, $this->request->uri)){
