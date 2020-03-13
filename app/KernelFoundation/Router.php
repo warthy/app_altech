@@ -48,6 +48,7 @@ class Router
 
     public static function GenerateRoutes()
     {
+    	// Load routes or generate cache
         if (file_exists('../../var/cache/routesGenerated.php')) {
             self::$routes = require '../../var/cache/routesGenerated.php';
         } else {
@@ -74,11 +75,13 @@ class Router
     }
 
     public static function getInstance(Request $req): self
-    {
+    {	
+    	// Get instance if not already created
         if (is_null(self::$_instance)) {
             self::$_instance = new Router($req);
         }
 
         return self::$_instance;
     }
+
 }
