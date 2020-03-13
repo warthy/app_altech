@@ -48,6 +48,7 @@ class Router
 
     public static function GenerateRoutes()
     {
+    	// Load routes or generate cache
         if (file_exists('../../var/cache/routesGenerated.php')) {
             self::$routes = require '../../var/cache/routesGenerated.php';
         } else {
