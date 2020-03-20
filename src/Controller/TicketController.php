@@ -13,6 +13,7 @@ class TicketController extends Controller
 
     public function view($id)
     {
+
         return $this->render("/ticket/view.php", ["id" => $id]);
     }
 

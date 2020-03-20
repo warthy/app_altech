@@ -11,6 +11,7 @@
   "/client/ticket": {
     "controller": "TicketController::index"
   },
+
   "/client/ticket/:id": {
     "controller": "TicketController::view",
     "requirements": {

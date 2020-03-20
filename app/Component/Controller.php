@@ -4,6 +4,7 @@
 namespace App\Component;
 
 
+use App\KernelFoundation\Database;
 use App\KernelFoundation\Request;
 use App\KernelFoundation\Response;
 use Exception;
@@ -17,6 +18,11 @@ abstract class Controller
     public function __construct(Request $request)
     {
         $this->request = $request;
+    }
+
+    protected function getRepository(string $class): Repository
+    {
+       return Database::getRepository($class);
     }
 
 

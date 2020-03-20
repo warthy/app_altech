@@ -1,14 +1,22 @@
 <?php
+
 namespace App\KernelFoundation;
 
+use App\Component\Repository;
 use Exception;
 use PDO;
 use PDOException;
 
 class Database
 {
+    /**
+     * @var PDO
+     */
     private $PDOInstance;
 
+    /**
+     * @var null|Database
+     */
     private static $_instance = null;
 
 
@@ -25,9 +33,17 @@ class Database
             $this->PDOInstance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->PDOInstance->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             throw new Exception("[Connection issue]: $e");
         }
+    }
+
+    public static function getRepository(string $class): Repository
+    {
+        if (!is_null(self::$_instance)) {
+            return new $class(self::$_instance->PDOInstance);
+        }
+        throw new Exception("Database instance hasn't been created");
     }
 
 
