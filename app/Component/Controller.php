@@ -67,6 +67,6 @@ abstract class Controller
 
     protected function getUser()
     {
-        //TODO: Return user
+        //TODO: Return user bla
     }
 }
