@@ -17,5 +17,10 @@
     "requirements": {
       "id": "\\d+"
     }
+  },
+
+
+  "/faq": {
+    "controller": "FAQController::index"
   }
 }

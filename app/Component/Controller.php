@@ -22,7 +22,11 @@ abstract class Controller
 
     protected function getRepository(string $class): Repository
     {
-       return Database::getRepository($class);
+        try {
+            return Database::getRepository($class);
+        } catch (Exception $e) {
+            die("unable to reach Repository $class");
+        }
     }
 
 

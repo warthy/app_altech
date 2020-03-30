@@ -27,7 +27,7 @@ CREATE TABLE  IF NOT EXISTS `ticket_message` (
   `date_sent` datetime NOT NULL
 );
 
-CREATE TABLE  IF NOT EXISTS `frequent_question` (
+CREATE TABLE  IF NOT EXISTS `faq` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `question` varchar(255) NOT NULL,
   `answer` text NOT NULL

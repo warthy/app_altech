@@ -4,6 +4,7 @@
     <title>Infinite Measures | Dashboard </title>
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f170de025b.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -21,7 +22,7 @@
         </div>
     </header>
     <div class="wrapper">
-        <div id="sidebar" class="hidden">
+        <div id="sidebar">
             <a href="#">
                 <i class="material-icons">home</i> Home
             </a>
@@ -43,8 +44,11 @@
 
         </div>
         <div class="content">
-            <?= $body ?>
+            <h1 class="content-title"><?= $title ?? "" ?></h1>
+            <?= $body  ?>
         </div>
     </div>
-    </body>
+
+    <script src="/js/main.js"></script>
+</body>
 </html>
