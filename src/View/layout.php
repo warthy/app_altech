@@ -3,7 +3,9 @@
 <head>
     <title>Infinite Measures | Dashboard </title>
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="/css/faq.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f170de025b.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -21,8 +23,8 @@
         </div>
     </header>
     <div class="wrapper">
-        <div id="sidebar" class="hidden">
-            <a href="#">
+        <div id="sidebar">
+            <a href="/">
                 <i class="material-icons">home</i> Home
             </a>
             <a href="#">
@@ -34,7 +36,7 @@
             <a href="#">
                 <i class="material-icons">error_outline</i> Ouvrir un ticket
             </a>
-            <a href="#">
+            <a href="/faq">
                 <i class="material-icons">question_answer</i> Consulter la FAQ
             </a>
             <a href="#">
@@ -43,8 +45,11 @@
 
         </div>
         <div class="content">
-            <?= $body ?>
+            <h1 class="content-title"><?= $title ?? "" ?></h1>
+            <?= $body  ?>
         </div>
     </div>
-    </body>
+
+    <script src="/js/main.js"></script>
+</body>
 </html>

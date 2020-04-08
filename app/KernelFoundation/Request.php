@@ -1,4 +1,5 @@
 <?php
+
 namespace App\KernelFoundation;
 
 class Request
@@ -19,7 +20,8 @@ class Request
         ParameterBag $cookies,
         ParameterBag $session,
         array $parameters
-    ){
+    )
+    {
         $this->method = $method;
         $this->cookies = $cookies;
         $this->session = $session;
@@ -35,17 +37,23 @@ class Request
         $method = $_SERVER['REQUEST_METHOD'];
         $parameters = [
             'query' => new ParameterBag($_GET),
-            'request' => new ParameterBag($_POST)
+            'form' => new ParameterBag($_POST)
         ];
 
         $cookies = new ParameterBag($_COOKIE);
         $session = new ParameterBag($_SESSION);
 
         $uri = rtrim($_SERVER["REQUEST_URI"], '/');
-        if($uri == ""){
+        if ($uri == "") {
             $uri = "/";
         }
 
         return new static($method, $uri, $_SERVER["SERVER_NAME"], $cookies, $session, $parameters);
     }
+
+    public function is(string $method): bool
+    {
+        return strtoupper($this->method) == strtoupper($method);
+    }
+
 }

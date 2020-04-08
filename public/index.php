@@ -10,10 +10,3 @@ $kernel = new Kernel();
 
 $response = $kernel->handle($request);
 $response->send();
-
-
-// Get Controller
-
-// Call controller methods
-
-// Return response

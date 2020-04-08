@@ -13,14 +13,11 @@ class ParameterBag
         $this->parameters = $data;
     }
 
-    public function __call(string $name, $arg)
+    public function __call(string $name, $args)
     {
         switch ($name){
             case "get":
-                if(is_string($arg)){
-                    return isset($this->parameters[$arg]) ? $this->parameters[$arg]: null;
-                }
-                throw new Exception("Argument needs to be a string");
+                return isset($this->parameters[$args[0]]) ? $this->parameters[$args[0]]: null;
             default:
                 throw new Exception("Unvalid method call.");
 

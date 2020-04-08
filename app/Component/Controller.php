@@ -22,9 +22,18 @@ abstract class Controller
 
     protected function getRepository(string $class): Repository
     {
-       return Database::getRepository($class);
+        try {
+            return Database::getRepository($class);
+        } catch (Exception $e) {
+            die("unable to reach Repository $class");
+        }
     }
 
+
+    protected function redirect(string $uri){
+        header("Location: $uri");
+        exit();
+    }
 
     protected function render(string $view, array $param = [], Response $response = null, $layout = self::DEFAULT_LAYOUT): Response
     {

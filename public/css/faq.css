@@ -1,0 +1,139 @@
+.faq-corner-link {
+    position: absolute;
+    top: 2rem;
+    right: 5px;
+    padding: 10px;
+
+    color: #E5B03C;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.faq-corner-link:hover {
+    color: #af822d;
+}
+
+.frequent-questions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.faq {
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 0.75rem;
+    font-weight: bold;
+    background-color: #656565;
+}
+
+.faq-question div a {
+    margin: auto 10px;
+    color: #fff;
+}
+
+.faq-question div a:hover {
+    color: #dbdbdb;
+    cursor: pointer;
+}
+
+
+.faq-answer {
+    padding: 0.75rem;
+}
+
+.faq-answer.hidden {
+    transition:height 1s ease-out;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.faq-button {
+    font-weight: bold;
+    text-decoration: none;
+    margin: 20px 10px;
+    text-align: center;
+    color: #fff;
+    background-color: #E5B03C;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 0.75rem 30px;
+    border: none;
+}
+
+.faq-button:hover {
+    cursor: pointer;
+    background-color: #c39134;
+}
+
+.open-ticket h2 {
+    margin: 0;
+    font-weight: bold;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 80%;
+}
+
+form .form-group {
+    width: 100%;
+    margin: 20px auto;
+}
+
+.form-group label {
+    color: #E5B03C;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: -10px;
+}
+.form-group input, textarea {
+    padding: 10px;
+    width: 100%;
+    border: #808782 solid 1px;
+    border-radius: 5px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+.faq-delete-button {
+    font-weight: bold;
+    text-decoration: none;
+    margin: 20px 10px;
+    text-align: center;
+    color: #fff;
+    background-color: #c63f3c;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 0.75rem 30px;
+}
+.faq-delete-button:hover {
+    cursor: pointer;
+    background-color: #8c2c29;
+}
+
+.button-list {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
