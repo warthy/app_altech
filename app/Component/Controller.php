@@ -30,6 +30,11 @@ abstract class Controller
     }
 
 
+    protected function redirect(string $uri){
+        header("Location: $uri");
+        exit();
+    }
+
     protected function render(string $view, array $param = [], Response $response = null, $layout = self::DEFAULT_LAYOUT): Response
     {
         // Check that file does exist otherwise throw exception

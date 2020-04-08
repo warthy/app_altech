@@ -37,7 +37,7 @@ class Request
         $method = $_SERVER['REQUEST_METHOD'];
         $parameters = [
             'query' => new ParameterBag($_GET),
-            'request' => new ParameterBag($_POST)
+            'form' => new ParameterBag($_POST)
         ];
 
         $cookies = new ParameterBag($_COOKIE);

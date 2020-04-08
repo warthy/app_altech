@@ -20,7 +20,23 @@
   },
 
 
+  "/faq/new": {
+    "controller": "FAQController::create"
+  },
   "/faq": {
     "controller": "FAQController::index"
+  },
+  "/faq/:id": {
+    "controller": "FAQController::edit",
+    "requirements": {
+      "id": "\\d+"
+    }
+  },
+  "/faq/:id/delete": {
+    "controller": "FAQController::delete",
+    "requirements": {
+      "id": "\\d+"
+    }
   }
+
 }

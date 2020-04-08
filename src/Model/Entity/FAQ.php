@@ -1,19 +1,24 @@
 <?php
 namespace Altech\Model\Entity;
 
-class FAQ
+class FAQ implements EntityInterface
 {
     private $id;
     private $question;
     private $answer;
 
-    public function getId(): int
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-
-    public function getQuestion(): string
+    public function getQuestion(): ?string
     {
         return $this->question;
     }
@@ -25,7 +30,7 @@ class FAQ
     }
 
 
-    public function getAnswer(): string
+    public function getAnswer(): ?string
     {
         return $this->answer;
     }
