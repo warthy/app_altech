@@ -4,20 +4,34 @@
 namespace App\Component;
 
 
+use Altech\Model\Entity\User;
+use Altech\Model\Repository\UserRepository;
 use App\KernelFoundation\Database;
 use App\KernelFoundation\Request;
 use App\KernelFoundation\Response;
 use Exception;
+use http\Exception\RuntimeException;
 
 abstract class Controller
 {
     const DEFAULT_LAYOUT = "/layout.php";
 
     private $request;
+    private $user;
 
     public function __construct(Request $request)
     {
         $this->request = $request;
+
+        /** @var UserRepository $repo */
+        $repo = $this->getRepository(UserRepository::class);
+        $id = $request->session->get('auth');
+        if($id){
+            $this->user = $repo->findbyId($request->session['auth']);
+            if(!$this->user)
+                throw new RuntimeException("Unknown user (id:".$request->session['auth'].")");
+        }
+
     }
 
     protected function getRepository(string $class): Repository
@@ -57,6 +71,7 @@ abstract class Controller
             ob_end_clean();
         }else {
             ob_start();
+            extract($param);
             include View::PATH_TO_VIEWS . $view;
             $content = ob_get_contents();
             ob_end_clean();
@@ -74,8 +89,8 @@ abstract class Controller
         return $this->request;
     }
 
-    protected function getUser()
+    protected function getUser(): ?User
     {
-        //TODO: Return user bla
+       return $this->user;
     }
 }

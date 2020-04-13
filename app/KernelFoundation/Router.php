@@ -2,6 +2,8 @@
 
 namespace App\KernelFoundation;
 
+use User;
+
 class Router
 {
 

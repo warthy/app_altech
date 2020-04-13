@@ -2,12 +2,21 @@
   "/": {
     "controller": "HomeController::index"
   },
+  "/password-recover": {
+    "controller": "SecurityController::recoverPassword"
+  },
+  "/password-reset/:token": {
+    "controller": "SecurityController::resetPassword",
+    "requirements": {
+      "token": ".+"
+    }
+  },
+
+
 
   "/client": {
     "controller": "ClientController::index"
   },
-
-
   "/client/ticket": {
     "controller": "TicketController::index"
   },

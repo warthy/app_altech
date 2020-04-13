@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `address` varchar(255),
   `telephone` int,
   `email` varchar(255) UNIQUE NOT NULL,
+  `recover_token` varchar(255) UNIQUE,
   `roles` ENUM ('ROLE_ADMIN', 'ROLE_SUPER_ADMIN', 'ROLE_CLIENT') NOT NULL DEFAULT 'ROLE_CLIENT',
   `password` varchar(255) NOT NULL
 );

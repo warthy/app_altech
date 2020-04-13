@@ -14,9 +14,19 @@ abstract class Repository
         $this->pdo = $pdo;
     }
 
+    public function findById(int $id){
+        $stmt = $this->pdo->prepare('SELECT * FROM ' . static::TABLE_NAME . ' WHERE id =  :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchObject(static::ENTITY);
+    }
+
     public function remove(EntityInterface $entity){
+        $id = $entity->getId();
+
         $stmt = $this->pdo->prepare('DELETE FROM ' . static::TABLE_NAME . ' WHERE id =  :id');
-        $stmt->bindParam(':id', $entity->getId(), PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
     }
 

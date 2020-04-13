@@ -52,7 +52,6 @@ class Database
         if (is_null(self::$_instance)) {
             self::$_instance = new Database($host, $database, $user, $password);
         }
-
         return self::$_instance;
     }
 
