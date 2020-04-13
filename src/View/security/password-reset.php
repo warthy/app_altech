@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8"/>
-        <title> ALTHEC CORP </title>
-        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' />
-        <link rel="stylesheet" href="css/password.css" />
-    </head>
+<head>
+    <meta charset="utf-8"/>
+    <title> ALTHEC CORP </title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' />
+    <link rel="stylesheet" href="/css/password.css" />
+</head>
     <body>
         <div class="password-form">
             <div class="inner-width">
