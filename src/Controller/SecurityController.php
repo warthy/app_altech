@@ -79,6 +79,8 @@ class SecurityController extends Controller
 
         $user = $repository->findByToken($token);
         if ($user) {
+            $status = false;
+            $error = "";
             if ($req->is(Request::METHOD_POST)) {
                 $form = $req->parameters['form'];
 
@@ -87,17 +89,16 @@ class SecurityController extends Controller
                     $user->setRecoverToken(null);
 
                     $repository->update($user);
-                    $this->redirect("/");
+                }else {
+                    $error = "les mots de passes sont différents.";
                 }
-
-                return $this->render('/security/password-reset.php', [
-                    'error' => 'Mot de passes différents'
-                ], null, null);
             }
 
-            return $this->render('/security/password-reset.php', [], null, null);
+            return $this->render('/security/password-reset.php', [
+                "status" => $status,
+                "error" => $error
+            ], null, null);
         }
-
-
+        $this->redirect("/");
     }
 }

@@ -19,7 +19,7 @@ class UserRepository extends Repository
         return $stmt->fetchObject(User::class);
     }
 
-    public function findByToken(string $token): User
+    public function findByToken(string $token)
     {
         $stmt = $this->pdo->prepare('SELECT * FROM ' . self::TABLE_NAME . ' WHERE recover_token = :recover_token');
         $stmt->execute(['recover_token' => $token]);
