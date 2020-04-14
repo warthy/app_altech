@@ -4,10 +4,11 @@ namespace Altech\Model\Repository;
 
 use Altech\Model\Entity\FAQ;
 use App\Component\Repository;
+use PDO;
 
 class FAQRepository extends Repository
 {
-    const TABLE_NAME = "frequent_question";
+    const TABLE_NAME = "faq";
     const ENTITY = FAQ::class;
 
 

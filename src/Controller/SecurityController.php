@@ -68,7 +68,7 @@ class SecurityController extends Controller
         }
         return $this->render('/security/password-recover.php', [
             "status" => $status
-        ], null, null);
+        ], null, false);
     }
 
     public function resetPassword(string $token)
@@ -97,7 +97,7 @@ class SecurityController extends Controller
             return $this->render('/security/password-reset.php', [
                 "status" => $status,
                 "error" => $error
-            ], null, null);
+            ], null, false);
         }
         $this->redirect("/");
     }

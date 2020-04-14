@@ -1,8 +1,182 @@
-header {
-    height: 60px;
-    width: 100%;
-    background-color: #fff;
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    height: 2000px;
+}
+li a {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #000000;
+    text-decoration: none;
+}
+.menu_bar{
+    background-color: white;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: space-between;
+    padding: 10px 5%;
+}
+.logo{
+    cursor: pointer;
+    margin-right: auto;
+    width: auto;
+    height: 50px;
+}
+.nav_links{
+    list-style: none;
+}
+.nav_links li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+.nav_links li a{
+    transition: 0.3s ease 0s;
+    text-decoration: none;
+    color: #000000;
+}
+.nav_links li a:hover{
+    color: #E5B03C;
+    border-bottom: 3px solid #E5B03C;
+}
+button{
+    padding: 9px 25px;
+    margin-left: 20px;
+    width: 150px;
+    color: white;
+    background-color: #E5B03C;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s ease 0s;
+    outline: none;
+}
+button:hover{
+    background-color: #FFFFFF;
+    color: #E5B03C;
+    border: 1px solid #E5B03C;
+    transition: 0.3s ease 0s;
+}
+.text{
+    color: #E5B03C;
+    font-family: "Montserrat";
+    font-weight: bold;
+    font-size: 25px;
+    position: absolute;
+    top: 90%;
+    left: 17%;
+    width: 500px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    text-transform: uppercase;
+}
+.img_landing{
+    width: 100%;
+    height: 550px;
+    filter: blur(5px);
+    -webkit-filter: blur(0.5px);
+}
+
+.data{
+    padding: 30px;
+}
+.data_title, .ticket_title, .inter_title{
+    color: #E5B03C;
+    font-family: "Montserrat", sans-serif;
+    font-size: 25px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    margin-left: 280px;
+    margin-top: 20px;
+}
+.data_text, .ticket_text, .inter_text{
+    width: 500px;
+    height: auto;
+    font-family: "Montserrat", sans-serif;
+    text-align: justify;
+}
+.data_img, .ticket_img{
+    width: auto;
+    height: 240px;
+    margin-left: 160px;
+}
+.ticket_links, .inter_links, .data_links{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 20px;
+    align-items: center;
+}
+
+.ticket{
+    padding: 30px;
+}
+.ticket_title{
+    margin-left: 900px;
+    margin-top: 20px;
+}
+.ticket_img{
+    margin-right: 100px;
+}
+
+.inter{
+    padding: 30px;
+}
+.inter_title{
+    margin-left: 320px;
+    margin-top: 20px;
+}
+.inter_text{
+    margin-right: 90px;
+}
+.inter_img{
+    width: auto;
+    height: 260px;
+}
+
+.contact_section{
+    padding: 60px 0;
+    text-align: center;
+}
+.inner-width{
+    max-width: 600px;
+    margin: auto;
+    padding: 0 20px;
+}
+.contact_section h1{
+    font-size: 25px;
+    color: #E5B03C;
+    font-family: "Montserrat";
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.name, .email, .message{
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #E5B03C;
+    color: #848789;
+    font-family: "Montserrat";
+    padding: 10px 6px;
+    font-size: 14px;
+    margin-bottom: 40px;
+}
+.name{
+    float: left;
+    width: 270px;
+}
+.email{
+    float: right;
+    width: 270px;
+}
+.message{
+    min-width: 100%;
+    max-width: 100%;
+}
+.contact_section button{
+    padding: 12px 40px;
 }
