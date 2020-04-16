@@ -13,13 +13,18 @@ class Request
     public $method;
     public $cookies;
     public $session;
+    public $form;
+    public $files;
+    public $get;
     public $hostname;
 
     public function __construct(
         $method, $uri, $hostname,
         ParameterBag $cookies,
         ParameterBag $session,
-        array $parameters
+        ParameterBag $get,
+        ParameterBag $form,
+        ParameterBag $files
     )
     {
         $this->method = $method;
@@ -27,7 +32,9 @@ class Request
         $this->session = $session;
         $this->hostname = $hostname;
         $this->uri = $uri;
-        $this->parameters = $parameters;
+        $this->get = $get;
+        $this->form = $form;
+        $this->files = $files;
     }
 
     static function createFromGlobals()
@@ -35,20 +42,19 @@ class Request
         session_start();
 
         $method = $_SERVER['REQUEST_METHOD'];
-        $parameters = [
-            'query' => new ParameterBag($_GET),
-            'form' => new ParameterBag($_POST)
-        ];
 
+        $form = new ParameterBag($_POST);
+        $get = new ParameterBag($_GET);
         $cookies = new ParameterBag($_COOKIE);
         $session = new ParameterBag($_SESSION);
+        $files = new ParameterBag($_FILES);
 
         $uri = rtrim($_SERVER["REQUEST_URI"], '/');
         if ($uri == "") {
             $uri = "/";
         }
 
-        return new static($method, $uri, $_SERVER["SERVER_NAME"], $cookies, $session, $parameters);
+        return new static($method, $uri, $_SERVER["SERVER_NAME"], $cookies, $session, $get, $form, $files);
     }
 
     public function is(string $method): bool

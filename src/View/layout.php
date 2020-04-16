@@ -4,6 +4,7 @@
     <title>Infinite Measures | Dashboard </title>
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="/css/faq.css">
+    <link rel="stylesheet" type="text/css" href="/css/candidate.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f170de025b.js" crossorigin="anonymous"></script>
 </head>

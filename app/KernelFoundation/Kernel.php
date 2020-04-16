@@ -11,11 +11,6 @@ class Kernel
 
     private static $conf;
 
-    public function __construct()
-    {
-
-    }
-
     public function handle(Request $request): Response
     {
         $this->request = $request;

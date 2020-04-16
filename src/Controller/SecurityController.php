@@ -9,6 +9,8 @@ use App\KernelFoundation\Request;
 class SecurityController extends Controller
 {
     const SECRET_SALT = ",^GH'7hq}LJgL`CU";
+    const ROLE_CLIENT = "ROLE_CLIENT";
+    const ROLE_ADMIN = "ROLE_ADMIN";
 
     public function login()
     {
@@ -16,7 +18,7 @@ class SecurityController extends Controller
 
         // If request is post then form has been submitted
         if ($req->is(Request::METHOD_POST)) {
-            $form = $req->parameters['form'];
+            $form = $req->form;
 
             if (!empty($form->get('email')) && !empty($form->get('password'))) {
                 /** @var UserRepository $repository */
@@ -50,7 +52,7 @@ class SecurityController extends Controller
 
         if ($req->is(Request::METHOD_POST)) {
             $status = true;
-            $form = $req->parameters['form'];
+            $form = $req->form;
 
             if (!empty($form->get('email'))) {
                 /** @var UserRepository $repository */

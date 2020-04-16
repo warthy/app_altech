@@ -5,9 +5,9 @@ namespace Altech\Controller;
 use Altech\Model\Entity\FAQ;
 use Altech\Model\Repository\FAQRepository;
 use App\Component\Controller;
-use App\KernelFoundation\ParameterBag;
 use App\KernelFoundation\Request;
 use Exception;
+
 class FAQController extends Controller
 {
     function index()
@@ -18,7 +18,7 @@ class FAQController extends Controller
         return $this->render('/faq/index.php', [
             "admin" => true,
             "title" => "Foire aux questions",
-            "faqs" => $rep->findAllQuestions()]
+            "faqs" => $rep->findAll()]
         );
     }
 
@@ -28,14 +28,14 @@ class FAQController extends Controller
         /* @var FAQRepository */
         $rep = $this->getRepository(FAQRepository::class);
         /** @var FAQ $faq */
-        $faq = $rep->findOneById($id);
+        $faq = $rep->findById($id);
 
         if($faq){
             $req = $this->getRequest();
             // If request is post then form has been submitted
             if($req->is(Request::METHOD_POST)){
-                /** @var ParameterBag $form */
-                $form = $req->parameters['form'];
+
+                $form = $req->form;
                 if(!empty($form->get('answer')) && !empty($form->get('question'))){
                     $repository = $this->getRepository(FAQRepository::class);
 
@@ -61,8 +61,8 @@ class FAQController extends Controller
 
         // If request is post then form has been submitted
         if($req->is(Request::METHOD_POST)){
-            /** @var ParameterBag $form */
-            $form = $req->parameters['form'];
+
+            $form = $req->form;
             if(!empty($form->get('answer')) && !empty($form->get('question'))){
                 $repository = $this->getRepository(FAQRepository::class);
 
@@ -85,7 +85,7 @@ class FAQController extends Controller
         /* @var FAQRepository */
         $rep = $this->getRepository(FAQRepository::class);
         /** @var FAQ $faq */
-        $faq = $rep->findOneById($id);
+        $faq = $rep->findById($id);
 
         // We check that the faq exists then we delete it
         if($faq){

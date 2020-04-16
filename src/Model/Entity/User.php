@@ -4,6 +4,7 @@ namespace Altech\Model\Entity;
 class User implements EntityInterface
 {
     private $id;
+    private $name;
     private $email;
     private $recoverToken;
     private $password;
@@ -44,6 +45,28 @@ class User implements EntityInterface
     public function setRecoverToken(string $recoverToken): void
     {
         $this->recoverToken = $recoverToken;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+        return $this;
     }
 
 
