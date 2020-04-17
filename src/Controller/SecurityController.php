@@ -9,6 +9,8 @@ use App\KernelFoundation\Request;
 class SecurityController extends Controller
 {
     const SECRET_SALT = ",^GH'7hq}LJgL`CU";
+    const ROLE_CLIENT = "ROLE_CLIENT";
+    const ROLE_ADMIN = "ROLE_ADMIN";
 
     public function login()
     {

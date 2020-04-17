@@ -4,26 +4,11 @@ namespace Altech\Model\Repository;
 
 use Altech\Model\Entity\FAQ;
 use App\Component\Repository;
-use PDO;
 
 class FAQRepository extends Repository
 {
     const TABLE_NAME = "faq";
     const ENTITY = FAQ::class;
-
-
-    public function findAllQuestions(): array
-    {
-        $stmt = $this->pdo->query('SELECT * FROM ' . self::TABLE_NAME);
-        return $stmt->fetchAll(PDO::FETCH_CLASS, FAQ::class);
-    }
-
-    public function findOneById(int $id): FAQ
-    {
-        $stmt = $this->pdo->prepare('SELECT * FROM ' . self::TABLE_NAME . ' WHERE id = :id');
-        $stmt->execute(['id' => $id]);
-        return $stmt->fetchObject(FAQ::class);
-    }
 
     /**
      * @param FAQ $faq

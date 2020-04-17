@@ -5,9 +5,9 @@ namespace Altech\Controller;
 use Altech\Model\Entity\FAQ;
 use Altech\Model\Repository\FAQRepository;
 use App\Component\Controller;
-use App\KernelFoundation\ParameterBag;
 use App\KernelFoundation\Request;
 use Exception;
+
 class FAQController extends Controller
 {
     function index()
@@ -18,7 +18,7 @@ class FAQController extends Controller
         return $this->render('/faq/index.php', [
             "admin" => true,
             "title" => "Foire aux questions",
-            "faqs" => $rep->findAllQuestions()]
+            "faqs" => $rep->findAll()]
         );
     }
 

@@ -3,12 +3,12 @@ USE `altech`;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `company_name` varchar(255),
+  `name` varchar(255),
   `address` varchar(255),
   `telephone` int,
   `email` varchar(255) UNIQUE NOT NULL,
   `recover_token` varchar(255) UNIQUE,
-  `roles` ENUM ('ROLE_ADMIN', 'ROLE_SUPER_ADMIN', 'ROLE_CLIENT') NOT NULL DEFAULT 'ROLE_CLIENT',
+  `role` ENUM ('ROLE_ADMIN', 'ROLE_SUPER_ADMIN', 'ROLE_CLIENT') NOT NULL DEFAULT 'ROLE_CLIENT',
   `password` varchar(255) NOT NULL
 );
 

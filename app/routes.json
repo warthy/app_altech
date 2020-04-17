@@ -12,20 +12,24 @@
     }
   },
 
-
-
   "/client": {
     "controller": "ClientController::index"
+  },
+  "/client/candidate": {
+    "controller": "CandidateController::index"
   },
   "/client/ticket": {
     "controller": "TicketController::index"
   },
-
   "/client/ticket/:id": {
     "controller": "TicketController::view",
     "requirements": {
       "id": "\\d+"
     }
+  },
+
+  "/admin/client/create": {
+    "controller": "ClientController::create"
   },
 
 
