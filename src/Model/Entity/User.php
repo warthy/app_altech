@@ -3,6 +3,8 @@ namespace Altech\Model\Entity;
 
 class User implements EntityInterface
 {
+    const UPLOAD_DIR = __DIR__."/../../../public/upload/";
+
     private $id;
     private $name;
     private $email;
