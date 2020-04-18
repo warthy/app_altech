@@ -29,7 +29,7 @@ class SecurityController extends Controller
                 if ($user && password_verify($form->get('password'), $user->getPassword())) {
 
                     $_SESSION['auth'] = $user->getId();
-                    $_SESSION['role'] = $user->getId();
+                    $_SESSION['role'] = $user->getRole();
                     $this->redirect('/client');
                 }
 
