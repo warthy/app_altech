@@ -33,19 +33,19 @@
   },
 
 
-  "/faq/new": {
+  "/(client|admin)/faq/new": {
     "controller": "FAQController::create"
   },
-  "/faq": {
+  "/(client|admin)/faq": {
     "controller": "FAQController::index"
   },
-  "/faq/:id": {
+  "/admin/faq/:id": {
     "controller": "FAQController::edit",
     "requirements": {
       "id": "\\d+"
     }
   },
-  "/faq/:id/delete": {
+  "/admin/faq/:id/delete": {
     "controller": "FAQController::delete",
     "requirements": {
       "id": "\\d+"

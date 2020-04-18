@@ -5,5 +5,11 @@
     "password": "",
     "database": "altech"
   },
-  "password_hash": "bcrypt"
+  "security": {
+    "password_hash": "bcrypt",
+    "routes": {
+        "^\/client" : ["ROLE_ADMIN", "ROLE_CLIENT"],
+        "^\/admin": ["ROLE_ADMIN"]
+    }
+  }
 }

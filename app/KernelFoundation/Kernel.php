@@ -2,6 +2,8 @@
 
 namespace App\KernelFoundation;
 
+use Exception;
+
 class Kernel
 {
 
@@ -18,19 +20,36 @@ class Kernel
         $this->loadConfig();
         $this->connectDatabase();
 
-        $this->router = Router::getInstance($request);
+        $this->router = Router::getInstance($request, self::$conf["security"]["routes"]);
 
         return $this->router->dispatch();
     }
 
+    public function handleException(Exception $e){
+        die($e->getMessage());
+    }
+
     private function loadConfig()
     {
-        if (file_exists('../../var/cache/KernelConf.php')) {
-            self::$conf = require '../../var/cache/KernelConf.php';
+        $cachedConf = __DIR__ . '/../../var/cache/conf.php';
+        if (file_exists($cachedConf)) {
+            $data = require $cachedConf;
+            if (md5_file(__DIR__ . '/../config.json') === $data["sha"]) {
+                self::$conf = $data;
+                return;
+            }
         } else {
-            self::$conf = json_decode(file_get_contents(__DIR__ . '/../config.json', true), true);
+            $json = json_decode(file_get_contents(__DIR__ . '/../config.json', true), true);
 
-            $handle = fopen('../var/cache/KernelConf.php', 'w') or die('Cannot open file routesGenerated');
+            $json["sha"] = md5_file(__DIR__ . '/../config.json');
+            $routes = [];
+            foreach ($json["security"]["routes"] as $route => $roles){
+                $routes[str_replace('/', '\/', $route)] = $roles;
+            }
+            $json["security"]["routes"] = $routes;
+
+            self::$conf = $json;
+            $handle = fopen($cachedConf, 'w') or die('Cannot open file conf');
             $content = "<?php return " . var_export(self::$conf, true) . ";";
 
             fwrite($handle, $content);
