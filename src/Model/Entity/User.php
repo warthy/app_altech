@@ -15,7 +15,7 @@ class User implements EntityInterface
     private $company_zipcode;
     private $company_email;
     private $company_phone;
-    
+
     private $legalrepresentative_firstname;
     private $legalrepresentative_lastname;
     private $legalrepresentative_email;
@@ -183,17 +183,6 @@ class User implements EntityInterface
         return $this;
     }
 
-
-    public function getRepresentativeFirstName(): ?string
-    {
-        return $this->$legalrepresentative_firstname;
-    }
-
-    public function setRepresentativeFirstName(string $firstname): self
-    {
-        $this->$legalrepresentative_firstname = $firstname;
-        return $this;
-    }
     
 
 
