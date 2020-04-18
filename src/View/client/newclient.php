@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/newclient.css" />
+        <link rel="stylesheet" href="/css/newclient.css" />
         
     </head>
 

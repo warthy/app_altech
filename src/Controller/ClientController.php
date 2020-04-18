@@ -6,8 +6,7 @@ use Altech\Model\Repository\UserRepository;
 use App\Component\Controller;
 use App\KernelFoundation\Request;
 
-class ClientController extends Controller
-{r
+class ClientController extends Controller{
     public function index(){
         return $this->render('/candidate/index.php');
     }

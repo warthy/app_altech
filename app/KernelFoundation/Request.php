@@ -24,7 +24,6 @@ class Request
         ParameterBag $session,
         ParameterBag $get,
         ParameterBag $form,
-        ParameterBag $form,
         ParameterBag $files
     )
     {

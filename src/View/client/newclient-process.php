@@ -30,7 +30,7 @@
         }
     }
     else{
-        echo "Non.";
+        echo "Non."; 
     }
 
     ?>

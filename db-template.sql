@@ -3,10 +3,18 @@ USE `altech`;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255),
-  `address` varchar(255),
-  `telephone` int,
-  `email` varchar(255) UNIQUE NOT NULL,
+  `company_name` varchar(255),
+  `company_address` varchar(255),
+  `company_city` varchar(255),
+  `company_zipcode` int,
+  `company_email` varchar(255) UNIQUE NOT NULL,
+  `company_phone` int,
+  
+  `legalrepresentative_firstname` varchar(255),
+  `legalrepresentative_lastaddress` varchar(255),
+  `legalrepresentative_email` varchar(255),
+  `legalrepresentative_phone` int,
+
   `recover_token` varchar(255) UNIQUE,
   `role` ENUM ('ROLE_ADMIN', 'ROLE_SUPER_ADMIN', 'ROLE_CLIENT') NOT NULL DEFAULT 'ROLE_CLIENT',
   `password` varchar(255) NOT NULL
