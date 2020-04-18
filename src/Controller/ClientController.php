@@ -25,7 +25,7 @@ class ClientController extends Controller
             if (!empty($form->get("name")) && !empty($form->get("email")) && !empty($file)) {
                 $client = new User();
                 $client
-                    ->setRole("ROLE_CLIENT")
+                    ->setRole(SecurityController::ROLE_CLIENT)
                     ->setName($form->get("name"))
                     ->setEmail($form->get("email"));
 

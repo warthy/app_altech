@@ -2,6 +2,9 @@
   "/": {
     "controller": "HomeController::index"
   },
+  "/login": {
+    "controller": "SecurityController::login"
+  },
   "/password-recover": {
     "controller": "SecurityController::recoverPassword"
   },
