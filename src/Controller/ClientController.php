@@ -5,6 +5,7 @@ namespace Altech\Controller;
 use Altech\Model\Entity\User;
 use App\Component\Controller;
 use App\KernelFoundation\Request;
+use App\KernelFoundation\Security;
 
 class ClientController extends Controller
 {
@@ -25,7 +26,7 @@ class ClientController extends Controller
             if (!empty($form->get("name")) && !empty($form->get("email")) && !empty($file)) {
                 $client = new User();
                 $client
-                    ->setRole(SecurityController::ROLE_CLIENT)
+                    ->setRole(Security::ROLE_CLIENT)
                     ->setName($form->get("name"))
                     ->setEmail($form->get("email"));
 

@@ -16,6 +16,7 @@
     "require": {
       "ext-json": "*",
       "ext-pdo": "*",
-      "ext-http": "*"
+      "ext-http": "*",
+      "ext-fileinfo": "*"
     }
 }

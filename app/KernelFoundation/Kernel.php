@@ -3,6 +3,7 @@
 namespace App\KernelFoundation;
 
 use Exception;
+use Throwable;
 
 class Kernel
 {
@@ -25,8 +26,9 @@ class Kernel
         return $this->router->dispatch();
     }
 
-    public function handleException(Exception $e){
-        die($e->getMessage());
+    public function handleException(Throwable $e)
+    {
+        die(var_dump($e->getLine()));
     }
 
     private function loadConfig()
@@ -38,22 +40,22 @@ class Kernel
                 self::$conf = $data;
                 return;
             }
-        } else {
-            $json = json_decode(file_get_contents(__DIR__ . '/../config.json', true), true);
-
-            $json["sha"] = md5_file(__DIR__ . '/../config.json');
-            $routes = [];
-            foreach ($json["security"]["routes"] as $route => $roles){
-                $routes[str_replace('/', '\/', $route)] = $roles;
-            }
-            $json["security"]["routes"] = $routes;
-
-            self::$conf = $json;
-            $handle = fopen($cachedConf, 'w') or die('Cannot open file conf');
-            $content = "<?php return " . var_export(self::$conf, true) . ";";
-
-            fwrite($handle, $content);
         }
+        $json = json_decode(file_get_contents(__DIR__ . '/../config.json', true), true);
+
+        $json["sha"] = md5_file(__DIR__ . '/../config.json');
+        $routes = [];
+        foreach ($json["security"]["routes"] as $route => $roles) {
+            $routes[str_replace('/', '\/', $route)] = $roles;
+        }
+        $json["security"]["routes"] = $routes;
+
+        self::$conf = $json;
+        $handle = fopen($cachedConf, 'w') or die('Cannot open file conf');
+        $content = "<?php return " . var_export(self::$conf, true) . ";";
+
+        fwrite($handle, $content);
+
     }
 
     private function connectDatabase()

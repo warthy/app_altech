@@ -5,13 +5,10 @@ namespace Altech\Controller;
 use Altech\Model\Repository\UserRepository;
 use App\Component\Controller;
 use App\KernelFoundation\Request;
+use App\KernelFoundation\Security;
 
 class SecurityController extends Controller
 {
-    const SECRET_SALT = ",^GH'7hq}LJgL`CU";
-    const ROLE_CLIENT = "ROLE_CLIENT";
-    const ROLE_ADMIN = "ROLE_ADMIN";
-
     public function login()
     {
         $req = $this->getRequest();
@@ -60,7 +57,7 @@ class SecurityController extends Controller
 
                 $user = $repository->findByEmail($form->get('email'));
                 if ($user) {
-                    $user->setRecoverToken( sha1(mt_rand(1, 90000) . self::SECRET_SALT));
+                    $user->setRecoverToken( sha1(mt_rand(1, 90000) . Security::SECRET_SALT));
                     $repository->update($user);
 
                     //TODO: send email now

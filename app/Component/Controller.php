@@ -57,11 +57,12 @@ abstract class Controller
         }
 
         //Generate html page
+        // Start output buffer
+        ob_start();
+        $role = $this->request->session->get('role') ?? "";
+        extract($param);
+        include View::PATH_TO_VIEWS . $view;
         if($layout){
-            // Start output buffer
-            ob_start();
-            extract($param);
-            include View::PATH_TO_VIEWS . $view;
             $body = ob_get_contents();
             ob_end_clean();
 
@@ -70,9 +71,6 @@ abstract class Controller
             $content = ob_get_contents();
             ob_end_clean();
         }else {
-            ob_start();
-            extract($param);
-            include View::PATH_TO_VIEWS . $view;
             $content = ob_get_contents();
             ob_end_clean();
         }
