@@ -56,6 +56,15 @@ header {
     padding: 0 5px;
 }
 
+.user-img {
+    margin: 0 10px;
+    color: black;
+}
+
+.user-img:hover {
+    color: #282727;
+}
+
 .wrapper {
     display: flex;
     width: 100%;

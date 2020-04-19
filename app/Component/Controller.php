@@ -22,6 +22,13 @@ abstract class Controller
     public function __construct(Request $request)
     {
         $this->request = $request;
+        $repo = $this->getRepository(UserRepository::class);
+        $id = $this->request->session->get('auth');
+        if ($id) {
+            $this->user = $repo->findbyId($id);
+            if (!$this->user)
+                throw new RuntimeException("Unknown user (id: $id)");
+        }
     }
 
     protected function getRepository(string $class): Repository
@@ -50,6 +57,7 @@ abstract class Controller
         // Start output buffer
         ob_start();
         $role = $this->request->session->get('role') ?? "";
+        $user = $this->user;
         extract($param);
         include View::PATH_TO_VIEWS . $view;
         if($layout){
@@ -79,17 +87,6 @@ abstract class Controller
 
     protected function getUser(): ?User
     {
-        if(!$this->user) {
-            /** @var UserRepository $repo */
-            $repo = $this->getRepository(UserRepository::class);
-            $id = $this->request->session->get('auth');
-            if ($id) {
-                $this->user = $repo->findbyId($id);
-                if (!$this->user)
-                    throw new RuntimeException("Unknown user (id: $id)");
-            }
-        }
-
        return $this->user;
     }
 }

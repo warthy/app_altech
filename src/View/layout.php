@@ -23,10 +23,10 @@
             <img src="/img/logo.png" height="50"/>
         </div>
         <div class="header-right">
-            <span class="user-name"> Auto école de Castres </span>
-            <div class="user-img">
-                v <img src=""/>
-            </div>
+            <span class="user-name"> <?= $user->getName() ?> </span>
+            <a href="/logout" class="user-img">
+               <i class="fas fa-sign-out-alt"></i>
+            </a>
         </div>
     </header>
     <div class="wrapper">
