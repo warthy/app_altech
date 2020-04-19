@@ -45,7 +45,7 @@ class Router
                 // Recover parameters inside URI
                 foreach ($requirements as $name => $val) {
                     $start = strpos($route, ':' . $name);
-                    $end = strpos($this->request->uri, '/', $start);
+                    $end = strpos($this->request->uri, '/', $start); //strpos($this->request->uri, '/'. $start); ??
                     if (!$end) {
                         $end = strlen($this->request->uri);
                     }

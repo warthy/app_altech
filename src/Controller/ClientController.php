@@ -7,6 +7,7 @@ use App\Component\Controller;
 use App\KernelFoundation\Request;
 use App\KernelFoundation\Security;
 
+
 class ClientController extends Controller
 {
     public function index()
