@@ -27,9 +27,9 @@ abstract class Controller
         $repo = $this->getRepository(UserRepository::class);
         $id = $request->session->get('auth');
         if($id){
-            $this->user = $repo->findbyId($request->session['auth']);
+            $this->user = $repo->findbyId($id);
             if(!$this->user)
-                throw new RuntimeException("Unknown user (id:".$request->session['auth'].")");
+                throw new RuntimeException("Unknown user (id: $id)");
         }
 
     }

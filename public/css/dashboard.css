@@ -113,5 +113,20 @@ header {
     color: #E5B03C;
 }
 
+.delete-btn{
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: bold;
+    background-color: #f56565;
+    color: #FFFFFF;
+}
+
+.delete-btn:hover {
+    background-color: #c53030;
+}
+
+
 
 

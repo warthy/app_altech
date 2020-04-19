@@ -5,6 +5,9 @@
   "/login": {
     "controller": "SecurityController::login"
   },
+  "/logout": {
+    "controller": "SecurityController::logout"
+  },
   "/password-recover": {
     "controller": "SecurityController::recoverPassword"
   },
@@ -50,6 +53,26 @@
   },
   "/admin/faq/:id/delete": {
     "controller": "FAQController::delete",
+    "requirements": {
+      "id": "\\d+"
+    }
+  },
+
+
+  "/admin/user" : {
+    "controller": "AdminController::index"
+  },
+  "/admin/user/create" : {
+    "controller": "AdminController::create"
+  },
+  "/admin/user/:id" : {
+    "controller": "AdminController::edit",
+    "requirements": {
+      "id": "\\d+"
+    }
+  },
+  "/admin/user/:id/delete" : {
+    "controller": "AdminController::delete",
     "requirements": {
       "id": "\\d+"
     }

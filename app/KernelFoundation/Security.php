@@ -12,7 +12,7 @@ class Security
     const ROLE_CLIENT = "ROLE_CLIENT";
     const ROLE_ADMIN = "ROLE_ADMIN";
     const ROLE_SUPER_ADMIN = "ROLE_SUPER_ADMIN";
-    private static $permissions = [
+    static $permissions = [
         self::ROLE_CLIENT => [],
         self::ROLE_ADMIN => [],
         self::ROLE_SUPER_ADMIN => [self::ROLE_ADMIN]
@@ -26,5 +26,15 @@ class Security
             return $role == $userRole || in_array($role, self::$permissions[$userRole]);
         }
         return false;
+    }
+
+    static function getInheritedRoles(string $role){
+        $roles[] = $role;
+        foreach (self::$permissions as $r => $inherited){
+            if(in_array($role, $inherited)){
+                $roles[] = $r;
+            }
+        }
+        return $roles;
     }
 }

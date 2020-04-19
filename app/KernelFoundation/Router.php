@@ -32,11 +32,10 @@ class Router
                 // Check if the matched route is protected by a firewall,
                 // and if so we check that the logged user has the required role
                 foreach ($this->firewall as $fwpattern => $role) {
-                    //die(var_dump($roles));
                     if (preg_match("/".$fwpattern."/", $this->request->uri) &&
                         !Security::hasPermission($role))
                     {
-                        throw new Exception("Access refused");
+                        throw new Exception("Access refused: rôle insuffisant", 403);
                     }
                 }
                 [$class, $method] = explode("::", $handler);
