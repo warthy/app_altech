@@ -6,17 +6,20 @@ use Altech\Model\Entity\FAQ;
 use Altech\Model\Repository\FAQRepository;
 use App\Component\Controller;
 use App\KernelFoundation\Request;
+use App\KernelFoundation\Security;
 use Exception;
 
 class FAQController extends Controller
 {
     function index()
     {
+        $user = $this->getUser();
+
         /* @var FAQRepository */
         $rep = $this->getRepository(FAQRepository::class);
 
         return $this->render('/faq/index.php', [
-            "admin" => true,
+            "admin" => Security::hasPermission("ROLE_ADMIN"),
             "title" => "Foire aux questions",
             "faqs" => $rep->findAll()]
         );

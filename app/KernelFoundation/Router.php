@@ -2,7 +2,7 @@
 
 namespace App\KernelFoundation;
 
-use User;
+use Exception;
 
 class Router
 {
@@ -10,14 +10,16 @@ class Router
     private static $_instance = null;
     private static $routes = [];
     private $request;
+    private $firewall;
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, array $firewall)
     {
         $this->request = $request;
+        $this->firewall = $firewall;
     }
 
 
-    /*
+    /**
      * find matching routes
      */
     public function dispatch(): Response
@@ -25,11 +27,22 @@ class Router
         // Check each route to see if one's valid
         foreach (self::$routes as $route => $conf) {
             ['controller' => $handler, 'regex_pattern' => $pattern] = $conf;
+            // Check is routes pattern match with URI
             if (preg_match($pattern, $this->request->uri)) {
+                // Check if the matched route is protected by a firewall,
+                // and if so we check that the logged user has the required role
+                foreach ($this->firewall as $fwpattern => $role) {
+                    if (preg_match("/".$fwpattern."/", $this->request->uri) &&
+                        !Security::hasPermission($role))
+                    {
+                        throw new Exception("Access refused: rôle insuffisant", 403);
+                    }
+                }
                 [$class, $method] = explode("::", $handler);
 
                 $args = [];
                 $requirements = $conf['requirements'] ?? [];
+                // Recover parameters inside URI
                 foreach ($requirements as $name => $val) {
                     $start = strpos($route, ':' . $name);
                     $end = strpos($this->request->uri, '/', $start); //strpos($this->request->uri, '/'. $start); ??
@@ -40,6 +53,7 @@ class Router
                     $args[$name] = substr($this->request->uri, $start, $end - $start);
                 }
 
+                // Call route's controller method
                 return call_user_func_array([new $class($this->request), $method], $args);
             }
         }
@@ -84,11 +98,12 @@ class Router
 
     }
 
-    public static function getInstance(Request $req): self
+    public
+    static function getInstance(Request $req, $firewall): self
     {
         // Get instance if not already created
         if (is_null(self::$_instance)) {
-            self::$_instance = new Router($req);
+            self::$_instance = new Router($req, $firewall);
         }
 
         return self::$_instance;

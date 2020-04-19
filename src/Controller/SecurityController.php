@@ -5,15 +5,13 @@ namespace Altech\Controller;
 use Altech\Model\Repository\UserRepository;
 use App\Component\Controller;
 use App\KernelFoundation\Request;
+use App\KernelFoundation\Security;
 
 class SecurityController extends Controller
 {
-    const SECRET_SALT = ",^GH'7hq}LJgL`CU";
-    const ROLE_CLIENT = "ROLE_CLIENT";
-    const ROLE_ADMIN = "ROLE_ADMIN";
-
     public function login()
     {
+        $error = false;
         $req = $this->getRequest();
 
         // If request is post then form has been submitted
@@ -25,18 +23,27 @@ class SecurityController extends Controller
                 $repository = $this->getRepository(UserRepository::class);
 
                 $user = $repository->findByEmail($form->get('email'));
-
                 if ($user && password_verify($form->get('password'), $user->getPassword())) {
 
                     $_SESSION['auth'] = $user->getId();
-                    $_SESSION['role'] = $user->getId();
-                    $this->redirect('/client');
+                    $_SESSION['role'] = $user->getRole();
+                    switch ($user->getRole()){
+                        case Security::ROLE_ADMIN:
+                        case Security::ROLE_SUPER_ADMIN:
+                            $this->redirect('/admin');
+                            break;
+                        case Security::ROLE_CLIENT:
+                        default:
+                            $this->redirect('/client');
+                            break;
+                    }
                 }
-
             }
+            $error = true;
         }
-
-        return $this->render('');
+        return $this->render('/security/login.php', [
+            'error' => $error
+        ], null, false);
     }
 
     public function logout()
@@ -60,7 +67,7 @@ class SecurityController extends Controller
 
                 $user = $repository->findByEmail($form->get('email'));
                 if ($user) {
-                    $user->setRecoverToken( sha1(mt_rand(1, 90000) . self::SECRET_SALT));
+                    $user->setRecoverToken( sha1(mt_rand(1, 90000) . Security::SECRET_SALT));
                     $repository->update($user);
 
                     //TODO: send email now

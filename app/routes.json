@@ -2,6 +2,12 @@
   "/": {
     "controller": "HomeController::index"
   },
+  "/login": {
+    "controller": "SecurityController::login"
+  },
+  "/logout": {
+    "controller": "SecurityController::logout"
+  },
   "/password-recover": {
     "controller": "SecurityController::recoverPassword"
   },
@@ -12,9 +18,11 @@
     }
   },
 
-  "/client": {
-    "controller": "ClientController::index"
+  "/(client|admin)": {
+    "controller": "HomeController::dashboard"
   },
+
+
   "/client/candidate": {
     "controller": "CandidateController::index"
   },
@@ -33,20 +41,40 @@
   },
 
 
-  "/faq/new": {
+  "/(client|admin)/faq/new": {
     "controller": "FAQController::create"
   },
-  "/faq": {
+  "/(client|admin)/faq": {
     "controller": "FAQController::index"
   },
-  "/faq/:id": {
+  "/admin/faq/:id": {
     "controller": "FAQController::edit",
     "requirements": {
       "id": "\\d+"
     }
   },
-  "/faq/:id/delete": {
+  "/admin/faq/:id/delete": {
     "controller": "FAQController::delete",
+    "requirements": {
+      "id": "\\d+"
+    }
+  },
+
+
+  "/admin/user" : {
+    "controller": "AdminController::index"
+  },
+  "/admin/user/create" : {
+    "controller": "AdminController::create"
+  },
+  "/admin/user/:id" : {
+    "controller": "AdminController::edit",
+    "requirements": {
+      "id": "\\d+"
+    }
+  },
+  "/admin/user/:id/delete" : {
+    "controller": "AdminController::delete",
     "requirements": {
       "id": "\\d+"
     }

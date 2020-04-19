@@ -13,7 +13,7 @@
                     <?php if($status){?>
                         <h6>Votre mot de passe vient d'être modifié.</h6>
                     <?php } ?>
-                    <img class="logo" src="Images\logo.jpg" alt="Logo_page"/>
+                    <img class="logo" src="/img/logo.jpg" alt="Logo_page"/>
                     <h1>Enregistrer
                         <br/>
                         son mot de passe

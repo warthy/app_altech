@@ -1,3 +1,4 @@
+<?php use App\KernelFoundation\Security; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,22 +29,40 @@
             <a href="/">
                 <i class="material-icons">home</i> Home
             </a>
-            <a href="#">
-                <i class="material-icons">settings_remote</i> Effectuer une mesure
-            </a>
-            <a href="#">
-                <i class="material-icons">backup</i> Consulter les mesures
-            </a>
-            <a href="#">
-                <i class="material-icons">error_outline</i> Ouvrir un ticket
-            </a>
-            <a href="/faq">
-                <i class="material-icons">question_answer</i> Consulter la FAQ
-            </a>
-            <a href="#">
-                <i class="material-icons">group</i> Consulter les candidats
-            </a>
-
+            <?php
+            if(Security::hasPermission("ROLE_CLIENT")) { ?>
+                <a href="#">
+                    <i class="material-icons">settings_remote</i> Effectuer une mesure
+                </a>
+                <a href="#">
+                    <i class="material-icons">backup</i> Consulter les mesures
+                </a>
+                <a href="#">
+                    <i class="material-icons">error_outline</i> Ouvrir un ticket
+                </a>
+                <a href="/client/faq">
+                    <i class="material-icons">question_answer</i> Consulter la FAQ
+                </a>
+                <a href="#/client/candidate">
+                    <i class="material-icons">group</i> Consulter les candidats
+                </a>
+            <?php }?>
+            <?php if(Security::hasPermission("ROLE_ADMIN")) { ?>
+                <a href="/admin/ticket">
+                    <i class="material-icons">error_outline</i> Gérer les tickets
+                </a>
+                <a href="/admin/faq">
+                    <i class="material-icons">question_answer</i> Consulter la FAQ
+                </a>
+                <a href="/admin/client">
+                    <i class="material-icons">group</i> Consulter les clients
+                </a>
+            <?php }?>
+            <?php if(Security::hasPermission("ROLE_SUPER_ADMIN")) {?>
+                <a href="/admin/user">
+                    <i class="material-icons">group</i> Gérer les administrateurs
+                </a>
+            <?php }?>
         </div>
         <div class="content">
             <h1 class="content-title"><?= $title ?? "" ?></h1>

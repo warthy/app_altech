@@ -13,7 +13,7 @@
                     <?php if($status){?>
                         <h6>Un email a été envoyé à cette adresse afin de récupérer votre email.</h6>
                     <?php } ?>
-                    <img class="logo" src="Images\logo.jpg" alt="Logo_page"/>
+                    <img class="logo" src="/img/logo.jpg" alt="Logo_page"/>
                     <h1>Récupérer
                         <br/>
                         son mot de passe

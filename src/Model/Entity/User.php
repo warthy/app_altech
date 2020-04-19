@@ -3,18 +3,19 @@ namespace Altech\Model\Entity;
 
 class User implements EntityInterface
 {
+    const UPLOAD_DIR = __DIR__."/../../../public/upload/";
+
     private $id;
+    private $name;
+    private $email;
+    private $phone;
     private $recoverToken;
     private $password;
     private $role = "ROLE_CLIENT";
 
-    //NEW CLIENT INFOS
-    private $company_name;
-    private $company_address;
-    private $company_city;
-    private $company_zipcode;
-    private $company_email;
-    private $company_phone;
+    private $address;
+    private $city;
+    private $zipcode;
 
     private $legalrepresentative_firstname;
     private $legalrepresentative_lastname;
@@ -25,17 +26,38 @@ class User implements EntityInterface
     private $candidates; //candidats ?
 
 
-    public function getId(): int
+    public function getId(): ?int
     {
        return $this->id;
     }
+  
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
 
-
-    
-
-    public function setPassword(string $password): void
+    public function getEmail(): ?string
+    {
+      return $this->email;
+    }
+      
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+        return $this;
+    }
+  
+  
+    public function getPassword(): string
+    {
+      return $this->password;    
+    }
+  
+    public function setPassword(string $password): self
     {
         $this->password = $password;
+        return $this;
     }
 
 
@@ -43,13 +65,13 @@ class User implements EntityInterface
     {
         return $this->recoverToken;
     }
-
-    public function setRecoverToken(string $recoverToken): void
+   
+    public function setRecoverToken(string $recoverToken): self
     {
         $this->recoverToken = $recoverToken;
+        return $this;
     }
 
-    
 
     public function getRole(): string
     {
@@ -61,77 +83,74 @@ class User implements EntityInterface
         $this->role = $role;
         return $this;
     }
-
-
-    public function getCompanyName(): ?string
+    
+  
+    public function getName(): ?string
     {
-        return $this->$company_name;
+      return $this->name;
     }
+  
 
-    public function setCompanyName(string $name): self
+    public function setName(string $name): self
     {
-        $this->$company_name = $name;
+        $this->name = $name;
         return $this;
     }
 
 
-    public function getCompanyAddress(): ?string
+    public function getEmail(): ?string
     {
-        return $this->$company_address;
-    }
-
-    public function setCompanyAddress(string $address): self
-    {
-        $this->$company_address = $address;
-        return $this;
-    }
-
-
-    public function getCompanyEmail(): ?string
-    {
-        return $this->$company_email;
+        return $this->$email;
     }
 
     public function setCompanyEmail(string $email): self
     {
-        $this->$company_email = $email;
+        $this->$email = $email;
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->$address = $address;
+        return $this;
+    }  
+  
+    public function getCity(): ?string
+    {
+        return $this->$city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->$city = $city;
         return $this;
     }
 
 
-    public function getCompanyPhone(): ?int
+    public function getZipCode(): ?int
     {
-        return $this->$company_phone;
+        return $this->$zipcode;
     }
 
-    public function setCompanyPhone(int $phone): self
+    public function setZipCode(int $zipcode): self
     {
-        $this->$company_phone = $phone;
-        return $this;
-    }
-
-
-
-    public function getCompanyCity(): ?string
-    {
-        return $this->$company_city;
-    }
-
-    public function setCompanyCity(string $city): self
-    {
-        $this->$company_city = $city;
-        return $this;
-    }
-
-
-    public function getCompanyZipCode(): ?int
-    {
-        return $this->$company_zipcode;
-    }
-
-    public function setCompanyZipCode(int $zipcode): self
-    {
-        $this->$company_zipcode = $zipcode;
+        $this->$zipcode = $zipcode;
         return $this;
     }
 
