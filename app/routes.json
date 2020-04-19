@@ -18,9 +18,11 @@
     }
   },
 
-  "/client": {
-    "controller": "ClientController::index"
+  "/(client|admin)": {
+    "controller": "HomeController::dashboard"
   },
+
+
   "/client/candidate": {
     "controller": "CandidateController::index"
   },

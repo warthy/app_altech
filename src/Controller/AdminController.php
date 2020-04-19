@@ -49,6 +49,7 @@ class AdminController extends Controller
 
                 $repo->insert($newAdmin);
                 //TODO: send email
+                $this->redirect("/admin/user/".$newAdmin->getId());
             }
 
         }
@@ -59,9 +60,39 @@ class AdminController extends Controller
         ]);
     }
 
-    public function edit()
+    public function edit($id)
     {
+        /** @var UserRepository $repo */
+        $repo = $this->getRepository(UserRepository::class);
+        $admin = $repo->findById($id);
 
+        if($admin){
+            $req = $this->getRequest();
+
+            if ($req->is(Request::METHOD_POST)) {
+                $form = $req->form;
+                if (!empty($form->get("firstname")) &&
+                    !empty($form->get("lastname")) &&
+                    !empty($form->get("email")) &&
+                    !empty($form->get("phone")) &&
+                    !empty($form->get("role"))
+                ){
+                    $newAdmin = (new User())
+                        ->setName($form->get("lastname"). " ".$form->get("firstname"))
+                        ->setRole($form->get("role"))
+                        ->setEmail($form->get("email"))
+                        ->setPhone($form->get("phone"))
+                        ->setPassword(bin2hex(random_bytes(10))); //We set a random password to avoid connection
+                    $repo->insert($newAdmin);
+                    //TODO: send email
+                }
+            }
+            return $this->render('/admin/form.php', [
+                "title" => "Administrateur $id",
+                "admin" => $admin
+            ]);
+        }
+        throw new Exception("invalid user id: $id");
     }
 
     public function delete($id)
