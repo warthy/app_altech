@@ -82,9 +82,12 @@ class AdminController extends Controller
                         ->setRole($form->get("role"))
                         ->setEmail($form->get("email"))
                         ->setPhone($form->get("phone"))
-                        ->setPassword(bin2hex(random_bytes(10))); //We set a random password to avoid connection
+                        ->setPassword(bin2hex(random_bytes(10)));
+                    //We set a random password to avoid connection while new user hasn't define his password himself
                     $repo->insert($newAdmin);
                     //TODO: send email
+
+                    $this->redirect("/admin/user/". $newAdmin->getId());
                 }
             }
             return $this->render('/admin/form.php', [

@@ -22,7 +22,7 @@ class User implements EntityInterface
     private $legalrepresentative_email;
     private $legalrepresentative_phone;
 
-    private $cgu_approvement; //??
+    private $cguApprovement;
     private $candidates; //candidats ?
 
 
@@ -115,7 +115,7 @@ class User implements EntityInterface
 
     public function setAddress(string $address): self
     {
-        $this->$address = $address;
+        $this->address = $address;
         return $this;
     }  
   

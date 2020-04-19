@@ -55,28 +55,30 @@ class UserRepository extends Repository
     {
         $stmt = $this->pdo->prepare(
             'INSERT INTO ' . self::TABLE_NAME . ' ('.
-                'name, address, city, zipcode, email, phone, password,'.
-                'legalrepresentative_firstname, legalrepresentative_lastname, legalrepresentative_email, legalrepresentative_phone ) 
-            VALUES ('.
-            ':name, :address, :city, :zipcode, :email, :phone, :password,'.
+                'name, address, city, zipcode, email, phone, password, role, cgu_approvement, '.
+                'legalrepresentative_firstname, legalrepresentative_lastname, legalrepresentative_email, legalrepresentative_phone '.
+            ') VALUES ('.
+            ':name, :address, :city, :zipcode, :email, :phone, :password, :role, :cgu_approvement'.
             ':legalrepresentative_firstname, :legalrepresentative_lastname, :legalrepresentative_email, :legalrepresentative_phone)'
         );
 
+        $stmt->execute([
+            'role' => $user->getRole(),
+            'name' => $user->getName(),
+            'address' => $user->getAddress(),
+            'city' => $user->getCity(),
+            'zipcode' => $user->getZipCode(),
+            'email' => $user->getEmail(),
+            'phone' => $user->getPhone(),
+            'password' => $user->getPassword(),
+            'cgu_approvement' => $user->getCguApprovement(),
+            'legalrepresentative_firstname' => $user->getRepresentativeFirstName(),
+            'legalrepresentative_lastname' => $user->getRepresentativeLastName(),
+            'legalrepresentative_email' => $user->getRepresentativeEmail(),
+            'legalrepresentative_phone' => $user->getRepresentativePhone()
+        ]);
 
-        $stmt->bindValue(':name', $user->getName());
-        $stmt->bindValue(':address', $user->getAddress());
-        $stmt->bindValue(':city', $user->getCity());
-        $stmt->bindValue(':zipcode', $user->getZipCode());
-        $stmt->bindValue(':email', $user->getEmail());
-        $stmt->bindValue(':phone', $user->getPhone());
-        $stmt->bindValue(':password', $user->getPassword());
-        $stmt->bindValue(':legalrepresentative_firstname', $user->getRepresentativeFirstName());
-        $stmt->bindValue(':legalrepresentative_lastname', $user->getRepresentativeLastName());
-        $stmt->bindValue(':legalrepresentative_email', $user->getRepresentativeEmail());
-        $stmt->bindValue(':legalrepresentative_phone', $user->getRepresentativePhone());
-        $stmt->execute();
         $user->setId($this->pdo->lastInsertId());
-
         return $user;
     }
 
@@ -98,7 +100,7 @@ class UserRepository extends Repository
                 'legalrepresentative_lastname = :legalrepresentative_lastname,'.
                 'legalrepresentative_email = :legalrepresentative_email,'.
                 'legalrepresentative_phone = :legalrepresentative_phone'.
-            'WHERE id = :id');
+            ' WHERE id = :id');
 
         $stmt->execute([
             'id' => $user->getId(),

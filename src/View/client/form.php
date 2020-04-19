@@ -10,7 +10,7 @@
         <div class="form-group">
             <div>
                 <label for="adresse postale">Adresse postale :</label>
-                <input type="text" name="addresse" id="adresse postale" value="<?= $client->getAddress() ?>" required/>
+                <input type="text" name="address" id="adresse postale" value="<?= $client->getAddress() ?>" required/>
             </div>
         </div>
         <div class="form-group">
@@ -42,21 +42,21 @@
         <div class="form-group">
             <div>
                 <label for="nom representant">Nom :</label>
-                <input type="text" name="nom_representant" id="nom representant" value="<?= $client->getRepresentativeFirstName() ?>" required/>
+                <input type="text" name="r_lastname" id="nom representant" value="<?= $client->getRepresentativeFirstName() ?>" required/>
             </div>
             <div>
                 <label for="prenom representant">Prénom :</label>
-                <input type="text" name="prenom_representant" id="prenom representant" value="<?= $client->getRepresentativeLastName() ?>" required/>
+                <input type="text" name="r_firstname" id="prenom representant" value="<?= $client->getRepresentativeLastName() ?>" required/>
             </div>
         </div>
         <div class="form-group">
             <div>
                 <label for="mail representant">Email :</label>
-                <input type="mail" name="mail_representant" id="mail representant" value="<?= $client->getRepresentativeEmail() ?>" required/>
+                <input type="mail" name="r_email" id="mail representant" value="<?= $client->getRepresentativeEmail() ?>" required/>
             </div>
             <div>
                 <label for="telephone representant">Téléphone :</label>
-                <input type="tel" name="telephone_representant" id="telephone representant" value="<?= $client->getRepresentativePhone() ?>" required/>
+                <input type="tel" name="r_phone" id="telephone representant" value="<?= $client->getRepresentativePhone() ?>" required/>
             </div>
         </div>
 
@@ -64,7 +64,11 @@
         <div class="form-group">
             <div>
                 <label for="CGU">Consentement CGU</label> :
-                <input type="file" name='cgu_approvement' id="CGU" accept=".pdf, .doc, .docx, .jpeg, .png" required/>
+                <input type="file" name='cgu_approvement' id="CGU" accept=".pdf, .doc, .docx, .jpeg, .png"
+                <?= !$client->getCguApprovement() ? "required" :""?> />
+                <?php if($client->getCguApprovement()){ ?>
+                    <a href="/upload/<?= $client->getCguApprovement() ?>" download>Télécharger le document</a>
+                <?php } ?>
             </div>
         </div>
 

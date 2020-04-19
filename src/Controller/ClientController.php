@@ -40,15 +40,24 @@ class ClientController extends Controller
                     ->setAddress($form->get("address"))
                     ->setCity($form->get("city"))
                     ->setZipCode($form->get("zipcode"))
-                    ->setEmail($form->get("email"));
+                    ->setEmail($form->get("email"))
+                    ->setRepresentativeLastName($form->get("r_lastname"))
+                    ->setRepresentativeFirstName($form->get("r_firstname"))
+                    ->setRepresentativeEmail($form->get("r_email"))
+                    ->setRepresentativePhone($form->get("r_phone"))
+                    ->setPassword(bin2hex(random_bytes(10)));
+                //We set a random password to avoid connection while new user hasn't define his password himself
 
                 $client->setCguApprovement($this->checkAndUploadFile($file));
                 $repo->insert($client);
+                //TODO: send email
+
+                $this->redirect("/admin/client/" . $client->getId());
             }
         }
         return $this->render('/client/form.php', [
             'title' => "Création d'un nouveau client :",
-            'client' => $client,
+            'client' => new User(),
             'error' => $error
         ]);
     }
@@ -67,7 +76,7 @@ class ClientController extends Controller
                 $form = $req->form;
                 $file = $req->files->get("cgu_approvement");
 
-                if (!empty($form->get("name")) && !empty($form->get("email")) && !empty($file)) {
+                if (!empty($form->get("name")) && !empty($form->get("email"))) {
                     $client = $client
                         ->setName($form->get("name"))
                         ->setPhone($form->get("phone"))
@@ -76,7 +85,15 @@ class ClientController extends Controller
                         ->setZipCode($form->get("zipcode"))
                         ->setEmail($form->get("email"));
 
-                    $client->setCguApprovement($this->checkAndUploadFile($file));
+
+                    if($file["size"] > 0){
+                        //If there was a previous file we delete it
+                        if($client->getCguApprovement()){
+                            unlink(User::UPLOAD_DIR.$client->getCguApprovement());
+                        }
+                        $client->setCguApprovement($this->checkAndUploadFile($file));
+                    }
+
                     $repo->update($client);
                 }
             }
@@ -106,9 +123,9 @@ class ClientController extends Controller
     {
         $metadata = pathinfo($file['name']);
         if (in_array($metadata['extension'], ['pdf', 'doc', 'docx', 'jpeg', 'png'])) {
-            $uploadPath = User::UPLOAD_DIR . bin2hex(random_bytes(20)) . '.pdf';
-            if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
-               return $uploadPath;
+            $random = bin2hex(random_bytes(20)) . '.' . $metadata['extension'];
+            if (move_uploaded_file($file['tmp_name'], User::UPLOAD_DIR . $random)) {
+                return $random;
             } else {
                 throw new Exception("Erreur d'upload du fichier");
             }

@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `legalrepresentative_firstname` varchar(255),
   `legalrepresentative_lastname` varchar(255),
   `legalrepresentative_email` varchar(255),
-  `legalrepresentative_phone` int,
+  `legalrepresentative_phone` varchar(15),
   `name` varchar(255),
   `address` varchar(255),
   `city` varchar(255),
@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(255) UNIQUE NOT NULL,
   `recover_token` varchar(255) UNIQUE,
   `role` ENUM ('ROLE_ADMIN', 'ROLE_SUPER_ADMIN', 'ROLE_CLIENT') NOT NULL DEFAULT 'ROLE_CLIENT',
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `cgu_approvement` varchar(255) DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `ticket` (
