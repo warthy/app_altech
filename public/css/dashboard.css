@@ -112,20 +112,34 @@ header {
     font-weight: bold;
     color: #E5B03C;
 }
-
-.delete-btn{
-    text-transform: uppercase;
-    text-decoration: none;
+.card {
+    padding: 50px;
+    width: 90%;
+    margin: auto;
     border-radius: 5px;
-    padding: 5px;
-    font-weight: bold;
-    background-color: #f56565;
-    color: #FFFFFF;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
-.delete-btn:hover {
-    background-color: #c53030;
+.default-btn {
+    font-weight: bold;
+    text-decoration: none;
+    margin: 20px 10px;
+    text-align: center;
+    color: #fff;
+    background-color: #E5B03C;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 0.75rem 30px;
+    border: none;
+    display: block;
+    width: max-content;
 }
+
+.default-btn:hover {
+    cursor: pointer;
+    background-color: #c39134;
+}
+
 
 
 

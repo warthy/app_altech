@@ -36,6 +36,9 @@
     }
   },
 
+  "/admin/client": {
+    "controller": "ClientController::index"
+  },
   "/admin/client/create": {
     "controller": "ClientController::create"
   },

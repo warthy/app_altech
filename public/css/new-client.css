@@ -25,34 +25,13 @@ body
 
 .boite /*boîte avec infos*/
 {
-    position: relative;
-    width: 65%;
-    height: 875px;
-    left: 356px;
-    top: 160px;
-    bottom: 70px;
-
+    width: 90%;
+    margin: 0 30px 10px;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-
-.champs /*Infos specifiques*/
-{
-    position: relative;
-    text-align: right;
-    width: 493px;
-    height: 62px;
-    right: 50px;
-    top: 40px;
 }
 
 fieldset
 {
     border: 0;
-}
-
-.h3
-{
-    text-align: center;
 }

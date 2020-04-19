@@ -4,7 +4,7 @@ USE `altech`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `legalrepresentative_firstname` varchar(255),
-  `legalrepresentative_lastaddress` varchar(255),
+  `legalrepresentative_lastname` varchar(255),
   `legalrepresentative_email` varchar(255),
   `legalrepresentative_phone` int,
   `name` varchar(255),

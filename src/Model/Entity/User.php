@@ -97,18 +97,6 @@ class User implements EntityInterface
         return $this;
     }
 
-
-    public function getEmail(): ?string
-    {
-        return $this->$email;
-    }
-
-    public function setCompanyEmail(string $email): self
-    {
-        $this->$email = $email;
-        return $this;
-    }
-
     public function getPhone(): ?string
     {
         return $this->phone;
@@ -133,77 +121,86 @@ class User implements EntityInterface
   
     public function getCity(): ?string
     {
-        return $this->$city;
+        return $this->city;
     }
 
     public function setCity(string $city): self
     {
-        $this->$city = $city;
+        $this->city = $city;
         return $this;
     }
 
 
     public function getZipCode(): ?int
     {
-        return $this->$zipcode;
+        return $this->zipcode;
     }
 
     public function setZipCode(int $zipcode): self
     {
-        $this->$zipcode = $zipcode;
+        $this->zipcode = $zipcode;
         return $this;
     }
 
 
     public function getRepresentativeFirstName(): ?string
     {
-        return $this->$legalrepresentative_firstname;
+        return $this->legalrepresentative_firstname;
     }
 
     public function setRepresentativeFirstName(string $firstname): self
     {
-        $this->$legalrepresentative_firstname = $firstname;
+        $this->legalrepresentative_firstname = $firstname;
         return $this;
     }
 
 
     public function getRepresentativeLastName(): ?string
     {
-        return $this->$legalrepresentative_lastname;
+        return $this->legalrepresentative_lastname;
     }
 
     public function setRepresentativeLastName(string $lastname): self
     {
-        $this->$legalrepresentative_lastname = $lastname;
+        $this->legalrepresentative_lastname = $lastname;
         return $this;
     }
 
 
     public function getRepresentativeEmail(): ?string
     {
-        return $this->$legalrepresentative_email;
+        return $this->legalrepresentative_email;
     }
 
     public function setRepresentativeEmail(string $email): self
     {
-        $this->$legalrepresentative_email = $email;
+        $this->legalrepresentative_email = $email;
         return $this;
     }
 
 
     public function getRepresentativePhone(): ?int
     {
-        return $this->$legalrepresentative_phone;
+        return $this->legalrepresentative_phone;
     }
 
     public function setRepresentativePhone(int $phone): self
     {
-        $this->$legalrepresentative_phone = $phone;
+        $this->legalrepresentative_phone = $phone;
         return $this;
     }
 
-    
+    public function getCguApprovement(): ?string
+    {
+        return $this->cgu_approvement;
+    }
 
+
+    public function setCguApprovement(string $cgu_approvement): self
+    {
+        $this->cgu_approvement = $cgu_approvement;
+        return $this;
+    }
 
 
 }

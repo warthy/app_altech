@@ -3,6 +3,7 @@
 namespace Altech\Controller;
 
 use Altech\Model\Entity\User;
+use Altech\Model\Repository\UserRepository;
 use App\Component\Controller;
 use App\KernelFoundation\Request;
 use App\KernelFoundation\Security;
@@ -12,7 +13,12 @@ class ClientController extends Controller
 {
     public function index()
     {
-        return $this->render('/candidate/index.php');
+        /** @var UserRepository $repo */
+        $repo = $this->getRepository(UserRepository::class);
+
+        return $this->render('/client/index.php', [
+            'clients' => $repo->findAllByRole(Security::ROLE_CLIENT)
+        ]);
     }
 
     public function create()
@@ -25,23 +31,29 @@ class ClientController extends Controller
             $file = $req->files->get("cgu_approvement");
 
             if (!empty($form->get("name")) && !empty($form->get("email")) && !empty($file)) {
-                $client = new User();
-                $client
+                $client = (new User())
                     ->setRole(Security::ROLE_CLIENT)
                     ->setName($form->get("name"))
+                    ->setPhone($form->get("phone"))
+                    ->setAddress($form->get("address"))
+                    ->setCity($form->get("city"))
+                    ->setZipCode($form->get("zipcode"))
                     ->setEmail($form->get("email"));
 
-                if (!mime_content_type($file['tmp_name']) == "'application/pdf") {
-                    $error = "File should be a pdf !";
+                $metadata = pathinfo($file['name']);
+                if (in_array($metadata['extension'], ['pdf', 'doc', 'docx', 'jpeg', 'png'])) {
+                    $uploadPath = User::UPLOAD_DIR . bin2hex(random_bytes(20)) . '.pdf';
+                    if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
+                        $client->setCguApprovement($uploadPath);
+                    } else {
+                        echo "Possible file upload attack!\n";
+                    }
                 }
-                else if (move_uploaded_file($file['tmp_name'],User::UPLOAD_DIR . uniqid() . '.pdf')) {
-                    die('oui');
-                } else {
-                    echo "Possible file upload attack!\n";
-                }
+
             }
         }
         return $this->render('/client/create.php', [
+            'title' => "Création d'un nouveau client :",
             'error' => $error
         ]);
     }

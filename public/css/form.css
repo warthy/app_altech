@@ -1,0 +1,82 @@
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 80%;
+}
+
+form .form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.form-group div {
+    width: 100%;
+    margin: 5px 20px;
+}
+
+.form-group label {
+    color: #E5B03C;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: -10px;
+}
+.form-group input, textarea, select {
+    padding: 10px;
+    width: 100%;
+    border: #808782 solid 1px;
+    border-radius: 5px;
+}
+.form-group select {
+    width: max-content;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+.submit-btn {
+    font-weight: bold;
+    text-decoration: none;
+    margin: 20px 10px;
+    text-align: center;
+    color: #fff;
+    background-color: #2b862b;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 0.75rem 30px;
+    border: none;
+}
+
+.submit-btn:hover {
+    cursor: pointer;
+    background-color: #329b32;
+}
+
+.delete-button {
+    font-weight: bold;
+    text-decoration: none;
+    margin: 20px 10px;
+    text-align: center;
+    color: #fff;
+    background-color: #c63f3c;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 0.75rem 30px;
+}
+.delete-button:hover {
+    cursor: pointer;
+    background-color: #8c2c29;
+}
+
+.button-list {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
