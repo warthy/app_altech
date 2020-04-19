@@ -15,10 +15,10 @@
                 <td><?= $client->getEmail() ?></td>
                 <td><?= $client->getPhone() ?></td>
                 <td>
-                    <a href="/admin/user/<?= $client->getId() ?>" class="action-btn edit-btn">
+                    <a href="/admin/client/<?= $client->getId() ?>" class="action-btn edit-btn">
                         <i class="far fa-eye"></i>
                     </a>
-                    <a href="/admin/user/<?= $client->getId() ?>/delete" class="action-btn delete-btn">
+                    <a href="/admin/client/<?= $client->getId() ?>/delete" class="action-btn delete-btn">
                         <i class="far fa-trash-alt"></i>
                     </a>
                 </td>

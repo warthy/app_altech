@@ -39,6 +39,18 @@
   "/admin/client": {
     "controller": "ClientController::index"
   },
+  "/admin/client/:id": {
+    "controller": "ClientController::edit",
+    "requirements": {
+      "id": "\\d+"
+    }
+  },
+  "/admin/client/:id/delete": {
+    "controller": "ClientController::delete",
+    "requirements": {
+      "id": "\\d+"
+    }
+  },
   "/admin/client/create": {
     "controller": "ClientController::create"
   },

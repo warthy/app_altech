@@ -97,7 +97,6 @@ class AdminController extends Controller
 
     public function delete($id)
     {
-        /** @var UserRepository $repo */
         $repo = $this->getRepository(UserRepository::class);
         /** @var User $admin */
         $admin = $repo->findById($id);
