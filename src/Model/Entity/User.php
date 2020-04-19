@@ -8,23 +8,31 @@ class User implements EntityInterface
     private $id;
     private $name;
     private $email;
+    private $phone;
     private $recoverToken;
     private $password;
     private $role = "ROLE_CLIENT";
 
-    public function getId(): int
+    public function getId(): ?int
     {
        return $this->id;
     }
 
-    public function getEmail(): string
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): void
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+        return $this;
     }
 
     public function getPassword(): string
@@ -33,11 +41,11 @@ class User implements EntityInterface
     }
 
 
-    public function setPassword(string $password): void
+    public function setPassword(string $password): self
     {
         $this->password = $password;
+        return $this;
     }
-
 
     public function getRecoverToken(): ?string
     {
@@ -49,7 +57,7 @@ class User implements EntityInterface
         $this->recoverToken = $recoverToken;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -71,5 +79,15 @@ class User implements EntityInterface
         return $this;
     }
 
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+        return $this;
+    }
 
 }

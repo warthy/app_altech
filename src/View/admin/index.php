@@ -5,6 +5,7 @@
             <th>Nom complet</th>
             <th>Rôle</th>
             <th>Email</th>
+            <th>Numéro de téléphone</th>
             <th>Actions</th>
         </thead>
         <tbody>
@@ -14,6 +15,7 @@
                 <td><?= $admin->getName() ?></td>
                 <td><?= $admin->getRole() ?></td>
                 <td><?= $admin->getEmail() ?></td>
+                <td><?= $admin->getPhone() ?? "non-renseigné" ?></td>
                 <td>
                     <a href="/admin/user/<?= $admin->getId() ?>" class="action-btn"">
                     <i class="far fa-edit"></i>
@@ -27,7 +29,7 @@
         </tbody>
     </table>
 
-    <a class="add-candidate" href="/candidate/new">
-        Ajouter un candidat
+    <a class="add-candidate" href="/admin/user/create">
+        Ajouter un administrateur
     </a>
 </div>

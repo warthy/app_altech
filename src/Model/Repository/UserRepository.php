@@ -5,6 +5,8 @@ namespace Altech\Model\Repository;
 use Altech\Model\Entity\EntityInterface;
 use Altech\Model\Entity\User;
 use App\Component\Repository;
+use App\KernelFoundation\Security;
+use PDO;
 
 class UserRepository extends Repository
 {
@@ -17,6 +19,24 @@ class UserRepository extends Repository
         $stmt->execute(['email' => $email]);
 
         return $stmt->fetchObject(User::class);
+    }
+
+    public function findAllByRole(string $role): array
+    {
+        $roles = Security::getInheritedRoles($role);
+        $in  = str_repeat('?,', count($roles) - 1) . '?';
+        $stmt = $this->pdo->prepare("SELECT * FROM " . self::TABLE_NAME . " WHERE role IN ($in) ");
+        $stmt->execute($roles);
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, User::class);
+    }
+
+    public function findSuperAdminCount(): int
+    {
+        $stmt = $this->pdo->query('SELECT COUNT(id) FROM ' . self::TABLE_NAME . ' WHERE role = "ROLE_SUPER_ADMIN" ');
+        $stmt->execute();
+
+        return $stmt->fetchColumn(0);
     }
 
     public function findByToken(string $token)
@@ -33,8 +53,25 @@ class UserRepository extends Repository
         // TODO: Implement update() method.
     }
 
-    public function insert(EntityInterface $entity)
+
+    /**
+     * @param User $user
+     * @return User
+     */
+    public function insert($user): User
     {
-        // TODO: Implement insert() method.
+        $stmt = $this->pdo->prepare(
+            'INSERT INTO ' . self::TABLE_NAME . ' (name, email, phone, role, password) VALUES (:name, :email, :phone, :role, :password)'
+        );
+        $stmt->bindValue(':name', $user->getName());
+        $stmt->bindValue(':email', $user->getEmail());
+        $stmt->bindValue(':phone', $user->getPhone());
+        $stmt->bindValue(':role', $user->getRole());
+        $stmt->bindValue(':password', $user->getPassword());
+
+        $stmt->execute();
+        $user->setId($this->pdo->lastInsertId());
+
+        return $user;
     }
 }

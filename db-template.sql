@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
   `address` varchar(255),
-  `telephone` int,
+  `phone` varchar(15),
   `email` varchar(255) UNIQUE NOT NULL,
   `recover_token` varchar(255) UNIQUE,
   `role` ENUM ('ROLE_ADMIN', 'ROLE_SUPER_ADMIN', 'ROLE_CLIENT') NOT NULL DEFAULT 'ROLE_CLIENT',
