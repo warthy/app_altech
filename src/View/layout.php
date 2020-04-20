@@ -31,12 +31,18 @@
     </header>
     <div class="wrapper">
         <div id="sidebar">
-            <a href="/">
+            <?php if(Security::hasPermission("ROLE_ADMIN")) { ?>
+            <a href="/admin">
                 <i class="material-icons">home</i> Home
             </a>
+            <?php }else{ ?>
+                <a href="/client">
+                    <i class="material-icons">home</i> Home
+                </a>
+            <?php } ?>
             <?php
             if(Security::hasPermission("ROLE_CLIENT")) { ?>
-                <a href="#">
+                <a href="/client/measure">
                     <i class="material-icons">settings_remote</i> Effectuer une mesure
                 </a>
                 <a href="#">
@@ -48,7 +54,7 @@
                 <a href="/client/faq">
                     <i class="material-icons">question_answer</i> Consulter la FAQ
                 </a>
-                <a href="#/client/candidate">
+                <a href="/client/candidate">
                     <i class="material-icons">group</i> Consulter les candidats
                 </a>
             <?php }?>
