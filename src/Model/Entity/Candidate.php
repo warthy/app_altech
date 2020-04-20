@@ -7,18 +7,27 @@ class Candidate implements EntityInterface
 {
     private $id;
     private $email;
+    private $phone;
     private $firstname;
     private $lastname;
     private $height;
     private $weight;
     private $sex;
     private $birthdate;
+    private $cgu_pprovement;
+
 
     private $client;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -108,6 +117,29 @@ class Candidate implements EntityInterface
     public function setClient(User $client): self
     {
         $this->client = $client;
+        return $this;
+    }
+
+    public function getCguApprovement(): ?string
+    {
+        return $this->cgu_approvement;
+    }
+
+
+    public function setCguApprovement(string $cgu_approvement): self
+    {
+        $this->cgu_approvement = $cgu_approvement;
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
         return $this;
     }
 

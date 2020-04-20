@@ -48,7 +48,7 @@ class ClientController extends Controller
                     ->setPassword(bin2hex(random_bytes(10)));
                 //We set a random password to avoid connection while new user hasn't define his password himself
 
-                $client->setCguApprovement($this->checkAndUploadFile($file));
+                $client->setCguApprovement(self::checkAndUploadFile($file));
                 $repo->insert($client);
                 //TODO: send email
 
@@ -91,7 +91,7 @@ class ClientController extends Controller
                         if($client->getCguApprovement()){
                             unlink(User::UPLOAD_DIR.$client->getCguApprovement());
                         }
-                        $client->setCguApprovement($this->checkAndUploadFile($file));
+                        $client->setCguApprovement(self::checkAndUploadFile($file));
                     }
 
                     $repo->update($client);
@@ -119,7 +119,7 @@ class ClientController extends Controller
         throw new Exception("invalid user id: $id");
     }
 
-    private function checkAndUploadFile($file): string
+    public static function checkAndUploadFile($file): string
     {
         $metadata = pathinfo($file['name']);
         if (in_array($metadata['extension'], ['pdf', 'doc', 'docx', 'jpeg', 'png'])) {

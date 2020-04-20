@@ -26,8 +26,15 @@
   "/client/candidate": {
     "controller": "CandidateController::index"
   },
+
   "/client/candidate/create": {
     "controller": "CandidateController::create"
+  },
+  "/client/candidate/:id": {
+    "controller": "CandidateController::edit",
+    "requirements": {
+      "id": "\\d+"
+    }
   },
   "/client/measure": {
     "controller": "MeasureController::init"

@@ -1,41 +1,54 @@
-<form method='post'>
-
-    <table class='data-table'>
-        <tr>
-            <td>Nom :</td>
-            <td><input type='text' name='nom'/></td>
-        </tr>
-        <tr>
-            <td>Prénom :</td>
-            <td><input type='text' name='prenom'/></td>
-        </tr>
-        <tr>
-            <td>Date de naissance :</td>
-            <td><input type='text' name='date_naissance'/></td>
-        </tr>
-        <tr>
-            <td>Sexe :</td>
-            <td><input type='radio' name='sexe_homme'/> Homme <input type='radio' name='sexe_femme' value='Femme'/>
-                Femme
-            </td>
-        </tr>
-        <tr>
-            <td>Poids (Kg) :</td>
-            <td><input type='text' name='poids'/></td>
-        </tr>
-        <tr>
-            <td>Taille (cm) :</td>
-            <td><input type='text' name='taille'/></td>
-        </tr>
-        <tr>
-            <td>Adresse mail :</td>
-            <td><input type='email' name='mail'/></td>
-        </tr>
-        <tr>
-            <td>Consentement CGU :</td>
-            <td><input type='file' name='cgu'/></td>
-        </tr>
-    </table>
+<form method='post' enctype="multipart/form-data">
+        <div class="form-group">
+            <div>
+                <label for="sexe">Sexe :</label>
+                <select name="sex" id="sexe">
+                    <option value="1">Homme</option>
+                    <option value="0">Femme</option>
+                    <option value="null">Non-divulgué</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <label for="nom">Nom :</label>
+                <input type="text" name="lastname" id="nom" value="<?= $candidate->getLastname() ?>" required/>
+            </div>
+            <div>
+                <label for="prenom">Prénom :</label>
+                <input type="text" name="firstname" id="prenom" value="<?= $candidate->getFirstname() ?>" required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <label for="email">Adresse email :</label>
+                <input id="email" type='email' name='email' value="<?= $candidate->getEmail() ?>"/>
+            </div>
+            <div>
+                <label for="phone">Numéro de téléphone :</label>
+                <input id="phone" type='text' name='phone' value="<?= $candidate->getPhone() ?>"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <label for="taille">Taille (cm) :</label>
+                <input id="taille" type='text' name='height' value="<?= $candidate->getHeight() ?>"/>
+            </div>
+            <div>
+                <label for="poids">Poids (kg) :</label>
+                <input id="poids" type='text' name='weight' value="<?= $candidate->getWeight() ?>"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <label for="CGU">Consentement CGU</label> :
+                <input type="file" name='cgu_approvement' id="CGU" accept=".pdf, .doc, .docx, .jpeg, .png"
+                    <?= !$candidate->getCguApprovement() ? "required" :""?> />
+                <?php if($candidate->getCguApprovement()){ ?>
+                    <a href="/upload/<?= $candidate->getCguApprovement() ?>" download>Télécharger le document</a>
+                <?php } ?>
+            </div>
+        </div>
 
 
     <button class="submit-btn">

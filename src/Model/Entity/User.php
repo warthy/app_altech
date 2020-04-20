@@ -22,7 +22,7 @@ class User implements EntityInterface
     private $legalrepresentative_email;
     private $legalrepresentative_phone;
 
-    private $cguApprovement;
+    private $cgu_approvement;
     private $candidates; //candidats ?
 
 
@@ -192,13 +192,13 @@ class User implements EntityInterface
 
     public function getCguApprovement(): ?string
     {
-        return $this->cguApprovement;
+        return $this->cgu_approvement;
     }
 
 
     public function setCguApprovement(string $cgu_approvement): self
     {
-        $this->cguApprovement = $cgu_approvement;
+        $this->cgu_approvement = $cgu_approvement;
         return $this;
     }
 
