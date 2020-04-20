@@ -14,7 +14,7 @@
                 <div>
                     <a onclick="toggleFAQ(<?= $index ?>)"><i id="ch-<?= $index ?>" class="fas fa-chevron-down"></i></a>
                     <?php
-                    if ($admin) echo "<a href='admin/faq/" . $faq->getId() . "'><i class='far fa-edit'></i></a>"; ?>
+                    if ($admin) echo "<a href='/admin/faq/" . $faq->getId() . "'><i class='far fa-edit'></i></a>"; ?>
                 </div>
             </div>
             <div id="faq-<?= $index ?>" class="faq-answer hidden">
