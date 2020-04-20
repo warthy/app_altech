@@ -26,6 +26,9 @@
   "/client/candidate": {
     "controller": "CandidateController::index"
   },
+  "/client/candidate/create": {
+    "controller": "CandidateController::create"
+  },
   "/client/measure": {
     "controller": "MeasureController::init"
   },

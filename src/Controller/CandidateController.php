@@ -16,4 +16,10 @@ class CandidateController extends Controller
             'totalPage' => $repo->findPageCount()
         ]);
     }
+
+    public function create(){
+        return $this->render('/candidate/form.php', [
+            "title" => "Création d'un nouveau candidat"
+        ]);
+    }
 }
