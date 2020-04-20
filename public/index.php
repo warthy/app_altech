@@ -5,6 +5,10 @@ use App\KernelFoundation\Request;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+// Create cache folder
+if(!file_exists("../var/cache"))
+    mkdir("../var/cache", 0750, true);
+
 $request  = Request::createFromGlobals();
 $kernel = new Kernel();
 
