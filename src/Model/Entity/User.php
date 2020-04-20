@@ -192,13 +192,13 @@ class User implements EntityInterface
 
     public function getCguApprovement(): ?string
     {
-        return $this->cgu_approvement;
+        return $this->cguApprovement;
     }
 
 
     public function setCguApprovement(string $cgu_approvement): self
     {
-        $this->cgu_approvement = $cgu_approvement;
+        $this->cguApprovement = $cgu_approvement;
         return $this;
     }
 

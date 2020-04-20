@@ -58,7 +58,7 @@ class UserRepository extends Repository
                 'name, address, city, zipcode, email, phone, password, role, cgu_approvement, '.
                 'legalrepresentative_firstname, legalrepresentative_lastname, legalrepresentative_email, legalrepresentative_phone '.
             ') VALUES ('.
-            ':name, :address, :city, :zipcode, :email, :phone, :password, :role, :cgu_approvement'.
+            ':name, :address, :city, :zipcode, :email, :phone, :password, :role, :cgu_approvement, '.
             ':legalrepresentative_firstname, :legalrepresentative_lastname, :legalrepresentative_email, :legalrepresentative_phone)'
         );
 
