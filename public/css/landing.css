@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+   }
+  
+
 /*Menu bar*/
 body{
     height: 2000px;

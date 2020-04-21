@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title> ALTHEC CORP </title>
+    <title> ALTECH CORP </title>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link rel="stylesheet" href="/css/landing.css"
   </head>
@@ -39,7 +39,7 @@
   <!-- Content -->
   <div class="landing">
       <img class="img_landing" src="/img/launch.jpg" alt="Landing_page"/>
-      <p class="text">La Révolution des Systèmes Psycotechniques</p>
+      <p class="text">La Révolution des Systèmes Psychotechniques</p>
   </div>
   <div id="service">
       <div class="data">
