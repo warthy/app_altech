@@ -40,17 +40,15 @@ class Router
                 }
                 [$class, $method] = explode("::", $handler);
 
+
+                // Recover parameters inside URI
                 $args = [];
                 $requirements = $conf['requirements'] ?? [];
-                // Recover parameters inside URI
-                foreach ($requirements as $name => $val) {
-                    $start = strpos($route, ':' . $name);
-                    $end = strpos($this->request->uri, '/', $start); //strpos($this->request->uri, '/'. $start); ??
-                    if (!$end) {
-                        $end = strlen($this->request->uri);
-                    }
-
-                    $args[$name] = substr($this->request->uri, $start, $end - $start);
+                $patternFrags = explode("/", trim($route, "/"));
+                $routeFrags = explode("/", trim($this->request->uri, "/"));
+                foreach ($patternFrags as $index => $frag){
+                    if($frag[0] === ":")
+                        $args[substr($frag[0], 1)] = $routeFrags[$index];
                 }
 
                 // Call route's controller method
