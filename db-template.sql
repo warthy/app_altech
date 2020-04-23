@@ -22,21 +22,22 @@ CREATE TABLE IF NOT EXISTS `user`
 
 CREATE TABLE IF NOT EXISTS `ticket`
 (
-    `id`        int PRIMARY KEY AUTO_INCREMENT,
-    `closed`    bit(1),
-    `open_at` datetime,
-    `description` text,
-    `admin_id`  int DEFAULT NULL,
-    `client_id` int
+    `id`          int PRIMARY KEY AUTO_INCREMENT,
+    `closed`      bit(1),
+    `open_at`     datetime,
+    `subject`     varchar(255) NOT NULL,
+    `description` text         NOT NULL,
+    `admin_id`    int DEFAULT NULL,
+    `client_id`   int          NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `ticket_message`
 (
     `id`        int PRIMARY KEY AUTO_INCREMENT,
-    `ticket_id` int          NOT NULL,
-    `message`   text NOT NULL,
-    `author_id`    int DEFAULT NULL,
-    `sent_at` datetime     NOT NULL
+    `ticket_id` int      NOT NULL,
+    `message`   text     NOT NULL,
+    `author_id` int DEFAULT NULL,
+    `sent_at`   datetime NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `faq`
@@ -48,17 +49,17 @@ CREATE TABLE IF NOT EXISTS `faq`
 
 CREATE TABLE IF NOT EXISTS `candidate`
 (
-    `id`             int PRIMARY KEY AUTO_INCREMENT,
-    `email`          varchar(255) UNIQUE NOT NULL,
-    `phone`          varchar(255) UNIQUE DEFAULT NULL,
-    `firstname`      varchar(255),
-    `lastname`       varchar(255),
-    `height`         float(2),
-    `weight`         float(2),
-    `sex`            BOOLEAN,
-    `birthdate`      datetime,
-    `tests_nb`       int,
-    `user_id`        int                 NOT NULL,
+    `id`              int PRIMARY KEY AUTO_INCREMENT,
+    `email`           varchar(255) UNIQUE NOT NULL,
+    `phone`           varchar(255) UNIQUE DEFAULT NULL,
+    `firstname`       varchar(255),
+    `lastname`        varchar(255),
+    `height`          float(2),
+    `weight`          float(2),
+    `sex`             BOOLEAN,
+    `birthdate`       datetime,
+    `tests_nb`        int,
+    `user_id`         int                 NOT NULL,
     `cgu_approvement` varchar(255)        NOT NULL
 );
 

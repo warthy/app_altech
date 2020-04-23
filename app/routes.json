@@ -42,10 +42,22 @@
 
 
   "/client/ticket": {
-    "controller": "TicketController::index"
+    "controller": "TicketController::clientPanel"
   },
-  "/client/ticket/:id": {
+  "/client/ticket/open": {
+    "controller": "TicketController::open"
+  },
+  "/admin/ticket": {
+    "controller": "TicketController::adminPanel"
+  },
+  "/(client|admin)/ticket/:id": {
     "controller": "TicketController::view",
+    "requirements": {
+      "id": "\\d+"
+    }
+  },
+  "/(client|admin)/ticket/:id/send": {
+    "controller": "TicketController::send",
     "requirements": {
       "id": "\\d+"
     }

@@ -6,7 +6,9 @@ use DateTime;
 class Ticket implements EntityInterface
 {
     private $id;
-    private $closed = false;
+    private $closed;
+    private $subject;
+    private $description;
     private $open_at;
     private $admin_id;
     private $client_id;
@@ -65,6 +67,29 @@ class Ticket implements EntityInterface
     public function setClientId($id): self
     {
         $this->client_id = $id;
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description): self
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    public function getSubject(): ?string
+    {
+        return $this->subject;
+    }
+
+
+    public function setSubject(string $subject): self
+    {
+        $this->subject = $subject;
         return $this;
     }
 
