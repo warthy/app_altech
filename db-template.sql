@@ -24,18 +24,19 @@ CREATE TABLE IF NOT EXISTS `ticket`
 (
     `id`        int PRIMARY KEY AUTO_INCREMENT,
     `closed`    bit(1),
-    `open_date` datetime,
+    `open_at` datetime,
+    `description` text,
     `admin_id`  int DEFAULT NULL,
-    `opener_id` int
+    `client_id` int
 );
 
 CREATE TABLE IF NOT EXISTS `ticket_message`
 (
     `id`        int PRIMARY KEY AUTO_INCREMENT,
     `ticket_id` int          NOT NULL,
-    `message`   varchar(255) NOT NULL,
-    `author`    int DEFAULT NULL,
-    `date_sent` datetime     NOT NULL
+    `message`   text NOT NULL,
+    `author_id`    int DEFAULT NULL,
+    `sent_at` datetime     NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `faq`
@@ -81,13 +82,13 @@ ALTER TABLE `ticket`
     ADD FOREIGN KEY (`admin_id`) REFERENCES `user` (`id`);
 
 ALTER TABLE `ticket`
-    ADD FOREIGN KEY (`opener_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+    ADD FOREIGN KEY (`client_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `ticket_message`
     ADD FOREIGN KEY (`ticket_id`) REFERENCES `ticket` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `ticket_message`
-    ADD FOREIGN KEY (`author`) REFERENCES `user` (`id`);
+    ADD FOREIGN KEY (`author_id`) REFERENCES `user` (`id`);
 
 ALTER TABLE `candidate`
     ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
