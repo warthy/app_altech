@@ -12,7 +12,7 @@ class TicketMessageRepository extends Repository
     const ENTITY = TicketMessage::class;
 
     public function findAllByTicket(Ticket $ticket){
-        $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME .' WHERE ticket_id = :ticket_id ORDER BY sent_at DESC');
+        $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME .' WHERE ticket_id = :ticket_id ORDER BY sent_at ASC');
         $stmt->bindValue(':ticket_id', $ticket->getId(), PDO::PARAM_INT);
 
         $stmt->execute();

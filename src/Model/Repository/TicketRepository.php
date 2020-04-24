@@ -33,7 +33,7 @@ class TicketRepository extends Repository
     {
         $stmt =$this->pdo->prepare(
             'INSERT INTO ' . self::TABLE_NAME . ' (description, subject, client_id, closed, open_at) '.
-            'VALUES (:description, :subject, :client_id, false, NOW())' );
+            'VALUES (:description, :subject, :client_id, 0, NOW())' );
         $stmt->bindValue(':client_id', $ticket->getClientId() ,PDO::PARAM_INT);
         $stmt->bindValue(':subject', $ticket->getSubject() ,PDO::PARAM_STR);
         $stmt->bindValue(':description', $ticket->getDescription() ,PDO::PARAM_STR);

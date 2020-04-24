@@ -60,7 +60,7 @@ class TicketMessage implements EntityInterface
 
     public function getSentAt(): ?DateTime
     {
-        return $this->sent_at;
+        return new DateTime($this->sent_at);
     }
 
     public function setSentAt(DateTime $sent_at): self

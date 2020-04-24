@@ -112,7 +112,6 @@ header {
     padding: 10px;
     position: relative;
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -147,6 +146,25 @@ header {
 .default-btn:hover {
     cursor: pointer;
     background-color: #c39134;
+}
+
+.delete-btn{
+    font-weight: bold;
+    text-decoration: none;
+    margin: 20px 10px;
+    text-align: center;
+    color: #fff;
+    background-color: #c63f3c;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 0.75rem 30px;
+    border: none;
+    display: block;
+    width: max-content;
+}
+.delete-btn:hover {
+    cursor: pointer;
+    background-color: #8c2c29;
 }
 
 

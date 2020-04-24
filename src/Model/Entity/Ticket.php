@@ -24,7 +24,7 @@ class Ticket implements EntityInterface
         return $this;
     }
 
-    public function getClosed(): bool
+    public function isClosed(): bool
     {
         return $this->closed;
     }
@@ -38,7 +38,7 @@ class Ticket implements EntityInterface
 
     public function getOpenAt(): ?DateTime
     {
-        return $this->open_at;
+        return new DateTime($this->open_at);
     }
 
     public function setOpenAt(DateTime $open_at): self
@@ -93,5 +93,14 @@ class Ticket implements EntityInterface
         return $this;
     }
 
+    public function getState(): string
+    {
+        if($this->admin_id){
+            if(!$this->closed)
+                return 'Résolu';
+            return 'En cours de résolution';
+        }
+        return 'Non attribué';
+    }
 
 }
