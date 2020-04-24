@@ -26,7 +26,7 @@
     </div>
 </div>
 <hr>
-<div class="ticket-messages">
+<div id="scroller" class="ticket-messages">
     <?php
     foreach ($messages as $message) {
         if ($message->getAuthorId() === $user->getId()) { ?>
@@ -52,3 +52,8 @@
         </form>
     </div>
 </div>
+<script>
+    // Start messages scroller at the bottom
+    const element = document.getElementById("scroller");
+    element.scrollTop = element.scrollHeight;
+</script>

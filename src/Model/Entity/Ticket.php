@@ -96,7 +96,7 @@ class Ticket implements EntityInterface
     public function getState(): string
     {
         if($this->admin_id){
-            if(!$this->closed)
+            if($this->closed)
                 return 'Résolu';
             return 'En cours de résolution';
         }

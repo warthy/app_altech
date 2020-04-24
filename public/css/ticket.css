@@ -56,9 +56,13 @@ hr {
 
 .ticket-messages {
     overflow-y: auto;
-    height: 450px;
+    height: 430px;
     display: flex;
-    flex-direction: column;
+    flex-flow: column nowrap;
+}
+.ticket-messages > :first-child {
+    margin-top: auto !important;
+    /* use !important to prevent breakage from child margin settings */
 }
 
 .message-box {

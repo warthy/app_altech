@@ -43,11 +43,10 @@ class Router
 
                 // Recover parameters inside URI
                 $args = [];
-                $requirements = $conf['requirements'] ?? [];
                 $patternFrags = explode("/", trim($route, "/"));
                 $routeFrags = explode("/", trim($this->request->uri, "/"));
                 foreach ($patternFrags as $index => $frag){
-                    if($frag[0] === ":")
+                    if(isset($frag[0]) && $frag[0] === ":")
                         $args[substr($frag[0], 1)] = $routeFrags[$index];
                 }
 
