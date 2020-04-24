@@ -19,7 +19,7 @@ class TicketController extends Controller
         $repo = $this->getRepository(TicketRepository::class);
         $client = $this->getUser();
 
-        $this->render('/ticket/client', [
+        return $this->render('/ticket/client.php', [
             'title' => 'Gestion des tickets',
             'tickets' => $repo->findAllByClient($client)
         ]);

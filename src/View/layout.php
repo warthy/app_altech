@@ -49,8 +49,8 @@
                 <a href="#">
                     <i class="material-icons">backup</i> Consulter les mesures
                 </a>
-                <a href="#">
-                    <i class="material-icons">error_outline</i> Ouvrir un ticket
+                <a href="/client/ticket">
+                    <i class="material-icons">error_outline</i> Gérer ses ticket
                 </a>
                 <a href="/client/faq">
                     <i class="material-icons">question_answer</i> Consulter la FAQ
