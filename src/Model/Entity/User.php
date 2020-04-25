@@ -6,6 +6,7 @@ use App\KernelFoundation\Security;
 class User implements EntityInterface
 {
     const UPLOAD_DIR = __DIR__."/../../../public/upload/";
+    const PICTURE_DIR = __DIR__."/../../../public/img/user/";
 
     private $id;
     private $name;

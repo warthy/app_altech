@@ -96,6 +96,7 @@ class UserRepository extends Repository
                 'zipcode = :zipcode, '.
                 'email = :email, '.
                 'phone = :phone, '.
+                'password = :password'.
                 'legalrepresentative_firstname = :legalrepresentative_firstname, '.
                 'legalrepresentative_lastname = :legalrepresentative_lastname,'.
                 'legalrepresentative_email = :legalrepresentative_email,'.
@@ -110,6 +111,7 @@ class UserRepository extends Repository
             'zipcode' => $user->getZipCode(),
             'email' => $user->getEmail(),
             'phone' => $user->getPhone(),
+            'password' => $user->getPassword(),
             'legalrepresentative_firstname' => $user->getRepresentativeFirstName(),
             'legalrepresentative_lastname' => $user->getRepresentativeLastName(),
             'legalrepresentative_email' => $user->getRepresentativeEmail(),

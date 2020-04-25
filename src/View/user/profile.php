@@ -91,8 +91,8 @@ use App\KernelFoundation\Security;
             </div>
             <div class="form-group">
                 <div>
-                    <label for="newpass_confirmed">Réentrer votre nouveau mot de passe</label>
-                    <input id="newpass_confirmed" name="newpass_confirmed" placeholder="Confirmer mot de passe..."/>
+                    <label for="newpass_confirm">Réentrer votre nouveau mot de passe</label>
+                    <input id="newpass_confirm" name="newpass_confirm" placeholder="Confirmer mot de passe..."/>
                 </div>
             </div>
 
