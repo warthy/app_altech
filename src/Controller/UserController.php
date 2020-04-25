@@ -29,6 +29,11 @@ class UserController extends Controller
             $form = $req->form;
             $user = $this->getUser();
             if (!empty($form->get('email')) && !empty($form->get('phone'))) {
+                $repo = $this->getRepository(UserRepository::class);
+                $user
+                    ->setEmail($form->get('email'))
+                    ->setPhone($form->get('phone'));
+
                 if (Security::hasPermission(Security::ROLE_ADMIN)) {
                     if (!empty($form->get('firstname')) && !empty($form->get('lastname'))) {
                         $user->setName($form->get('firstname') . ' ' . $form->get('lastname'));
@@ -50,6 +55,8 @@ class UserController extends Controller
                         unlink(User::PICTURE_DIR . $user->getPicture());
                     $user->setPicture(self::checkAndUploadPicture($file));
                 }
+
+                $repo->update($user);
             }
         }
         $this->redirect("/profile");

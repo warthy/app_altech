@@ -21,6 +21,12 @@
   "/profile": {
     "controller": "UserController::profile"
   },
+  "/profile/edit": {
+    "controller": "UserController::edit"
+  },
+  "/profile/password": {
+    "controller": "UserController::changePassword"
+  },
 
   "/(client|admin)": {
     "controller": "HomeController::dashboard"

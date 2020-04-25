@@ -220,7 +220,7 @@ class User implements EntityInterface
 
     public function getPicture(): ?string
     {
-        return $this->picture ?? "/img/user/default.svg";
+        return "/img/user/" . ($this->picture ?? "default.svg");
     }
 
     public function setPicture(string $picture): self

@@ -113,6 +113,8 @@ class ClientController extends Controller
 
         // We check that the user exists and that he isn't trying to delete his account by himself
         if ($client) {
+            if($client->getPicture())
+                unlink(User::PICTURE_DIR.$client->getPicture());
             $repo->remove($client);
             $this->redirect("/admin/client");
         }

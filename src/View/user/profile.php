@@ -6,12 +6,12 @@ use App\KernelFoundation\Security;
 <div class="index-wrapper">
     <div class="card general-form">
         <h1>Modifier son profil</h1>
-        <form method="post" action="">
+        <form method="post" action="/profile/edit" enctype="multipart/form-data">
             <div class="image-picker">
-                <img src="<?= $user->getPicture() ?>" />
+                <img id="user-picture" src="<?= $user->getPicture() ?>" />
                 <div class="form-group">
                     <div>
-                        <input type="file" name="picture" id="picture"/>
+                        <input type="file" name="picture" id="picture-upload" accept="image/*" />
                     </div>
                 </div>
             </div>
@@ -32,11 +32,11 @@ use App\KernelFoundation\Security;
                 <div class="form-group">
                     <div>
                         <label for="firstname">Prénom</label> :
-                        <input type="lastname" name="firstname" id=firstname" value="<?= $firstname ?>" required/>
+                        <input name="firstname" id=firstname" value="<?= $firstname ?>" required/>
                     </div>
                     <div>
                         <label for="lastname">Téléphone :</label>
-                        <input type="tel" name="phone" id="lastname" value="<?= $lastname ?>" required/>
+                        <input name="lastname" id="lastname" value="<?= $lastname ?>" required/>
                     </div>
                 </div>
             <?php } else { ?>
@@ -102,3 +102,14 @@ use App\KernelFoundation\Security;
         </form>
     </div>
 </div>
+
+<script>
+    const input = document.getElementById('picture-upload');
+    input.addEventListener('change', (event) => {
+        const output = document.getElementById('user-picture');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    })
+</script>
