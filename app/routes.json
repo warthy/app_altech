@@ -18,6 +18,10 @@
     }
   },
 
+  "/profile": {
+    "controller": "UserController::profile"
+  },
+
   "/(client|admin)": {
     "controller": "HomeController::dashboard"
   },

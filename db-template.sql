@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS `user`
     `legalrepresentative_email`     varchar(255),
     `legalrepresentative_phone`     varchar(15),
     `name`                          varchar(255),
+    `picture`                          varchar(255),
     `address`                       varchar(255),
     `city`                          varchar(255),
     `zipcode`                       int,

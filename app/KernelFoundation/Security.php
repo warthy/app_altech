@@ -13,9 +13,9 @@ class Security
     const ROLE_ADMIN = "ROLE_ADMIN";
     const ROLE_SUPER_ADMIN = "ROLE_SUPER_ADMIN";
     static $permissions = [
-        self::ROLE_CLIENT => [],
-        self::ROLE_ADMIN => [],
-        self::ROLE_SUPER_ADMIN => [self::ROLE_ADMIN]
+        self::ROLE_CLIENT => ["AUTHENTICATED"],
+        self::ROLE_ADMIN => ["AUTHENTICATED"],
+        self::ROLE_SUPER_ADMIN => [self::ROLE_ADMIN, "AUTHENTICATED"]
     ];
 
     static function hasPermission(string $role)

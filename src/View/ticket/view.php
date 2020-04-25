@@ -9,7 +9,7 @@
     </div>
     <div class="h-right">
         <div class="state">
-            <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-367-456319.png" /> <?= $ticket->getAdmin()->getName() ?>
+            <img src="<?= $ticket->getAdmin()->getPicture() ?>" /> <?= $ticket->getAdmin()->getName() ?>
         </div>
         <div class="state">
             <h2>Etat :</h2> <?= $ticket->getState() ?>

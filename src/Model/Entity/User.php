@@ -14,6 +14,7 @@ class User implements EntityInterface
     private $recoverToken;
     private $password;
     private $role = "ROLE_CLIENT";
+    private $picture;
 
     private $address;
     private $city;
@@ -25,8 +26,6 @@ class User implements EntityInterface
     private $legalrepresentative_phone;
 
     private $cgu_approvement;
-    private $candidates; //candidats ?
-
 
     public function getId(): ?int
     {
@@ -215,6 +214,17 @@ class User implements EntityInterface
     public function setCguApprovement(string $cgu_approvement): self
     {
         $this->cgu_approvement = $cgu_approvement;
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture ?? "/img/user/default.svg";
+    }
+
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
         return $this;
     }
 

@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/css/form.css" />
 
     <link rel="stylesheet" type="text/css" href="/css/faq.css" />
+    <link rel="stylesheet" type="text/css" href="/css/profile.css" />
     <link rel="stylesheet" type="text/css" href="/css/ticket.css" />
     <link rel="stylesheet" type="text/css" href="/css/candidate.css" />
     <link rel="stylesheet" type="text/css" href="/css/new-client.css"/>
@@ -26,12 +27,12 @@
         <div class="header-right">
             <div class="dropdown">
                 <a class="dropbtn user-name">
-                    <img class="user-img" src="https://cdn.iconscout.com/icon/free/png-256/avatar-367-456319.png"/>
+                    <img class="user-img" src="<?= $user->getPicture() ?>"/>
                     <?= $user->getName() ?>
                 </a>
                 <div class="dropdown-content">
                     <a href="#" class="user-role"><?= $user->getReadableRole() ?></a>
-                    <a href="#"><i class="fas fa-sliders-h"></i> Paramètres</a>
+                    <a href="/profile"><i class="fas fa-sliders-h"></i> Paramètres</a>
                     <a href="/logout"><i class="fas fa-sign-out-alt"></i> Se déconnecter </a>
                 </div>
             </div>
