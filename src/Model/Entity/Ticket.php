@@ -6,7 +6,7 @@ use DateTime;
 class Ticket implements EntityInterface
 {
     private $id;
-    private $closed;
+    private $closed = false;
     private $subject;
     private $description;
     private $open_at;

@@ -62,6 +62,12 @@
       "id": "\\d+"
     }
   },
+  "/admin/ticket/:id/assign": {
+    "controller": "TicketController::assign",
+    "requirements": {
+      "id": "\\d+"
+    }
+  },
   "/admin/ticket": {
     "controller": "TicketController::adminPanel"
   },

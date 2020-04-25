@@ -29,7 +29,7 @@ class TicketRepository extends Repository
         $stmt->execute([
             'id' => $ticket->getId(),
             'admin_id' => $ticket->getAdminId(),
-            'closed' => $ticket->isClosed()
+            'closed' => +$ticket->isClosed()
         ]);
     }
 

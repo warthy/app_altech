@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `user`
 CREATE TABLE IF NOT EXISTS `ticket`
 (
     `id`          int PRIMARY KEY AUTO_INCREMENT,
-    `closed`      boolean,
+    `closed`      boolean default 0,
     `open_at`     datetime,
     `subject`     varchar(255) NOT NULL,
     `description` text         NOT NULL,

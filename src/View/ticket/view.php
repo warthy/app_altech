@@ -18,7 +18,7 @@
         </div>
         <div class="state-buttons">
             <?php if (is_null($ticket->getAdminId())) { ?>
-                <a href="/" class="default-btn">
+                <a href="/admin/ticket/<?= $ticket->getId() ?>/assign" class="default-btn">
                     S'assigner le ticket
                 </a>
             <?php } ?>
