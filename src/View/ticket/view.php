@@ -9,6 +9,9 @@
     </div>
     <div class="h-right">
         <div class="state">
+            <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-367-456319.png" /> <?= $ticket->getAdmin()->getName() ?>
+        </div>
+        <div class="state">
             <h2>Etat :</h2> <?= $ticket->getState() ?>
         </div>
         <div class="state-buttons">
@@ -17,7 +20,7 @@
                     S'assigner le ticket
                 </button>
             <?php } ?>
-            <?php if (!($ticket->isClosed() && Security::hasPermission(Security::ROLE_ADMIN))) { ?>
+            <?php if (!$ticket->isClosed() && Security::hasPermission(Security::ROLE_ADMIN)) { ?>
             <button class="delete-btn">
                 Fermer le ticket
             </button>

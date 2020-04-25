@@ -14,6 +14,7 @@ class CandidateController extends Controller
         $repo = $this->getRepository(CandidateRepository::class);
 
         return $this->render('/candidate/index.php', [
+            'title' => 'Gestion des candidats',
             'candidates' => $repo->findAllOfUser($this->getUser()),
         ]);
     }

@@ -1,6 +1,8 @@
 <?php
 namespace Altech\Model\Entity;
 
+use App\KernelFoundation\Security;
+
 class User implements EntityInterface
 {
     const UPLOAD_DIR = __DIR__."/../../../public/upload/";
@@ -76,6 +78,20 @@ class User implements EntityInterface
     public function getRole(): string
     {
         return $this->role;
+    }
+
+    public function getReadableRole(): string
+    {
+        switch ($this->role){
+            case Security::ROLE_ADMIN:
+                return "Administrateur";
+            case Security::ROLE_CLIENT:
+                return "Client";
+            case Security::ROLE_SUPER_ADMIN:
+                return "Super-Admin";
+            default:
+                return "Unknown";
+        }
     }
 
     public function setRole(string $role): self

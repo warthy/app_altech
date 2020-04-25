@@ -24,10 +24,17 @@
             <img src="/img/logo.png" height="50"/>
         </div>
         <div class="header-right">
-            <span class="user-name"> <?= $user->getName() ?> </span>
-            <a href="/logout" class="user-img">
-               <i class="fas fa-sign-out-alt"></i>
-            </a>
+            <div class="dropdown">
+                <a class="dropbtn user-name">
+                    <img class="user-img" src="https://cdn.iconscout.com/icon/free/png-256/avatar-367-456319.png"/>
+                    <?= $user->getName() ?>
+                </a>
+                <div class="dropdown-content">
+                    <a href="#" class="user-role"><?= $user->getReadableRole() ?></a>
+                    <a href="#"><i class="fas fa-sliders-h"></i> Paramètres</a>
+                    <a href="/logout"><i class="fas fa-sign-out-alt"></i> Se déconnecter </a>
+                </div>
+            </div>
         </div>
     </header>
     <div class="wrapper">

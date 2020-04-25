@@ -5,6 +5,7 @@ namespace Altech\Controller;
 use Altech\Model\Entity\Ticket;
 use Altech\Model\Repository\TicketMessageRepository;
 use Altech\Model\Repository\TicketRepository;
+use Altech\Model\Repository\UserRepository;
 use App\Component\Controller;
 use App\KernelFoundation\Request;
 use App\KernelFoundation\Security;
@@ -39,9 +40,14 @@ class TicketController extends Controller
         /** @var Ticket $ticket */
         $ticket = $ticketRepo->findById($id);
 
+
         if($ticket){
             $user = $this->getUser();
             if($ticket->getClientId() === $user->getId() || Security::hasPermission(Security::ROLE_ADMIN)){
+                if(!is_null($ticket->getAdminId())){
+                    $userRepo = $this->getRepository(UserRepository::class);
+                    $ticket->setAdmin($userRepo->findById($ticket->getAdminId()));
+                }
 
                 return $this->render('/ticket/view.php', [
                     "title" => "ticket $id : ".$ticket->getSubject(),

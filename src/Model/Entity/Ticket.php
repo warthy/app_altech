@@ -11,6 +11,7 @@ class Ticket implements EntityInterface
     private $description;
     private $open_at;
     private $admin_id;
+    private $admin;
     private $client_id;
 
     public function getId(): ?int
@@ -101,6 +102,18 @@ class Ticket implements EntityInterface
             return 'En cours de résolution';
         }
         return 'Non attribué';
+    }
+
+    public function getAdmin(): ?User
+    {
+        return $this->admin;
+    }
+
+
+    public function setAdmin(User $admin): self
+    {
+        $this->admin = $admin;
+        return $this;
     }
 
 }

@@ -13,7 +13,7 @@ class TicketRepository extends Repository
     const ENTITY = Ticket::class;
 
     public function findAllByClient(User $client){
-        $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME .' WHERE client_id = :client_id');
+        $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME .' WHERE client_id = :client_id ORDER BY closed, open_at');
         $stmt->bindValue(':client_id', $client->getId(), PDO::PARAM_INT);
         $stmt->execute();
 
