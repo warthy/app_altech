@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `user`
 CREATE TABLE IF NOT EXISTS `ticket`
 (
     `id`          int PRIMARY KEY AUTO_INCREMENT,
-    `closed`      bit(1),
+    `closed`      boolean,
     `open_at`     datetime,
     `subject`     varchar(255) NOT NULL,
     `description` text         NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `candidate`
     `lastname`        varchar(255),
     `height`          float(2),
     `weight`          float(2),
-    `sex`             BOOLEAN,
+    `sex`             boolean,
     `birthdate`       datetime,
     `tests_nb`        int,
     `user_id`         int                 NOT NULL,

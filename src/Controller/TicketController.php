@@ -85,4 +85,22 @@ class TicketController extends Controller
         ]);
     }
 
+    public function close($id){
+        $repo = $this->getRepository(TicketRepository::class);
+        /** @var Ticket $ticket */
+        $ticket = $repo->findById($id);
+
+        if($ticket && !$ticket->isClosed()){
+            $admin = $this->getUser();
+            if($ticket->getAdminId() === $admin->getId()){
+                $ticket->setClosed(true);
+                $repo->update($ticket);
+
+                $this->redirect("/admin/ticket/$id");
+            }
+        }
+        throw new Exception("Invalid id: $id");
+
+    }
+
 }

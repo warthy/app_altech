@@ -20,9 +20,17 @@ class TicketRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
     }
 
-    public function update(EntityInterface $entity): void
+    /**
+     * @param Ticket $ticket
+     */
+    public function update($ticket): void
     {
-        // TODO: Implement update() method.
+        $stmt = $this->pdo->prepare('UPDATE ' . self::TABLE_NAME . ' SET closed = :closed, admin_id = :admin_id WHERE id = :id');
+        $stmt->execute([
+            'id' => $ticket->getId(),
+            'admin_id' => $ticket->getAdminId(),
+            'closed' => $ticket->isClosed()
+        ]);
     }
 
     /**

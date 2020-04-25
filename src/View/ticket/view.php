@@ -8,22 +8,24 @@
         </div>
     </div>
     <div class="h-right">
+        <?php if($ticket->getAdmin()){ ?>
         <div class="state">
             <img src="<?= $ticket->getAdmin()->getPicture() ?>" /> <?= $ticket->getAdmin()->getName() ?>
         </div>
+        <?php } ?>
         <div class="state">
             <h2>Etat :</h2> <?= $ticket->getState() ?>
         </div>
         <div class="state-buttons">
             <?php if (is_null($ticket->getAdminId())) { ?>
-                <button class="default-btn">
+                <a href="/" class="default-btn">
                     S'assigner le ticket
-                </button>
+                </a>
             <?php } ?>
             <?php if (!$ticket->isClosed() && Security::hasPermission(Security::ROLE_ADMIN)) { ?>
-            <button class="delete-btn">
+            <a href="/admin/ticket/<?= $ticket->getId()?>/close" class="delete-btn">
                 Fermer le ticket
-            </button>
+            </a>
             <?php } ?>
         </div>
     </div>
@@ -44,8 +46,7 @@
             </div>
         <?php }
     }
-    ?>
-
+    if(!$ticket->isClosed()) { ?>
     <div>
         <form class="msg-form" method="post" onsubmit="alert('sending message...')">
             <textarea placeholder="Entrez votre message..." class="msg-input" name="message"></textarea>
@@ -54,6 +55,7 @@
             </button>
         </form>
     </div>
+    <?php } ?>
 </div>
 <script>
     // Start messages scroller at the bottom

@@ -36,7 +36,6 @@
   "/client/candidate": {
     "controller": "CandidateController::index"
   },
-
   "/client/candidate/create": {
     "controller": "CandidateController::create"
   },
@@ -56,6 +55,12 @@
   },
   "/client/ticket/open": {
     "controller": "TicketController::open"
+  },
+  "/admin/ticket/:id/close": {
+    "controller": "TicketController::close",
+    "requirements": {
+      "id": "\\d+"
+    }
   },
   "/admin/ticket": {
     "controller": "TicketController::adminPanel"
