@@ -11,4 +11,6 @@ class MeasureController extends Controller
     public function init(){
         return  $this->render('/client/newmeasures.php');
     }
+
+    
 }

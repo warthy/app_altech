@@ -14,7 +14,7 @@ class Candidate implements EntityInterface
     private $weight;
     private $sex;
     private $birthdate;
-    private $cgu_pprovement;
+    private $cgu_approvement;
 
 
     private $client;
