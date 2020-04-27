@@ -1,6 +1,9 @@
 <?php
+namespace Altech\Model\Entity;
 
+use DateTime;
 
+use Altech\Model\Entity\Candidate;
 use Altech\Model\Entity\EntityInterface;
 
 class Measure implements EntityInterface
@@ -16,6 +19,8 @@ class Measure implements EntityInterface
     private $visual_unexpected_reflex;
     private $temperature;
     private $tonality_recognition;
+
+    private $candidate;
 
     public function setId(int $id): self
     {
@@ -155,6 +160,18 @@ class Measure implements EntityInterface
     {
         $this->candidate_id = $candidate_id;
 
+        return $this;
+    }
+
+
+    public function getCandidate(): Candidate
+    {
+        return $this->candidate;
+    }
+
+    public function setCandidate(Candidate $candidate): self
+    {
+        $this->candidate = $candidate;
         return $this;
     }
 }

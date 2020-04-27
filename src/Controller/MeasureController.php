@@ -12,5 +12,9 @@ class MeasureController extends Controller
         return  $this->render('/client/newmeasures.php');
     }
 
+
+
+    
+
     
 }
