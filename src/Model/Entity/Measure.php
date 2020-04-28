@@ -174,4 +174,14 @@ class Measure implements EntityInterface
         $this->candidate = $candidate;
         return $this;
     }
+
+    
+    /**
+     * Get the value of the measure
+     */
+    public function getValue(): ?int
+    {
+        return 0;
+    }
+
 }

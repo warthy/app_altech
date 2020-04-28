@@ -40,7 +40,7 @@ class MeasureRepository extends Repository
             'VALUES (:heartbeat, :temperature, :conductivity, :visual_unexpected_reflex, :visual_expected_reflex, :sound_unexpected_reflex, :sound_expected_reflex, :tonality_recognition, :date_measured, :candidate_id)'
         );
 
-        $measure->setDate_measured(date('YYYY-MM-DD'));
+        
 
         $stmt->execute([
             'heartbeat' => $measure->getHeartBeat(),
@@ -62,6 +62,11 @@ class MeasureRepository extends Repository
     public function update(EntityInterface $entity): void
     {
         // TODO: Implement update() method.
+    }
+
+    public function delete(EntityInterface $entity): void
+    {
+        // TODO: Implement delete() method.
     }
 
     

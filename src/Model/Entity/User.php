@@ -23,7 +23,7 @@ class User implements EntityInterface
     private $legalrepresentative_phone;
 
     private $cgu_approvement;
-    private $candidates; //candidats ?
+    private $candidates; 
 
 
     public function getId(): ?int
@@ -203,4 +203,43 @@ class User implements EntityInterface
     }
 
 
+
+    /**
+     * Get the value of candidates
+     */ 
+    public function getCandidates(): ?array
+    {
+        return $this->candidates;
+    }
+
+    /**
+     * Set the value of candidates
+     *
+     * @return  self
+     */ 
+    public function setCandidates($candidates): self
+    {
+        $this->candidates = $candidates;
+
+        return $this;
+    }
+
+
+    public function addCandidate($candidate): self
+    {
+        $this->candidates[] = $candidate;
+
+        return $this;
+    }
+
+
+    public function getCandidateById($id): ?Candidate
+    {
+        foreach($this->candidates as $value){
+            if($value->getId() == $id){
+                return $value;
+            }
+        }
+        return null;
+    }
 }
