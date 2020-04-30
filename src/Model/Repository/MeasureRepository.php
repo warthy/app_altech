@@ -32,7 +32,7 @@ class MeasureRepository extends Repository
      * @param Measure $measure
      * @return Measure
      */
-    public function insert($measure)
+    public function insert(Measure $measure)
     {
         $stmt = $this->pdo->prepare(
             'INSERT INTO' . self::TABLE_NAME . 
@@ -64,9 +64,17 @@ class MeasureRepository extends Repository
         // TODO: Implement update() method.
     }
 
-    public function delete(EntityInterface $entity): void
+    public function delete(Measure $measure): void
     {
-        // TODO: Implement delete() method.
+        $stmt = $this->pdo->prepare('DELETE FROM ' . self::TABLE_NAME .
+        'WHERE id = :id'
+        );
+
+        $stmt->execute([
+            'id' => $measure->getId()
+        ]);
+
+        //delete measure object ?
     }
 
     
