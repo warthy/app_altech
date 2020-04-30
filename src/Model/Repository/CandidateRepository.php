@@ -5,11 +5,19 @@ namespace Altech\Model\Repository;
 use Altech\Model\Entity\Candidate;
 use Altech\Model\Entity\EntityInterface;
 use App\Component\Repository;
+use PDO;
 
 class CandidateRepository extends Repository
 {
     const TABLE_NAME = "candidate";
     const ENTITY = Candidate::class;
+
+    public function findAllOfUser($page): array
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM ' . self::TABLE_NAME . ' WHERE user_id = :user_id');
+        
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Candidate::class);
+    }
 
     public function findById(int $id): Candidate
     {
