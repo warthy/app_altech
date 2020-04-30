@@ -3,12 +3,14 @@
 <html>
 <head>
     <title>Infinite Measures | Dashboard </title>
-    <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
-    <link rel="stylesheet" type="text/css" href="/css/datatable.css">
-    <link rel="stylesheet" type="text/css" href="/css/form.css">
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css" />
+    <link rel="stylesheet" type="text/css" href="/css/datatable.css" />
+    <link rel="stylesheet" type="text/css" href="/css/form.css" />
 
-    <link rel="stylesheet" type="text/css" href="/css/faq.css">
-    <link rel="stylesheet" type="text/css" href="/css/candidate.css">
+    <link rel="stylesheet" type="text/css" href="/css/faq.css" />
+    <link rel="stylesheet" type="text/css" href="/css/profile.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ticket.css" />
+    <link rel="stylesheet" type="text/css" href="/css/candidate.css" />
     <link rel="stylesheet" type="text/css" href="/css/new-client.css"/>
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -23,10 +25,17 @@
             <img src="/img/logo.png" height="50"/>
         </div>
         <div class="header-right">
-            <span class="user-name"> <?= $user->getName() ?> </span>
-            <a href="/logout" class="user-img">
-               <i class="fas fa-sign-out-alt"></i>
-            </a>
+            <div class="dropdown">
+                <a class="dropbtn user-name">
+                    <img class="user-img" src="<?= $user->getPicture() ?>"/>
+                    <?= $user->getName() ?>
+                </a>
+                <div class="dropdown-content">
+                    <a href="#" class="user-role"><?= $user->getReadableRole() ?></a>
+                    <a href="/profile"><i class="fas fa-sliders-h"></i> Paramètres</a>
+                    <a href="/logout"><i class="fas fa-sign-out-alt"></i> Se déconnecter </a>
+                </div>
+            </div>
         </div>
     </header>
     <div class="wrapper">
@@ -48,8 +57,8 @@
                 <a href="#">
                     <i class="material-icons">backup</i> Consulter les mesures
                 </a>
-                <a href="#">
-                    <i class="material-icons">error_outline</i> Ouvrir un ticket
+                <a href="/client/ticket">
+                    <i class="material-icons">error_outline</i> Gérer ses ticket
                 </a>
                 <a href="/client/faq">
                     <i class="material-icons">question_answer</i> Consulter la FAQ

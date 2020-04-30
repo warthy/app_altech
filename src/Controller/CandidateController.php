@@ -13,13 +13,12 @@ class CandidateController extends Controller
 
     
     public function index(){
+        /** @var CandidateRepository $repo */
         $repo = $this->getRepository(CandidateRepository::class);
-        $page = $this->getRequest()->get->get("page") ?? 0;
 
         return $this->render('/candidate/index.php', [
-            'candidates' => $repo->findAllOfUser($page),
-            'page' => $page,
-            'totalPage' => $repo->findPageCount()
+            'title' => 'Gestion des candidats',
+            'candidates' => $repo->findAllOfUser($this->getUser()),
         ]);
     }
 
@@ -40,7 +39,7 @@ class CandidateController extends Controller
                 $repo = $this->getRepository(CandidateRepository::class);
 
                 $candidate = (new Candidate())
-                    ->setClient($this->getUser())
+                    ->setClientId($this->getUser()->getId())
                     ->setEmail($form->get("email"))
                     ->setPhone($form->get("phone"))
                     ->setFirstname($form->get("firstname"))
@@ -70,7 +69,7 @@ class CandidateController extends Controller
         /** @var Candidate $candidate */
         $candidate = $repo->findById($id);
 
-        if($candidate && $user->getId() == $candidate->getClient()->getId()){
+        if($candidate && $user->getId() == $candidate->getClientId()){
 
             return $this->render('/candidate/form.php', [
                 "title" => "Création d'un nouveau candidat",

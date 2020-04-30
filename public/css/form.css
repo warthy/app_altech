@@ -41,6 +41,7 @@ form .form-group {
 }
 
 .submit-btn {
+    width: max-content;
     font-weight: bold;
     text-decoration: none;
     margin: 20px 10px;

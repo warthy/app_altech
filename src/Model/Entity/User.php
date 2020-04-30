@@ -1,9 +1,12 @@
 <?php
 namespace Altech\Model\Entity;
 
+use App\KernelFoundation\Security;
+
 class User implements EntityInterface
 {
     const UPLOAD_DIR = __DIR__."/../../../public/upload/";
+    const PICTURE_DIR = __DIR__."/../../../public/img/user/";
 
     private $id;
     private $name;
@@ -12,6 +15,7 @@ class User implements EntityInterface
     private $recoverToken;
     private $password;
     private $role = "ROLE_CLIENT";
+    private $picture;
 
     private $address;
     private $city;
@@ -23,8 +27,11 @@ class User implements EntityInterface
     private $legalrepresentative_phone;
 
     private $cgu_approvement;
+<<<<<<< HEAD
     private $candidates; 
 
+=======
+>>>>>>> ec3e8efe7bc0821e9d80c13bffe1a8295ce717a4
 
     public function getId(): ?int
     {
@@ -76,6 +83,20 @@ class User implements EntityInterface
     public function getRole(): string
     {
         return $this->role;
+    }
+
+    public function getReadableRole(): string
+    {
+        switch ($this->role){
+            case Security::ROLE_ADMIN:
+                return "Administrateur";
+            case Security::ROLE_CLIENT:
+                return "Client";
+            case Security::ROLE_SUPER_ADMIN:
+                return "Super-Admin";
+            default:
+                return "Unknown";
+        }
     }
 
     public function setRole(string $role): self
@@ -199,6 +220,17 @@ class User implements EntityInterface
     public function setCguApprovement(string $cgu_approvement): self
     {
         $this->cgu_approvement = $cgu_approvement;
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return "/img/user/" . ($this->picture ?? "default.svg");
+    }
+
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
         return $this;
     }
 

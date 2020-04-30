@@ -8,6 +8,7 @@
   "security": {
     "password_hash": "bcrypt",
     "routes": {
+        "^/profile": "AUTHENTICATED",
         "^/client" : "ROLE_CLIENT",
         "^/admin": "ROLE_ADMIN",
         "^/admin/user": "ROLE_SUPER_ADMIN"

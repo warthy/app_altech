@@ -17,7 +17,7 @@ class Candidate implements EntityInterface
     private $cgu_approvement;
 
 
-    private $client;
+    private $client_id;
 
     public function getId(): ?int
     {
@@ -109,14 +109,14 @@ class Candidate implements EntityInterface
     }
 
    
-    public function getClient(): User
+    public function getClientId(): User
     {
-        return $this->client;
+        return $this->client_id;
     }
 
-    public function setClient(User $client): self
+    public function setClientId(int $client_id): self
     {
-        $this->client = $client;
+        $this->client_id = $client_id;
         return $this;
     }
 

@@ -1,0 +1,216 @@
+.index-wrapper {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+}
+
+@media (max-width: 1000px) {
+    .index-wrapper {
+        flex-direction: column;
+    }
+}
+
+.ticket-list {
+    flex: 2
+}
+
+.state-on {
+    border-radius: 5px;
+    padding: 10px;
+    color:white;
+    background-color: #9ae6b4;
+}
+
+.state-off {
+    border-radius: 5px;
+    padding: 10px;
+    color:white;
+    background-color: #f56565;
+}
+
+.ticket-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ticket-form form {
+    flex: 1;
+    margin: 20px auto !important;
+}
+
+.ticket-form h1 {
+    color: #E5B03C;
+    text-align: center;
+}
+
+.ticket-form .submit-btn {
+    margin: auto;
+}
+
+
+.ticket-header {
+    display: flex;
+    flex-direction: row;
+    margin-top: -20px;
+}
+
+@media (max-width: 1000px) {
+    .state-buttons {
+        flex-wrap: wrap;
+    }
+}
+
+.h-left {
+    flex: 3;
+}
+
+.h-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+}
+
+.state {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    align-items: center;
+}
+
+.state h2 {
+    margin: 0 10px;
+    text-transform: uppercase;
+}
+
+.state img {
+    border-radius: 50%;
+    margin: 0 10px;
+    height: 30px;
+    width: auto;
+}
+
+.state-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.timestamp {
+    margin-top: 0;
+    font-weight: normal;
+}
+
+.subject {
+
+}
+
+hr {
+    margin-top: 20px;
+    width: 80%;
+    color: #FFF;
+}
+
+.ticket-messages {
+    overflow-y: auto;
+    height: 430px;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.ticket-messages > :first-child {
+    margin-top: auto !important;
+    /* use !important to prevent breakage from child margin settings */
+}
+
+.message-box {
+    position: relative;
+    margin: 20px;
+    padding: 10px 10px 30px;
+    max-width: 60%;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.msg-date {
+    font-size: 8px;
+    position: absolute;
+    bottom: 5px;
+}
+
+.from-author .msg-date {
+    left: 5px;
+}
+
+.from-other .msg-date {
+    right: 5px;
+}
+
+.from-author {
+    align-self: end;
+    background-color: #ebf8ff;
+}
+
+.from-author::after {
+    content: '';
+    position: absolute;
+    visibility: visible;
+    bottom: -10px;
+    right: -8px;
+    border: 10px solid transparent;
+    border-top: 10px solid #ebf8ff;
+    clear: both;
+}
+
+
+.from-other {
+    align-self: start;
+    background-color: #e6fffa;
+}
+
+.from-other::after {
+    content: '';
+    position: absolute;
+    visibility: visible;
+    bottom: -10px;
+    left: -8px;
+    border: 10px solid transparent;
+    border-top: 10px solid #e6fffa;
+    clear: both;
+}
+
+.msg-form {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: start;
+}
+
+.msg-input {
+    flex: 1;
+    font-family: 'Alegreya Sans', Arial, Helvetica, sans-serif;
+    border: #808782 solid 1px;
+    border-radius: 5px;
+}
+
+.submit-msg {
+    font-weight: bold;
+    text-decoration: none;
+    margin: 20px 10px;
+    text-align: center;
+    color: #fff;
+    background-color: #b2f5ea;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 0.75rem 30px;
+    border: none;
+    display: block;
+    width: max-content;
+}
+
+.submit-msg:hover {
+    cursor: pointer;
+    background-color: #4fd1c5;
+}

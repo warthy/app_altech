@@ -9,7 +9,6 @@
 }
 
 .data-table tbody td {
-    padding: 5px;
     text-align: center;
 }
 
@@ -36,16 +35,19 @@
 }
 
 .edit-btn{
+    font-weight: bold;
+    text-decoration: none;
+    margin: 10px 10px;
+    text-align: center;
+    color: #fff;
     background-color: #2e63ba;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 0.5rem 18px;
+    border: none;
 }
 .edit-btn:hover {
     background-color: #214786;
-}
-
-.delete-btn{
-    background-color: #f56565;
-}
-.delete-btn:hover {
-    background-color: #c53030;
+    cursor: pointer;
 }
 

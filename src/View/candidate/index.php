@@ -17,8 +17,8 @@
                 <td><?= $candidate->getEmail() ?></td>
                 <td><?= $candidate->getBirthdate() ?? "Non renseigné" ?></td>
                 <td>
-                    <a href="/candidate/<?= $candidate->getId() ?>/test" class="action-btn"">Lancer un test</a>
-                    <a href="/candidate/<?= $candidate->getId() ?>" class="action-btn">Editer</a>
+                    <a href="/candidate/<?= $candidate->getId() ?>/test" class="submit-btn">Lancer un test</a>
+                    <a href="/candidate/<?= $candidate->getId() ?>" class="edit-btn"><i class="far fa-edit"></i></a>
                 </td>
             </tr>
         <?php } ?>

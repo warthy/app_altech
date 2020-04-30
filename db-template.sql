@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS `user`
     `legalrepresentative_email`     varchar(255),
     `legalrepresentative_phone`     varchar(15),
     `name`                          varchar(255),
+    `picture`                          varchar(255),
     `address`                       varchar(255),
     `city`                          varchar(255),
     `zipcode`                       int,
@@ -22,20 +23,22 @@ CREATE TABLE IF NOT EXISTS `user`
 
 CREATE TABLE IF NOT EXISTS `ticket`
 (
-    `id`        int PRIMARY KEY AUTO_INCREMENT,
-    `closed`    bit(1),
-    `open_date` datetime,
-    `admin_id`  int DEFAULT NULL,
-    `opener_id` int
+    `id`          int PRIMARY KEY AUTO_INCREMENT,
+    `closed`      boolean default 0,
+    `open_at`     datetime,
+    `subject`     varchar(255) NOT NULL,
+    `description` text         NOT NULL,
+    `admin_id`    int DEFAULT NULL,
+    `client_id`   int          NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `ticket_message`
 (
     `id`        int PRIMARY KEY AUTO_INCREMENT,
-    `ticket_id` int          NOT NULL,
-    `message`   varchar(255) NOT NULL,
-    `author`    int DEFAULT NULL,
-    `date_sent` datetime     NOT NULL
+    `ticket_id` int      NOT NULL,
+    `message`   text     NOT NULL,
+    `author_id` int DEFAULT NULL,
+    `sent_at`   datetime NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `faq`
@@ -47,17 +50,17 @@ CREATE TABLE IF NOT EXISTS `faq`
 
 CREATE TABLE IF NOT EXISTS `candidate`
 (
-    `id`             int PRIMARY KEY AUTO_INCREMENT,
-    `email`          varchar(255) UNIQUE NOT NULL,
-    `phone`          varchar(255) UNIQUE DEFAULT NULL,
-    `firstname`      varchar(255),
-    `lastname`       varchar(255),
-    `height`         float(2),
-    `weight`         float(2),
-    `sex`            BOOLEAN,
-    `birthdate`      datetime,
-    `tests_nb`       int,
-    `user_id`        int                 NOT NULL,
+    `id`              int PRIMARY KEY AUTO_INCREMENT,
+    `email`           varchar(255) UNIQUE NOT NULL,
+    `phone`           varchar(255) UNIQUE DEFAULT NULL,
+    `firstname`       varchar(255),
+    `lastname`        varchar(255),
+    `height`          float(2),
+    `weight`          float(2),
+    `sex`             boolean,
+    `birthdate`       datetime,
+    `tests_nb`        int,
+    `user_id`         int                 NOT NULL,
     `cgu_approvement` varchar(255)        NOT NULL
 );
 
@@ -81,13 +84,13 @@ ALTER TABLE `ticket`
     ADD FOREIGN KEY (`admin_id`) REFERENCES `user` (`id`);
 
 ALTER TABLE `ticket`
-    ADD FOREIGN KEY (`opener_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+    ADD FOREIGN KEY (`client_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `ticket_message`
     ADD FOREIGN KEY (`ticket_id`) REFERENCES `ticket` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `ticket_message`
-    ADD FOREIGN KEY (`author`) REFERENCES `user` (`id`);
+    ADD FOREIGN KEY (`author_id`) REFERENCES `user` (`id`);
 
 ALTER TABLE `candidate`
     ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;

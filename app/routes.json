@@ -18,6 +18,16 @@
     }
   },
 
+  "/profile": {
+    "controller": "UserController::profile"
+  },
+  "/profile/edit": {
+    "controller": "UserController::edit"
+  },
+  "/profile/password": {
+    "controller": "UserController::changePassword"
+  },
+
   "/(client|admin)": {
     "controller": "HomeController::dashboard"
   },
@@ -26,7 +36,6 @@
   "/client/candidate": {
     "controller": "CandidateController::index"
   },
-
   "/client/candidate/create": {
     "controller": "CandidateController::create"
   },
@@ -42,10 +51,34 @@
 
 
   "/client/ticket": {
-    "controller": "TicketController::index"
+    "controller": "TicketController::clientPanel"
   },
-  "/client/ticket/:id": {
+  "/client/ticket/open": {
+    "controller": "TicketController::open"
+  },
+  "/admin/ticket/:id/close": {
+    "controller": "TicketController::close",
+    "requirements": {
+      "id": "\\d+"
+    }
+  },
+  "/admin/ticket/:id/assign": {
+    "controller": "TicketController::assign",
+    "requirements": {
+      "id": "\\d+"
+    }
+  },
+  "/admin/ticket": {
+    "controller": "TicketController::adminPanel"
+  },
+  "/(client|admin)/ticket/:id": {
     "controller": "TicketController::view",
+    "requirements": {
+      "id": "\\d+"
+    }
+  },
+  "/(client|admin)/ticket/:id/send": {
+    "controller": "TicketController::send",
     "requirements": {
       "id": "\\d+"
     }
