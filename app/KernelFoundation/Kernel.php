@@ -2,7 +2,6 @@
 
 namespace App\KernelFoundation;
 
-use Exception;
 use Throwable;
 
 class Kernel
