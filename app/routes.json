@@ -45,8 +45,14 @@
       "id": "\\d+"
     }
   },
-  "/client/measure": {
+  "/client/newmeasure": {
     "controller": "MeasureController::init"
+  },
+  "/client/measure/:id": {
+    "controller": "MeasureController::candidatePanel",
+    "requirements": {
+      "id": "\\d+"
+    }
   },
 
 

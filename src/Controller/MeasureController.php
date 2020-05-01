@@ -20,7 +20,7 @@ class MeasureController extends Controller
         $repo = $this->getRepository(MeasureRepository::class);
         $candidate = $this->getUser()->getCandidateById($id);
 
-        return $this->render('/measures/index.php', [
+        return $this->render('/measures/candidate.php', [
             'title' => 'Gérer les mesures',
             'measures' => $repo->findAllByCandidate($candidate)
         ]);
@@ -28,7 +28,7 @@ class MeasureController extends Controller
     
     
     public function init(){
-        return  $this->render('/client/newmeasures.php');
+        return  $this->render('/client/newmeasure.php');
     }
     
 

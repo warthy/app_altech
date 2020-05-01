@@ -27,11 +27,8 @@ class User implements EntityInterface
     private $legalrepresentative_phone;
 
     private $cgu_approvement;
-<<<<<<< HEAD
     private $candidates; 
 
-=======
->>>>>>> ec3e8efe7bc0821e9d80c13bffe1a8295ce717a4
 
     public function getId(): ?int
     {
