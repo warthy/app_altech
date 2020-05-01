@@ -86,7 +86,7 @@ abstract class Controller
         return $this->request;
     }
 
-    protected function getMailer(): PHPMailer
+    protected function getMailer(): Mailer
     {
         return Mailer::getInstance();
     }

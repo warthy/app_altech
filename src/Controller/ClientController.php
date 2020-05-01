@@ -45,12 +45,28 @@ class ClientController extends Controller
                     ->setRepresentativeFirstName($form->get("r_firstname"))
                     ->setRepresentativeEmail($form->get("r_email"))
                     ->setRepresentativePhone($form->get("r_phone"))
+                    ->setRecoverToken(sha1(mt_rand(1, 90000) . Security::SECRET_SALT))
                     ->setPassword(bin2hex(random_bytes(10)));
                 //We set a random password to avoid connection while new user hasn't define his password himself
 
                 $client->setCguApprovement(self::checkAndUploadFile($file));
                 $repo->insert($client);
-                //TODO: send email
+
+
+                $mailer = $this->getMailer();
+                try {
+                    $mailer
+                        ->to($client->getEmail())
+                        ->subject("Création de votre compte client")
+                        ->setBody('client-created.php', [
+                            'token' => $client->getRecoverToken()
+                        ]);
+
+                    $mailer->send();
+                } catch (Exception $e) {
+                    die(var_dump($e));
+                    //TODO: handle Exception
+                }
 
                 $this->redirect("/admin/client/" . $client->getId());
             }

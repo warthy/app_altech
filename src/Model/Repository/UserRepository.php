@@ -98,6 +98,7 @@ class UserRepository extends Repository
                 'phone = :phone, '.
                 'picture = :picture,'.
                 'password = :password,'.
+                'recover_token = :recover_token,'.
                 'legalrepresentative_firstname = :legalrepresentative_firstname, '.
                 'legalrepresentative_lastname = :legalrepresentative_lastname,'.
                 'legalrepresentative_email = :legalrepresentative_email,'.
@@ -114,6 +115,7 @@ class UserRepository extends Repository
             'phone' => $user->getPhone(),
             'picture' => $user->getPicture(),
             'password' => $user->getPassword(),
+            'recover_token' => $user->getRecoverToken(),
             'legalrepresentative_firstname' => $user->getRepresentativeFirstName(),
             'legalrepresentative_lastname' => $user->getRepresentativeLastName(),
             'legalrepresentative_email' => $user->getRepresentativeEmail(),

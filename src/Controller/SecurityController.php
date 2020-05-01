@@ -2,10 +2,12 @@
 
 namespace Altech\Controller;
 
+use Altech\Model\Entity\User;
 use Altech\Model\Repository\UserRepository;
 use App\Component\Controller;
 use App\KernelFoundation\Request;
 use App\KernelFoundation\Security;
+use Exception;
 
 class SecurityController extends Controller
 {
@@ -27,7 +29,7 @@ class SecurityController extends Controller
 
                     $_SESSION['auth'] = $user->getId();
                     $_SESSION['role'] = $user->getRole();
-                    switch ($user->getRole()){
+                    switch ($user->getRole()) {
                         case Security::ROLE_ADMIN:
                         case Security::ROLE_SUPER_ADMIN:
                             $this->redirect('/admin');
@@ -60,27 +62,43 @@ class SecurityController extends Controller
         if ($req->is(Request::METHOD_POST)) {
             $status = true;
             $form = $req->form;
+            $email = $form->get('email');
 
-            if (!empty($form->get('email'))) {
+            if (!empty($email)) {
                 /** @var UserRepository $repository */
                 $repository = $this->getRepository(UserRepository::class);
 
-                $user = $repository->findByEmail($form->get('email'));
+                /** @var User $user */
+                $user = $repository->findByEmail($email);
                 if ($user) {
-                    $user->setRecoverToken( sha1(mt_rand(1, 90000) . Security::SECRET_SALT));
+                    $user->setRecoverToken(sha1(mt_rand(1, 90000) . Security::SECRET_SALT));
                     $repository->update($user);
 
-                    //TODO: send email now
-                }
-            }
+                    $mailer = $this->getMailer();
+                    try {
+                        $mailer
+                            ->to($email)
+                            ->subject('Réinitalisation mot de passe')
+                            ->setBody('password-reset.php', ['token' => $user->getRecoverToken()]);
 
+                      $mailer->send();
+                    } catch (Exception $e) {
+                        die(var_dump($e));
+                        //TODO: handle Exception
+                    }
+
+                }
+
+            }
         }
         return $this->render('/security/password-recover.php', [
             "status" => $status
         ], null, false);
     }
 
-    public function resetPassword(string $token)
+
+    public
+    function resetPassword(string $token)
     {
         $req = $this->getRequest();
         /** @var UserRepository $repository */
@@ -94,11 +112,11 @@ class SecurityController extends Controller
                 $form = $req->parameters['form'];
 
                 if (!empty($form->get('password')) && !empty($form->get('password_confirm'))) {
-                    $user->setPassword(password_hash($form->get('password'),  PASSWORD_BCRYPT));
+                    $user->setPassword(password_hash($form->get('password'), PASSWORD_BCRYPT));
                     $user->setRecoverToken(null);
 
                     $repository->update($user);
-                }else {
+                } else {
                     $error = "les mots de passes sont différents.";
                 }
             }

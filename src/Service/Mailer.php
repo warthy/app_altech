@@ -5,30 +5,34 @@ namespace Altech\Service;
 use Exception;
 use PHPMailer\PHPMailer\Exception as MailerException;
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 class Mailer
 {
-    private const TEMPLATE_DIR = '/../View/mail/';
+    private const TEMPLATE_DIR = __DIR__. '/../View/mail/';
 
     /**
      * @var null|self
      */
     private static $_instance = null;
     private $mailer;
-    private $isEmailReady = false;
 
     public function __construct()
     {
         $this->mailer = new PHPMailer();
-        $this->mailer->isSMTP();
+        $this->mailer->SMTPAuth = true;
         $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $this->mailer->SMTPDebug = SMTP::DEBUG_SERVER;
 
         $this->mailer->Host = $_ENV["MAILER_HOST"];
         $this->mailer->Username = $_ENV["MAILER_USERNAME"];
         $this->mailer->Password = $_ENV["MAILER_PASSWORD"];
         $this->mailer->Port = $_ENV["MAILER_PORT"];
 
-        $this->mailer->setFrom($_ENV["MAILER_HOST"], "Infinite Measures");
+        $this->mailer->CharSet = 'utf-8';
+        $this->mailer->Encoding = 'base64';
+
+        $this->mailer->setFrom($_ENV["MAILER_USERNAME"], "Infinite Measures");
         $this->mailer->isHTML(true);
     }
 
@@ -47,17 +51,16 @@ class Mailer
             ->to($recipient)
             ->subject($subject)
             ->setBody($body, $params);
-        $this->isEmailReady = true;
         return $this;
     }
 
     /**
      * @param string $recipient The email address to send to
+     * @return $this
      * @throws MailerException
      *
-     * @return $this
      */
-    private function to(string $recipient): self
+    public function to(string $recipient): self
     {
         $this->mailer->addAddress($recipient);
         return $this;
@@ -68,7 +71,7 @@ class Mailer
      *
      * @return $this
      */
-    private function subject(string $subject): self
+    public function subject(string $subject): self
     {
         $this->mailer->Subject = $subject;
         return $this;
@@ -80,9 +83,9 @@ class Mailer
      * @return $this
      * @throws Exception raises if the file doesn't exist
      */
-    private function setBody(string $body, array $params): self
+    public function setBody(string $body, array $params): self
     {
-        if(file_exists(self::TEMPLATE_DIR . $body)){
+        if (file_exists(self::TEMPLATE_DIR . $body)) {
             ob_start();
             extract($params);
             $host = "";
@@ -94,28 +97,21 @@ class Mailer
 
             return $this;
         }
-        throw new Exception("Email body's file can not be found at: ". self::TEMPLATE_DIR);
+        throw new Exception("Email body's file can not be found at: " . self::TEMPLATE_DIR);
     }
-
 
 
     public function send(): bool
     {
-        if ($this->isEmailReady) {
-            $res = $this->mailer->send();
-
-            $this->isEmailReady = false;
-            return $res;
-        }
-        throw new Exception("You need to create a new email before being able to call the send() method");
+        return $this->mailer->send();
     }
 
-    public static function getInstance(): PHPMailer
+    public static function getInstance(): self
     {
         if (is_null(self::$_instance)) {
             self::$_instance = new self();
         }
-        return self::$_instance->mailer;
+        return self::$_instance;
     }
 
 }

@@ -20,7 +20,7 @@ class Database
     private static $_instance = null;
 
 
-    public function __construct($host, $username, $password, $database)
+    public function __construct($host, $database, $username, $password)
     {
         try {
             $this->PDOInstance = new PDO(
