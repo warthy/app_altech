@@ -13,26 +13,10 @@ class CandidateRepository extends Repository
     const TABLE_NAME = "candidate";
     const ENTITY = Candidate::class;
 
-<<<<<<< HEAD
-    public function findAllOfUser($page): array
-    {
-        $stmt = $this->pdo->prepare('SELECT * FROM ' . self::TABLE_NAME . ' WHERE user_id = :user_id');
-        
-        return $stmt->fetchAll(PDO::FETCH_CLASS, Candidate::class);
-    }
-
-    public function findById(int $id): Candidate
-    {
-        /** @var Candidate $candidate */
-        $candidate = parent::findById($id);
-        $stmt = $this->pdo->prepare('SELECT * FROM ' . UserRepository::TABLE_NAME . ' WHERE id = :id');
-        $stmt->execute(["id" => $candidate->user_id]);
-=======
     public function findAllOfUser(User $client) {
         $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME .' WHERE client_id = :client_id');
         $stmt->bindValue(':client_id', $client->getId(), PDO::PARAM_INT);
         $stmt->execute();
->>>>>>> ec3e8efe7bc0821e9d80c13bffe1a8295ce717a4
 
         return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
     }
@@ -63,7 +47,7 @@ class CandidateRepository extends Repository
             'email' => $candidate->getLastname(),
             'phone' => $candidate->getPhone(),
             'cgu_approvement' => $candidate->getCguApprovement(),
-            'user_id' => $candidate->getClient()->getId()
+            'user_id' => $candidate->getClientId()
         ]);
 
         $candidate->setId($this->pdo->lastInsertId());

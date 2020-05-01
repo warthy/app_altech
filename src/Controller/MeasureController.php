@@ -3,17 +3,30 @@
 
 namespace Altech\Controller;
 
+use Altech\Model\Repository;
 use Altech\Model\Entity\Measure;
-use App\Component\Controller;
-use Altech\Model\Entity\User;
-use Altech\Model\Entity\Candidate;
 use Altech\Model\Repository\MeasureRepository;
 use Altech\Model\Repository\CandidateRepository;
 use App\KernelFoundation\Request;
+use App\Component\Controller;
+
+
 use Exception;
 
 class MeasureController extends Controller
 {
+    public function candidatePanel($id){
+        /** @var MeasureRepository $repo */
+        $repo = $this->getRepository(MeasureRepository::class);
+        $candidate = $this->getUser()->getCandidateById($id);
+
+        return $this->render('/measures/index.php', [
+            'title' => 'Gérer les mesures',
+            'measures' => $repo->findAllByCandidate($candidate)
+        ]);
+    }
+    
+    
     public function init(){
         return  $this->render('/client/newmeasures.php');
     }

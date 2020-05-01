@@ -19,6 +19,7 @@
                 <td>
                     <a href="/candidate/<?= $candidate->getId() ?>/test" class="submit-btn">Lancer un test</a>
                     <a href="/candidate/<?= $candidate->getId() ?>" class="edit-btn"><i class="far fa-edit"></i></a>
+                    <a href="/measures/<?= $candidate->getId() ?>" class="view-btn">Consulter les mesures</a>
                 </td>
             </tr>
         <?php } ?>
