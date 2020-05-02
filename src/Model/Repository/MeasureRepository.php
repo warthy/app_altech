@@ -1,7 +1,7 @@
 <?php
 namespace Altech\Model\Repository;
 
-
+use Altech\Controller\ClientController;
 use Altech\Model\Entity\Measure;
 use Altech\Model\Entity\Candidate;
 use Altech\Model\Entity\EntityInterface;
@@ -26,20 +26,22 @@ class MeasureRepository extends Repository
     }
 
 
-    public function findAllByCandidate(Candidate $candidate): array
+    public function findAllByCandidateId(int $id): array
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM ' . self::TABLE_NAME . ' WHERE candidate_id = :candidate_id');
-        $stmt->bindValue(':candidate_id', $candidate->getId(), PDO::PARAM_INT);
+        $stmt = $this->pdo->prepare('SELECT * FROM ' . self::TABLE_NAME . ' WHERE candidate_id = :candidate_id ORDER BY date_measured DESC');
+        $stmt->bindValue(':candidate_id', $id, PDO::PARAM_INT);
         $stmt->execute();
         
         return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
     }
 
+    
+
     /**
      * @param Measure $measure
      * @return Measure
      */
-    public function insert(Measure $measure)
+    public function insert($measure): Measure
     {
         $stmt = $this->pdo->prepare(
             'INSERT INTO' . self::TABLE_NAME . 
