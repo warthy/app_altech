@@ -61,6 +61,7 @@ class CandidateController extends Controller
         $candidate = $repo->findById($id);
 
         if($candidate && $user->getId() == $candidate->getClientId()){
+            //TODO: candidate edition
 
             return $this->render('/candidate/form.php', [
                 "title" => "Création d'un nouveau candidat",
