@@ -2,10 +2,21 @@
   "security": {
     "password_hash": "bcrypt",
     "routes": {
-        "^/profile": "AUTHENTICATED",
-        "^/client" : "ROLE_CLIENT",
-        "^/admin": "ROLE_ADMIN",
-        "^/admin/user": "ROLE_SUPER_ADMIN"
+      "^/profile": "AUTHENTICATED",
+
+      "^/candidate": "ROLE_CLIENT",
+
+      "^/ticket": "AUTHENTICATED",
+      "^/ticket/open": "ROLE_CLIENT",
+      "^/ticket/(\\d+)/(assign|close)": "ROLE_ADMIN",
+
+      "^/client": "ROLE_ADMIN",
+
+      "^/faq": "AUTHENTICATED",
+      "^/faq/new": "ROLE_ADMIN",
+      "^/faq/(\\d+)/delete": "ROLE_ADMIN",
+
+      "^/admin/user": "ROLE_SUPER_ADMIN"
     }
   }
 }

@@ -14,22 +14,21 @@ use Exception;
 
 class TicketController extends Controller
 {
-    public function clientPanel()
+    public function panel()
     {
         /** @var TicketRepository $repo */
         $repo = $this->getRepository(TicketRepository::class);
         $client = $this->getUser();
 
-        return $this->render('/ticket/client.php', [
+        return Security::hasPermission(Security::ROLE_ADMIN) ?
+            $this->render('/ticket/admin.php', [
+               'title' => "Administration des tickets"
+            ])
+            :
+            $this->render('/ticket/client.php', [
             'title' => 'Gestion des tickets',
             'tickets' => $repo->findAllByClient($client)
         ]);
-    }
-
-
-    public function adminPanel()
-    {
-
     }
 
     public function view($id)
@@ -78,7 +77,7 @@ class TicketController extends Controller
                     ->setOpenAt(new DateTime());
 
                 $repo->insert($ticket);
-                $this->redirect('/client/ticket/' . $ticket->getId());
+                $this->redirect('/ticket/' . $ticket->getId());
             }
         }
 
@@ -99,7 +98,7 @@ class TicketController extends Controller
                 $ticket->setClosed(true);
                 $repo->update($ticket);
 
-                $this->redirect("/admin/ticket/$id");
+                $this->redirect("/ticket/$id");
             }
         }
         throw new Exception("Invalid id: $id");
@@ -116,7 +115,7 @@ class TicketController extends Controller
             $ticket->setAdminId($this->getUser()->getId());
             $repo->update($ticket);
 
-            $this->redirect("/admin/ticket/$id");
+            $this->redirect("/ticket/$id");
 
         }
         throw new Exception("Invalid id: $id");

@@ -42,7 +42,7 @@ class CandidateController extends Controller
                 $candidate->setCguApprovement(ClientController::checkAndUploadFile($file));
 
                 $repo->insert($candidate);
-                $this->redirect("/client/candidate/".$candidate->getId());
+                $this->redirect("/candidate/".$candidate->getId());
             }
         }
 
