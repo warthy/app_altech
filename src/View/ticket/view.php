@@ -48,7 +48,7 @@
     }
     if(!$ticket->isClosed()) { ?>
     <div>
-        <form class="msg-form" method="post" onsubmit="alert('sending message...')">
+        <form class="msg-form" method="post" action="/(client|admin)/ticket/<?= $ticket->getId() ?>/send">
             <textarea placeholder="Entrez votre message..." class="msg-input" name="message"></textarea>
             <button class="submit-msg">
                 Envoyer <i class="far fa-paper-plane"></i>
