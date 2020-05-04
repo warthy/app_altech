@@ -25,21 +25,8 @@ class SecurityController extends Controller
                 $repository = $this->getRepository(UserRepository::class);
 
                 $user = $repository->findByEmail($form->get('email'));
-                if ($user && password_verify($form->get('password'), $user->getPassword())) {
-
-                    $_SESSION['auth'] = $user->getId();
-                    $_SESSION['role'] = $user->getRole();
-                    switch ($user->getRole()) {
-                        case Security::ROLE_ADMIN:
-                        case Security::ROLE_SUPER_ADMIN:
-                            $this->redirect('/admin');
-                            break;
-                        case Security::ROLE_CLIENT:
-                        default:
-                            $this->redirect('/client');
-                            break;
-                    }
-                }
+                if ($user && password_verify($form->get('password'), $user->getPassword()))
+                    $this->redirect('/');
             }
             $error = true;
         }

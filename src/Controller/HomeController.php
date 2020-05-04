@@ -14,22 +14,13 @@ class HomeController extends Controller
     public function index()
     {
         $user = $this->getUser();
-        if ($user) {
-            switch ($user->getRole()) {
-                case Security::ROLE_ADMIN:
-                case Security::ROLE_SUPER_ADMIN:
-                    $this->redirect('/admin');
-                    break;
-                case Security::ROLE_CLIENT:
-                default:
-                    $this->redirect('/client');
-                    break;
-            }
-        }
-        return $this->render("/landing-page.php", [], null, false);
+        return $user ?
+            $this->render("/dashboard/index.php", []) :
+            $this->render("/landing-page.php", [], null, false);
     }
 
-    public function contact(){
+    public function contact()
+    {
         $req = $this->getRequest();
         if ($req->is(Request::METHOD_POST)) {
             $form = $req->form;
@@ -49,10 +40,5 @@ class HomeController extends Controller
             }
         }
         return $this->render("/landing-page.php", [], null, false);
-    }
-
-    public function dashboard()
-    {
-        return $this->render("/dashboard/index.php", []);
     }
 }
