@@ -5,7 +5,7 @@ namespace Altech\Controller;
 
 use Altech\Model\Repository;
 use Altech\Model\Entity\Measure;
-use Altech\Model\Entity\Candidate;
+use Altech\Model\Repository\CandidateRepository;
 use Altech\Model\Repository\MeasureRepository;
 use App\KernelFoundation\Request;
 use App\Component\Controller;
@@ -16,16 +16,40 @@ use Exception;
 class MeasureController extends Controller
 {
     public function candidatePanel($id){
-        /** @var MeasureRepository $repo */
-        $repo = $this->getRepository(MeasureRepository::class);
-        $measures = $repo->findAllByCandidateId($id);
-               
+        /** @var MeasureRepository $measureRepo */
+        $measureRepo = $this->getRepository(MeasureRepository::class);
+        /** @var CandidateRepository $candidateRepo */
+        $candidateRepo = $this->getRepository(CandidateRepository::class);
+        /** @var Candidate $candidate */
+        $candidate = $candidateRepo->findById($id);
+        $measures = $measureRepo->findAllByCandidateId($id);
+        
+        // TODO : make security verifications
+        /* 
+        verify if : - measures exist
+                    - the measures belong to the candidate
+                    - the candidate belong to the client
+        */
 
-        return $this->render('/measures/candidate.php', [
-            'title' => 'Gérer les mesures : ',
+        return $this->render('/measures/candidate-index.php', [
+            'title' => 'Gérer les mesures du candidat : ' . $candidate->getFirstName() . ' ' . $candidate->getLastName(),
             'candidate_id' => $id,
             'measures' => $measures
         ]);
+    }
+
+    public function view($id){
+        /** @var MeasureRepository $measureRepo */
+        $measureRepo = $this->getRepository(MeasureRepository::class);
+        /** @var CandidateRepository $candidateRepo */
+        $candidateRepo = $this->getRepository(CandidateRepository::class);
+        /** @var Measure $measure */
+        $measure = $measureRepo->findById($id);
+
+        if ($measure){
+            $user = $this->getUser();
+            
+        }
     }
     
     
