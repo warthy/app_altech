@@ -17,9 +17,9 @@ class FAQRepository extends Repository
     {
         $stmt = $this->pdo->prepare('UPDATE ' . self::TABLE_NAME . ' SET question = :question, answer = :answer WHERE id = :id');
         $stmt->execute([
-            'id' => $faq->getId(),
-            'question' => $faq->getQuestion(),
-            'answer' => $faq->getAnswer()
+            'id' => htmlspecialchars($faq->getId()),
+            'question' => htmlspecialchars($faq->getQuestion()),
+            'answer' => htmlspecialchars($faq->getAnswer())
         ]);
     }
 
@@ -30,10 +30,8 @@ class FAQRepository extends Repository
     public function insert($faq): FAQ
     {
         $stmt = $this->pdo->prepare('INSERT INTO ' . self::TABLE_NAME . ' (question, answer) VALUES (:question, :answer)');
-        $question = $faq->getQuestion();
-        $answer = $faq->getAnswer();
-        $stmt->bindParam(':question', $question);
-        $stmt->bindParam(':answer', $answer);
+        $stmt->bindValue(':question', htmlspecialchars($faq->getQuestion()));
+        $stmt->bindValue(':answer', htmlspecialchars(($faq->getAnswer())));
 
         $stmt->execute();
         $faq->setId($this->pdo->lastInsertId());

@@ -21,9 +21,28 @@ class CandidateRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
     }
 
-    public function update(EntityInterface $entity): void
+    /**
+     * @param Candidate $candidate
+     * @return void
+     */
+    public function update($candidate): void
     {
-        // TODO: Implement update() method.
+        $stmt = $this->pdo->prepare(
+            'UPDATE ' . self::TABLE_NAME .
+            'SET firstname = :firstname, lastname = :lastname, sex = :sex, height = :height, weight = :weight,  email = :email, phone = :phone ' .
+            'WHERE id = :id'
+        );
+
+        $stmt->execute([
+            'id' => htmlspecialchars($candidate->getId()),
+            'firstname' => htmlspecialchars($candidate->getFirstname()),
+            'lastname' => htmlspecialchars($candidate->getLastname()),
+            'sex' => htmlspecialchars($candidate->getSex()),
+            'height' => htmlspecialchars($candidate->getHeight()),
+            'weight' => htmlspecialchars($candidate->getWeight()),
+            'email' => htmlspecialchars($candidate->getLastname()),
+            'phone' => htmlspecialchars($candidate->getPhone()),
+        ]);
     }
 
     /**
@@ -39,15 +58,15 @@ class CandidateRepository extends Repository
         );
 
         $stmt->execute([
-            'firstname' => $candidate->getFirstname(),
-            'lastname' => $candidate->getLastname(),
-            'sex' => $candidate->getSex(),
-            'height' => $candidate->getHeight(),
-            'weight' => $candidate->getWeight(),
-            'email' => $candidate->getLastname(),
-            'phone' => $candidate->getPhone(),
-            'cgu_approvement' => $candidate->getCguApprovement(),
-            'user_id' => $candidate->getClient()->getId()
+            'firstname' => htmlspecialchars($candidate->getFirstname()),
+            'lastname' => htmlspecialchars($candidate->getLastname()),
+            'sex' => htmlspecialchars($candidate->getSex()),
+            'height' => htmlspecialchars($candidate->getHeight()),
+            'weight' => htmlspecialchars($candidate->getWeight()),
+            'email' => htmlspecialchars($candidate->getLastname()),
+            'phone' => htmlspecialchars($candidate->getPhone()),
+            'cgu_approvement' => htmlspecialchars($candidate->getCguApprovement()),
+            'user_id' => htmlspecialchars($candidate->getClientId())
         ]);
 
         $candidate->setId($this->pdo->lastInsertId());
