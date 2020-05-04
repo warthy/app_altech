@@ -9,6 +9,8 @@ use Altech\Model\Repository\CandidateRepository;
 use Altech\Model\Repository\MeasureRepository;
 use App\KernelFoundation\Request;
 use App\Component\Controller;
+use App\KernelFoundation\Security;
+
 
 
 use Exception;
@@ -45,10 +47,19 @@ class MeasureController extends Controller
         $candidateRepo = $this->getRepository(CandidateRepository::class);
         /** @var Measure $measure */
         $measure = $measureRepo->findById($id);
+        /** @var Candidate $candidate */
+        $candidate = $candidateRepo->findById($measure->getCandidate_id());
 
         if ($measure){
             $user = $this->getUser();
-            
+            if(($candidate && $candidate->getClientId() === $user->getId()) || Security::hasPermission(Security::ROLE_ADMIN))
+            {
+                return $this->render('/measures/view.php',[
+                    'title' => 'Mesure n° : ' . $measure->getId(),
+                    'candidate' => $candidate,
+                    'measure' => $measure
+                ]);
+            }
         }
     }
     

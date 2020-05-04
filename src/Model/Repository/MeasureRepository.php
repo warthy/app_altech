@@ -19,7 +19,7 @@ class MeasureRepository extends Repository
         /** @var Measure $measure */
         $measure = parent::findById($id);
         $stmt = $this->pdo->prepare('SELECT * FROM ' . CandidateRepository::TABLE_NAME . ' WHERE id = :id');
-        $stmt->execute(["id" => $measure->candidate_id]);
+        $stmt->execute(["id" => $measure->getCandidate_id()]);
 
         $measure->setCandidate($stmt->fetchObject(CandidateRepository::ENTITY));
         return $measure;

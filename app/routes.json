@@ -56,6 +56,12 @@
       "id": "\\d+"
     }
   },
+  "/measures/measure/:id": {
+    "controller": "MeasureController::view",
+    "requirements": {
+      "id": "\\d+"
+    }
+  },
 
 
   "/client/ticket": {

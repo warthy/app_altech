@@ -109,7 +109,7 @@ class Candidate implements EntityInterface
     }
 
    
-    public function getClientId(): User
+    public function getClientId(): int
     {
         return $this->client_id;
     }

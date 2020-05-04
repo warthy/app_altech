@@ -12,7 +12,7 @@ class Measure implements EntityInterface
     private $candidate_id;
     private $conductivity;
     private $date_measured;
-    private $hearbeat;
+    private $heartbeat;
     private $sound_expected_reflex;
     private $sound_unexpected_reflex;
     private $visual_expected_reflex;
@@ -52,7 +52,7 @@ class Measure implements EntityInterface
 
     public function getHeartBeat(): ?float
     {
-        return $this->hearbeat;
+        return $this->heartbeat;
     }
 
     public function setTemperature(float $temperature): self
@@ -126,9 +126,10 @@ class Measure implements EntityInterface
     /**
      * Get the value of date_measured
      */ 
-    public function getDate_measured()
+    public function getDate_measured(): ?string
     {
-        return $this->date_measured;
+        $originalDate = $this->date_measured;
+        return date("d/m/Y à h:i", strtotime($originalDate));
     }
 
     /**
@@ -136,7 +137,7 @@ class Measure implements EntityInterface
      *
      * @return  self
      */ 
-    public function setDate_measured($date_measured)
+    public function setDate_measured($date_measured): self
     {
         $this->date_measured = $date_measured;
 

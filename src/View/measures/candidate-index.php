@@ -11,7 +11,7 @@
                 <td><?= $measure->getId() ?></td>
                 <td><?= $measure->getDate_measured() ?? "Non renseigné" ?></td>
                 <td>
-                    <a href="/candidate/<?= $measure->getCandidate_id() ?>/test" class="submit-btn">Consulter les résultats</a>
+                    <a href="/measures/measure/<?= $measure->getId() ?>" class="submit-btn">Consulter les résultats</a>
                 </td>
             </tr>
         <?php } ?>
