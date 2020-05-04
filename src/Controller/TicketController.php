@@ -26,6 +26,7 @@ class TicketController extends Controller
         ]);
     }
 
+
     public function adminPanel()
     {
 
@@ -121,5 +122,4 @@ class TicketController extends Controller
         throw new Exception("Invalid id: $id");
 
     }
-
 }

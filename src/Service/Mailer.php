@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\SMTP;
 
 class Mailer
 {
-    private const TEMPLATE_DIR = __DIR__. '/../View/mail/';
+    private const TEMPLATE_DIR = __DIR__ . '/../View/mail/';
 
     /**
      * @var null|self
@@ -63,6 +63,18 @@ class Mailer
     public function to(string $recipient): self
     {
         $this->mailer->addAddress($recipient);
+        return $this;
+    }
+
+    /**
+     * @param string $author The email address that send the email
+     * @param string $name Author's name
+     * @return $this
+     * @throws MailerException
+     */
+    public function from(string $author, string $name = ""): self
+    {
+        $this->mailer->setFrom($author, $name);
         return $this;
     }
 
