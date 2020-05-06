@@ -46,7 +46,7 @@ class FAQController extends Controller
                     $faq->setQuestion($form->get('question'));
 
                     $repository->update($faq);
-                    $this->redirect($this->generateRoute() ."/". $faq->getId());
+                    $this->redirect("/faq/". $faq->getId());
                 }
             }
 
@@ -75,7 +75,7 @@ class FAQController extends Controller
                 $faq->setQuestion($form->get('question'));
 
                 $repository->insert($faq);
-                $this->redirect($this->generateRoute() ."/". $faq->getId());
+                $this->redirect("/faq/". $faq->getId());
             }
         }
 
@@ -95,14 +95,11 @@ class FAQController extends Controller
         // We check that the faq exists then we delete it
         if ($faq) {
             $rep->remove($faq);
-            $this->redirect($this->generateRoute());
+            $this->redirect("/faq/");
         }
 
         throw new Exception("invalid faq id: $id");
     }
 
-    private function generateRoute()
-    {
-        return Security::hasPermission(Security::ROLE_ADMIN) ? "/admin/faq" : "client/faq";
-    }
+
 }

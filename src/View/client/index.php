@@ -15,10 +15,10 @@
                 <td><?= $client->getEmail() ?></td>
                 <td><?= $client->getPhone() ?></td>
                 <td>
-                    <a href="/admin/client/<?= $client->getId() ?>" class="edit-btn">
+                    <a href="/client/<?= $client->getId() ?>" class="edit-btn">
                         <i class="far fa-eye"></i>
                     </a>
-                    <a href="/admin/client/<?= $client->getId() ?>/delete" class="delete-btn">
+                    <a href="/client/<?= $client->getId() ?>/delete" class="delete-btn">
                         <i class="far fa-trash-alt"></i>
                     </a>
                 </td>
@@ -27,7 +27,7 @@
         </tbody>
     </table>
 
-    <a class="default-btn" href="/admin/client/create">
+    <a class="default-btn" href="/client/create">
         Ajouter un client
     </a>
 </div>

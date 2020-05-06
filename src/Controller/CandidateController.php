@@ -51,7 +51,7 @@ class CandidateController extends Controller
                 $candidate->setCguApprovement(ClientController::checkAndUploadFile($file));
 
                 $repo->insert($candidate);
-                $this->redirect("/client/candidate/".$candidate->getId());
+                $this->redirect("/candidate/".$candidate->getId());
             }
         }
 
@@ -70,6 +70,7 @@ class CandidateController extends Controller
         $candidate = $repo->findById($id);
 
         if($candidate && $user->getId() == $candidate->getClientId()){
+            //TODO: candidate edition
 
             return $this->render('/candidate/form.php', [
                 "title" => "Création d'un nouveau candidat",

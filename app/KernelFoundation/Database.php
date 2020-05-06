@@ -15,12 +15,12 @@ class Database
     private $PDOInstance;
 
     /**
-     * @var null|Database
+     * @var null|self
      */
     private static $_instance = null;
 
 
-    public function __construct($host, $username, $password, $database)
+    public function __construct($host, $database, $username, $password)
     {
         try {
             $this->PDOInstance = new PDO(
@@ -50,7 +50,7 @@ class Database
     public static function getInstance($host, $database, $user, $password): self
     {
         if (is_null(self::$_instance)) {
-            self::$_instance = new Database($host, $database, $user, $password);
+            self::$_instance = new self($host, $database, $user, $password);
         }
         return self::$_instance;
     }

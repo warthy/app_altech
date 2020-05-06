@@ -3,6 +3,7 @@
 namespace Altech\Controller;
 
 use Altech\Model\Entity\Ticket;
+use Altech\Model\Entity\TicketMessage;
 use Altech\Model\Repository\TicketMessageRepository;
 use Altech\Model\Repository\TicketRepository;
 use Altech\Model\Repository\UserRepository;
@@ -14,21 +15,21 @@ use Exception;
 
 class TicketController extends Controller
 {
-    public function clientPanel()
+    public function panel()
     {
         /** @var TicketRepository $repo */
         $repo = $this->getRepository(TicketRepository::class);
         $client = $this->getUser();
 
-        return $this->render('/ticket/client.php', [
+        return Security::hasPermission(Security::ROLE_ADMIN) ?
+            $this->render('/ticket/admin.php', [
+               'title' => "Administration des tickets"
+            ])
+            :
+            $this->render('/ticket/client.php', [
             'title' => 'Gestion des tickets',
             'tickets' => $repo->findAllByClient($client)
         ]);
-    }
-
-    public function adminPanel()
-    {
-
     }
 
     public function view($id)
@@ -77,7 +78,7 @@ class TicketController extends Controller
                     ->setOpenAt(new DateTime());
 
                 $repo->insert($ticket);
-                $this->redirect('/client/ticket/' . $ticket->getId());
+                $this->redirect('/ticket/' . $ticket->getId());
             }
         }
 
@@ -98,7 +99,7 @@ class TicketController extends Controller
                 $ticket->setClosed(true);
                 $repo->update($ticket);
 
-                $this->redirect("/admin/ticket/$id");
+                $this->redirect("/ticket/$id");
             }
         }
         throw new Exception("Invalid id: $id");
@@ -115,11 +116,38 @@ class TicketController extends Controller
             $ticket->setAdminId($this->getUser()->getId());
             $repo->update($ticket);
 
-            $this->redirect("/admin/ticket/$id");
+            $this->redirect("/ticket/$id");
 
         }
         throw new Exception("Invalid id: $id");
 
     }
 
+    public function send($id)
+    {
+        $req = $this->getRequest();
+        if ($req->is(Request::METHOD_POST)) {
+            $form = $req->form;
+
+            $repo = $this->getRepository(TicketRepository::class);
+            /** @var Ticket $ticket */
+            $ticket = $repo->findById($id);
+            $user = $this->getUser();
+
+            if ($ticket && $user->getId() == $ticket->getClientId() || $user->getId() == $ticket->getAdminId()) {
+                $repo = $this->getRepository(TicketMessageRepository::class);
+
+                $message = new TicketMessage();
+                $message->setTicketId($id);
+                $message->setAuthorId($user->getId());
+                $message->setMessage($form->get("message"));
+
+                $repo->insert($message);
+
+                $this->redirect("/ticket/$id");
+            }
+            throw new Exception("Invalid id: $id");
+        }
+        $this->redirect("/ticket/$id");
+    }
 }

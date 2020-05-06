@@ -21,7 +21,7 @@
                     <td><?= $ticket->getSubject() ?></td>
                     <td><?= $ticket->getOpenAt()->format('H:i, d/m/Y') ?></td>
                     <td>
-                        <a href="/client/ticket/<?= $ticket->getId() ?>" class="edit-btn">
+                        <a href="/ticket/<?= $ticket->getId() ?>" class="edit-btn">
                             <i class="far fa-eye"></i>
                         </a>
                     </td>
@@ -32,7 +32,7 @@
     </div>
     <div class="card ticket-form">
         <h1>Ouvrir un nouveau ticket</h1>
-        <form method="post" action="/client/ticket/open">
+        <form method="post" action="/ticket/open">
             <div class="form-group">
                 <div>
                     <label for="subject">Objet</label>

@@ -201,7 +201,7 @@ hr {
     margin: 20px 10px;
     text-align: center;
     color: #fff;
-    background-color: #b2f5ea;
+    background-color: #4fd1c5;
     border-radius: 5px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     padding: 0.75rem 30px;
@@ -212,5 +212,5 @@ hr {
 
 .submit-msg:hover {
     cursor: pointer;
-    background-color: #4fd1c5;
+    background-color: #b2f5ea;
 }

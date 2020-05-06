@@ -2,6 +2,9 @@
   "/": {
     "controller": "HomeController::index"
   },
+  "/landing/contact": {
+    "controller": "HomeController::contact"
+  },
   "/login": {
     "controller": "SecurityController::login"
   },
@@ -28,18 +31,14 @@
     "controller": "UserController::changePassword"
   },
 
-  "/(client|admin)": {
-    "controller": "HomeController::dashboard"
-  },
 
-
-  "/client/candidate": {
+  "/candidate": {
     "controller": "CandidateController::index"
   },
-  "/client/candidate/create": {
+  "/candidate/create": {
     "controller": "CandidateController::create"
   },
-  "/client/candidate/:id": {
+  "/candidate/:id": {
     "controller": "CandidateController::edit",
     "requirements": {
       "id": "\\d+"
@@ -69,73 +68,70 @@
   },
 
 
-  "/client/ticket": {
-    "controller": "TicketController::clientPanel"
+  "/ticket": {
+    "controller": "TicketController::panel"
   },
-  "/client/ticket/open": {
+  "/ticket/open": {
     "controller": "TicketController::open"
   },
-  "/admin/ticket/:id/close": {
+  "/ticket/:id/close": {
     "controller": "TicketController::close",
     "requirements": {
       "id": "\\d+"
     }
   },
-  "/admin/ticket/:id/assign": {
+  "/ticket/:id/assign": {
     "controller": "TicketController::assign",
     "requirements": {
       "id": "\\d+"
     }
   },
-  "/admin/ticket": {
-    "controller": "TicketController::adminPanel"
-  },
-  "/(client|admin)/ticket/:id": {
+  "/ticket/:id": {
     "controller": "TicketController::view",
     "requirements": {
       "id": "\\d+"
     }
   },
-  "/(client|admin)/ticket/:id/send": {
+  "/ticket/:id/send": {
     "controller": "TicketController::send",
     "requirements": {
       "id": "\\d+"
     }
   },
 
-  "/admin/client": {
+  "/client": {
     "controller": "ClientController::index"
   },
-  "/admin/client/:id": {
+  "/client/:id": {
     "controller": "ClientController::edit",
     "requirements": {
       "id": "\\d+"
     }
   },
-  "/admin/client/:id/delete": {
+  "/client/:id/delete": {
     "controller": "ClientController::delete",
     "requirements": {
       "id": "\\d+"
     }
   },
-  "/admin/client/create": {
+  "/client/create": {
     "controller": "ClientController::create"
   },
 
 
-  "/(client|admin)/faq/new": {
+  "/faq/new": {
     "controller": "FAQController::create"
   },
-  "/(client|admin)/faq": {
+  "/faq": {
     "controller": "FAQController::index"
   },
-  "/admin/faq/:id": {
+  "/faq/:id": {
     "controller": "FAQController::edit",
     "requirements": {
       "id": "\\d+"
     }
   },
-  "/admin/faq/:id/delete": {
+  "/faq/:id/delete": {
     "controller": "FAQController::delete",
     "requirements": {
       "id": "\\d+"

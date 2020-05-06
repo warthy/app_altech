@@ -41,11 +41,11 @@
     <div class="wrapper">
         <div id="sidebar">
             <?php if(Security::hasPermission("ROLE_ADMIN")) { ?>
-            <a href="/admin">
+            <a href="/">
                 <i class="material-icons">home</i> Home
             </a>
             <?php }else{ ?>
-                <a href="/client">
+                <a href="/">
                     <i class="material-icons">home</i> Home
                 </a>
             <?php } ?>
@@ -57,29 +57,29 @@
                 <a href="/client/measures">
                     <i class="material-icons">backup</i> Consulter les mesures
                 </a>
-                <a href="/client/ticket">
+                <a href="/ticket">
                     <i class="material-icons">error_outline</i> Gérer ses ticket
                 </a>
-                <a href="/client/faq">
+                <a href="/faq">
                     <i class="material-icons">question_answer</i> Consulter la FAQ
                 </a>
-                <a href="/client/candidate">
+                <a href="/candidate">
                     <i class="material-icons">group</i> Consulter les candidats
                 </a>
             <?php }?>
             <?php if(Security::hasPermission("ROLE_ADMIN")) { ?>
-                <a href="/admin/ticket">
+                <a href="/ticket">
                     <i class="material-icons">error_outline</i> Gérer les tickets
                 </a>
-                <a href="/admin/faq">
+                <a href="/faq">
                     <i class="material-icons">question_answer</i> Consulter la FAQ
                 </a>
-                <a href="/admin/client">
+                <a href="/client">
                     <i class="material-icons">group</i> Consulter les clients
                 </a>
             <?php }?>
             <?php if(Security::hasPermission("ROLE_SUPER_ADMIN")) {?>
-                <a href="/admin/user">
+                <a href="admin/user">
                     <i class="material-icons">group</i> Gérer les administrateurs
                 </a>
             <?php }?>

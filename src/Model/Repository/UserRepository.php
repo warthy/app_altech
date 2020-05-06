@@ -55,27 +55,28 @@ class UserRepository extends Repository
     {
         $stmt = $this->pdo->prepare(
             'INSERT INTO ' . self::TABLE_NAME . ' ('.
-                'name, address, city, zipcode, email, phone, password, role, cgu_approvement, '.
+                'name, address, city, zipcode, email, phone, password, role, cgu_approvement, recover_token, '.
                 'legalrepresentative_firstname, legalrepresentative_lastname, legalrepresentative_email, legalrepresentative_phone '.
             ') VALUES ('.
-            ':name, :address, :city, :zipcode, :email, :phone, :password, :role, :cgu_approvement, '.
+            ':name, :address, :city, :zipcode, :email, :phone, :password, :role, :cgu_approvement, :recover_token, '.
             ':legalrepresentative_firstname, :legalrepresentative_lastname, :legalrepresentative_email, :legalrepresentative_phone)'
         );
 
         $stmt->execute([
-            'role' => $user->getRole(),
-            'name' => $user->getName(),
-            'address' => $user->getAddress(),
-            'city' => $user->getCity(),
-            'zipcode' => $user->getZipCode(),
-            'email' => $user->getEmail(),
-            'phone' => $user->getPhone(),
-            'password' => $user->getPassword(),
-            'cgu_approvement' => $user->getCguApprovement(),
-            'legalrepresentative_firstname' => $user->getRepresentativeFirstName(),
-            'legalrepresentative_lastname' => $user->getRepresentativeLastName(),
-            'legalrepresentative_email' => $user->getRepresentativeEmail(),
-            'legalrepresentative_phone' => $user->getRepresentativePhone()
+            'role' => htmlspecialchars($user->getRole()),
+            'name' => htmlspecialchars($user->getName()),
+            'address' => htmlspecialchars($user->getAddress()),
+            'city' => htmlspecialchars($user->getCity()),
+            'zipcode' => htmlspecialchars($user->getZipCode()),
+            'email' => htmlspecialchars($user->getEmail()),
+            'phone' => htmlspecialchars($user->getPhone()),
+            'password' => htmlspecialchars($user->getPassword()),
+            'recover_token' => $user->getRecoverToken(),
+            'cgu_approvement' => htmlspecialchars($user->getCguApprovement()),
+            'legalrepresentative_firstname' => htmlspecialchars($user->getRepresentativeFirstName()),
+            'legalrepresentative_lastname' => htmlspecialchars($user->getRepresentativeLastName()),
+            'legalrepresentative_email' => htmlspecialchars($user->getRepresentativeEmail()),
+            'legalrepresentative_phone' => htmlspecialchars($user->getRepresentativePhone())
         ]);
 
         $user->setId($this->pdo->lastInsertId());
@@ -98,6 +99,7 @@ class UserRepository extends Repository
                 'phone = :phone, '.
                 'picture = :picture,'.
                 'password = :password,'.
+                'recover_token = :recover_token,'.
                 'legalrepresentative_firstname = :legalrepresentative_firstname, '.
                 'legalrepresentative_lastname = :legalrepresentative_lastname,'.
                 'legalrepresentative_email = :legalrepresentative_email,'.
@@ -105,19 +107,20 @@ class UserRepository extends Repository
             ' WHERE id = :id');
 
         $stmt->execute([
-            'id' => $user->getId(),
-            'name' => $user->getName(),
-            'address' => $user->getAddress(),
-            'city' => $user->getCity(),
-            'zipcode' => $user->getZipCode(),
-            'email' => $user->getEmail(),
-            'phone' => $user->getPhone(),
-            'picture' => $user->getPicture(),
-            'password' => $user->getPassword(),
-            'legalrepresentative_firstname' => $user->getRepresentativeFirstName(),
-            'legalrepresentative_lastname' => $user->getRepresentativeLastName(),
-            'legalrepresentative_email' => $user->getRepresentativeEmail(),
-            'legalrepresentative_phone' => $user->getRepresentativePhone()
+            'id' => htmlspecialchars($user->getId()),
+            'name' => htmlspecialchars($user->getName()),
+            'address' => htmlspecialchars($user->getAddress()),
+            'city' => htmlspecialchars($user->getCity()),
+            'zipcode' => htmlspecialchars($user->getZipCode()),
+            'email' => htmlspecialchars($user->getEmail()),
+            'phone' => htmlspecialchars($user->getPhone()),
+            'picture' => htmlspecialchars($user->getPictureFile()),
+            'password' => htmlspecialchars($user->getPassword()),
+            'recover_token' => $user->getRecoverToken(),
+            'legalrepresentative_firstname' => htmlspecialchars($user->getRepresentativeFirstName()),
+            'legalrepresentative_lastname' => htmlspecialchars($user->getRepresentativeLastName()),
+            'legalrepresentative_email' => htmlspecialchars($user->getRepresentativeEmail()),
+            'legalrepresentative_phone' => htmlspecialchars($user->getRepresentativePhone())
         ]);
     }
 

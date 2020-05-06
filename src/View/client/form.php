@@ -77,7 +77,7 @@
                 Enregistrer
             </button>
             <?php if ($client->getId()) { ?>
-                <a type="button" class="delete-button" href="/admin/client/<?= $client->getId() ?>/delete">
+                <a type="button" class="delete-button" href="/client/<?= $client->getId() ?>/delete">
                     Supprimer
                 </a>
             <?php } ?>

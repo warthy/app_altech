@@ -2,7 +2,6 @@
 
 namespace App\KernelFoundation;
 
-use Exception;
 use Throwable;
 
 class Kernel
@@ -60,7 +59,11 @@ class Kernel
 
     private function connectDatabase()
     {
-        $credentials = self::$conf["database"];
-        $this->database = Database::getInstance(...array_values($credentials));
+        $this->database = Database::getInstance(
+            $_ENV["DB_HOST"],
+            $_ENV["DB_DATABASE"],
+            $_ENV["DB_USERNAME"],
+            $_ENV["DB_PASSWORD"]
+        );
     }
 }

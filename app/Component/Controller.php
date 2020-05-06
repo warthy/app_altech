@@ -6,11 +6,12 @@ namespace App\Component;
 
 use Altech\Model\Entity\User;
 use Altech\Model\Repository\UserRepository;
+use Altech\Service\Mailer;
 use App\KernelFoundation\Database;
 use App\KernelFoundation\Request;
 use App\KernelFoundation\Response;
 use Exception;
-use http\Exception\RuntimeException;
+use PHPMailer\PHPMailer\PHPMailer;
 
 abstract class Controller
 {
@@ -27,7 +28,7 @@ abstract class Controller
         if ($id) {
             $this->user = $repo->findbyId($id);
             if (!$this->user)
-                throw new RuntimeException("Unknown user (id: $id)");
+                throw new Exception("Unknown user (id: $id)");
         }
     }
 
@@ -83,6 +84,11 @@ abstract class Controller
     protected function getRequest(): Request
     {
         return $this->request;
+    }
+
+    protected function getMailer(): Mailer
+    {
+        return Mailer::getInstance();
     }
 
     protected function getUser(): ?User
