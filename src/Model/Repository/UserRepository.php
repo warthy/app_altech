@@ -113,7 +113,7 @@ class UserRepository extends Repository
             'zipcode' => htmlspecialchars($user->getZipCode()),
             'email' => htmlspecialchars($user->getEmail()),
             'phone' => htmlspecialchars($user->getPhone()),
-            'picture' => htmlspecialchars($user->getPicture()),
+            'picture' => htmlspecialchars($user->getPictureFile()),
             'password' => htmlspecialchars($user->getPassword()),
             'recover_token' => htmlspecialchars($user->getRecoverToken()),
             'legalrepresentative_firstname' => htmlspecialchars($user->getRepresentativeFirstName()),

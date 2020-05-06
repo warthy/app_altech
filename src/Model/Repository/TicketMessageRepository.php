@@ -24,8 +24,22 @@ class TicketMessageRepository extends Repository
         // TODO: Implement update() method.
     }
 
-    public function insert( $entity)
+    /**
+     * @param TicketMessage $tm
+     * @return TicketMessage
+     */
+    public function insert($tm): TicketMessage
     {
-        // TODO: Implement insert() method.
+        $stmt = $this->pdo->prepare('INSERT INTO ' . self::TABLE_NAME .
+            ' (message, ticket_id, author_id, sent_at) VALUES (:message, :ticket_id, :author_id, NOW())'
+        );
+        $stmt->bindValue(':message', htmlspecialchars($tm->getMessage()));
+        $stmt->bindValue(':ticket_id', $tm->getTicketId());
+        $stmt->bindValue(':author_id', $tm->getAuthorId());
+
+        $stmt->execute();
+        $tm->setId($this->pdo->lastInsertId());
+
+        return $tm;
     }
 }
