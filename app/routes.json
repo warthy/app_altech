@@ -45,8 +45,13 @@
       "id": "\\d+"
     }
   },
+
+
   "/client/newmeasure": {
     "controller": "MeasureController::init"
+  },
+  "/client/measures":{
+    "controller": "MeasureController::index"
   },
 
 

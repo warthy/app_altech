@@ -5,6 +5,7 @@ use Altech\Controller\ClientController;
 use Altech\Model\Entity\Measure;
 use Altech\Model\Entity\Candidate;
 use Altech\Model\Entity\EntityInterface;
+use Altech\Model\Entity\User;
 use App\Component\Repository;
 use PDO;
 
@@ -23,6 +24,14 @@ class MeasureRepository extends Repository
 
         $measure->setCandidate($stmt->fetchObject(CandidateRepository::ENTITY));
         return $measure;
+    }
+
+    public function findAllOfUser(User $client) {
+        $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME .' WHERE client_id = :client_id ORDER BY date_measured DESC');
+        $stmt->bindValue(':client_id', $client->getId(), PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
     }
 
 

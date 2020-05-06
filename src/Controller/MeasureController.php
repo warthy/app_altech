@@ -17,6 +17,20 @@ use Exception;
 
 class MeasureController extends Controller
 {
+    public function index(){
+        /** @var MeasureRepository $measureRepo */
+        $measureRepo = $this->getRepository(MeasureRepository::class);
+        /** @var CandidateRepository $candidateRepo */
+        $candidateRepo = $this->getRepository(CandidateRepository::class);
+
+        return $this->render('/measures/index.php',[
+            'title' => 'Gestion des mesures',
+            'measures' => $measureRepo->findAllOfUser($this->getUser()),
+            'candidateRepo' => $candidateRepo
+        ]);
+    }
+    
+    
     public function candidatePanel($id){
         /** @var MeasureRepository $measureRepo */
         $measureRepo = $this->getRepository(MeasureRepository::class);
@@ -26,18 +40,18 @@ class MeasureController extends Controller
         $candidate = $candidateRepo->findById($id);
         $measures = $measureRepo->findAllByCandidateId($id);
         
-        // TODO : make security verifications
-        /* 
-        verify if : - measures exist
-                    - the measures belong to the candidate
-                    - the candidate belong to the client
-        */
-
-        return $this->render('/measures/candidate-index.php', [
-            'title' => 'Gérer les mesures du candidat : ' . $candidate->getFirstName() . ' ' . $candidate->getLastName(),
-            'candidate_id' => $id,
-            'measures' => $measures
-        ]);
+        // TODO : verify if measures belong to candidate ?
+        if($measures){
+            $user = $this->getUser();
+            if(($candidate && $candidate->getClientId() === $user->getId()) || Security::hasPermission(Security::ROLE_ADMIN))
+            {
+                return $this->render('/measures/candidate-index.php', [
+                    'title' => 'Gérer les mesures du candidat : ' . $candidate->getFirstName() . ' ' . $candidate->getLastName(),
+                    'candidate_id' => $id,
+                    'measures' => $measures
+                ]);
+            }
+        }
     }
 
     public function view($id){

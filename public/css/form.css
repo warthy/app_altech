@@ -47,7 +47,7 @@ form .form-group {
     margin: 20px 10px;
     text-align: center;
     color: #fff;
-    background-color: #2b862b;
+    background-color: #5CAB7D;
     border-radius: 5px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     padding: 0.75rem 30px;
@@ -56,7 +56,8 @@ form .form-group {
 
 .submit-btn:hover {
     cursor: pointer;
-    background-color: #329b32;
+    background-color: rgb(119, 143, 77);
+    ;
 }
 
 .delete-button {

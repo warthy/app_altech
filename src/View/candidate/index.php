@@ -18,8 +18,9 @@
                 <td><?= $candidate->getBirthdate() ?? "Non renseigné" ?></td>
                 <td>
                     <a href="/candidate/<?= $candidate->getId() ?>/test" class="submit-btn">Lancer un test</a>
-                    <a href="/candidate/<?= $candidate->getId() ?>" class="edit-btn"><i class="far fa-edit"></i></a>
                     <a href="/measures/candidate/<?= $candidate->getId() ?>" class="view-btn">Consulter les mesures</a>
+                    <a href="/candidate/<?= $candidate->getId() ?>" class="edit-btn"><i class="far fa-edit"></i></a>
+                    
                 </td>
             </tr>
         <?php } ?>

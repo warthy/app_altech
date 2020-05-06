@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="/css/ticket.css" />
     <link rel="stylesheet" type="text/css" href="/css/candidate.css" />
     <link rel="stylesheet" type="text/css" href="/css/new-client.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/results.css"/>
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f170de025b.js" crossorigin="anonymous"></script>
@@ -52,10 +51,10 @@
             <?php } ?>
             <?php
             if(Security::hasPermission("ROLE_CLIENT")) { ?>
-                <a href="/client/measure">
+                <a href="/client/newmeasure">
                     <i class="material-icons">settings_remote</i> Effectuer une mesure
                 </a>
-                <a href="#">
+                <a href="/client/measures">
                     <i class="material-icons">backup</i> Consulter les mesures
                 </a>
                 <a href="/client/ticket">

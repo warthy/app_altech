@@ -21,6 +21,7 @@ class CandidateRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
     }
 
+    
     public function update(EntityInterface $entity): void
     {
         // TODO: Implement update() method.

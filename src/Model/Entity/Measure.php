@@ -9,7 +9,7 @@ use Altech\Model\Entity\EntityInterface;
 class Measure implements EntityInterface
 {
     private $id;
-    private $candidate_id;
+
     private $conductivity;
     private $date_measured;
     private $heartbeat;
@@ -21,6 +21,9 @@ class Measure implements EntityInterface
     private $tonality_recognition;
 
     private $candidate;
+    private $candidate_id;
+    private $client;
+    private $client_id;
 
     public function setId(int $id): self
     {
@@ -147,7 +150,7 @@ class Measure implements EntityInterface
     /**
      * Get the value of candidate_id
      */ 
-    public function getCandidate_id()
+    public function getCandidate_id(): ?int
     {
         return $this->candidate_id;
     }
@@ -157,7 +160,7 @@ class Measure implements EntityInterface
      *
      * @return  self
      */ 
-    public function setCandidate_id(int $candidate_id)
+    public function setCandidate_id(int $candidate_id): self
     {
         $this->candidate_id = $candidate_id;
 
@@ -165,7 +168,7 @@ class Measure implements EntityInterface
     }
 
 
-    public function getCandidate(): Candidate
+    public function getCandidate(): ?Candidate
     {
         return $this->candidate;
     }
@@ -185,4 +188,44 @@ class Measure implements EntityInterface
         return 0;
     }
 
+
+    /**
+     * Get the value of client
+     */ 
+    public function getClient(): ?User
+    {
+        return $this->client;
+    }
+
+    /**
+     * Set the value of client
+     *
+     * @return  self
+     */ 
+    public function setClient($client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of client_id
+     */ 
+    public function getClient_id(): ?int
+    {
+        return $this->client_id;
+    }
+
+    /**
+     * Set the value of client_id
+     *
+     * @return  self
+     */ 
+    public function setClient_id($client_id): self
+    {
+        $this->client_id = $client_id;
+
+        return $this;
+    }
 }
