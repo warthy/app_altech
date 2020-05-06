@@ -55,10 +55,10 @@ class UserRepository extends Repository
     {
         $stmt = $this->pdo->prepare(
             'INSERT INTO ' . self::TABLE_NAME . ' ('.
-                'name, address, city, zipcode, email, phone, password, role, cgu_approvement, '.
+                'name, address, city, zipcode, email, phone, password, role, cgu_approvement, recover_token, '.
                 'legalrepresentative_firstname, legalrepresentative_lastname, legalrepresentative_email, legalrepresentative_phone '.
             ') VALUES ('.
-            ':name, :address, :city, :zipcode, :email, :phone, :password, :role, :cgu_approvement, '.
+            ':name, :address, :city, :zipcode, :email, :phone, :password, :role, :cgu_approvement, :recover_token, '.
             ':legalrepresentative_firstname, :legalrepresentative_lastname, :legalrepresentative_email, :legalrepresentative_phone)'
         );
 
@@ -71,6 +71,7 @@ class UserRepository extends Repository
             'email' => htmlspecialchars($user->getEmail()),
             'phone' => htmlspecialchars($user->getPhone()),
             'password' => htmlspecialchars($user->getPassword()),
+            'recover_token' => $user->getRecoverToken(),
             'cgu_approvement' => htmlspecialchars($user->getCguApprovement()),
             'legalrepresentative_firstname' => htmlspecialchars($user->getRepresentativeFirstName()),
             'legalrepresentative_lastname' => htmlspecialchars($user->getRepresentativeLastName()),
@@ -115,7 +116,7 @@ class UserRepository extends Repository
             'phone' => htmlspecialchars($user->getPhone()),
             'picture' => htmlspecialchars($user->getPictureFile()),
             'password' => htmlspecialchars($user->getPassword()),
-            'recover_token' => htmlspecialchars($user->getRecoverToken()),
+            'recover_token' => $user->getRecoverToken(),
             'legalrepresentative_firstname' => htmlspecialchars($user->getRepresentativeFirstName()),
             'legalrepresentative_lastname' => htmlspecialchars($user->getRepresentativeLastName()),
             'legalrepresentative_email' => htmlspecialchars($user->getRepresentativeEmail()),

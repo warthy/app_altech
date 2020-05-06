@@ -100,7 +100,7 @@ class Mailer
         if (file_exists(self::TEMPLATE_DIR . $body)) {
             ob_start();
             extract($params);
-            $host = "";
+            $host = "http://localhost:8080";
 
             include self::TEMPLATE_DIR . $body;
 

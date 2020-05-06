@@ -59,6 +59,7 @@ class ClientController extends Controller
                         ->to($client->getEmail())
                         ->subject("Création de votre compte client")
                         ->setBody('client-created.php', [
+                            'name' => $client->getName(),
                             'token' => $client->getRecoverToken()
                         ]);
 

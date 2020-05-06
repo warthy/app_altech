@@ -31,7 +31,11 @@ class HomeController extends Controller
                     ->from($form->get('email'), $form->get('name'))
                     ->to("venard.paul@gmail.com")                                       //TODO: change email
                     ->subject('Demande de contact: ' . $form->get('name'))
-                    ->setBody('contact.php', ['message' => $form->get('message')]);
+                    ->setBody('contact.php', [
+                        'name' => $form->get('name'),
+                        'email' => $form->get('email'),
+                        'message' => $form->get('message')
+                    ]);
 
                 $mailer->send();
             } catch (Exception $e) {

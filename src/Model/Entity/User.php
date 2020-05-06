@@ -68,7 +68,7 @@ class User implements EntityInterface
         return $this->recoverToken;
     }
    
-    public function setRecoverToken(string $recoverToken): self
+    public function setRecoverToken(?string $recoverToken): self
     {
         $this->recoverToken = $recoverToken;
         return $this;

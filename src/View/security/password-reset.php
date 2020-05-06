@@ -10,10 +10,10 @@
         <div class="password-form">
             <div class="inner-width">
                 <form method="post">
-                    <?php if($status){?>
+                    <?php if($succeed){?>
                         <h6>Votre mot de passe vient d'être modifié.</h6>
                     <?php } ?>
-                    <img class="logo" src="/img/logo.jpg" alt="Logo_page"/>
+                    <a href="/" ><img class="logo" src="/img/logo.jpg" alt="Logo_page"/></a>
                     <h1>Enregistrer
                         <br/>
                         son mot de passe
