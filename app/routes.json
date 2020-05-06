@@ -2,6 +2,9 @@
   "/": {
     "controller": "HomeController::index"
   },
+  "/landing/contact": {
+    "controller": "HomeController::contact"
+  },
   "/login": {
     "controller": "SecurityController::login"
   },

@@ -89,12 +89,12 @@
 <!-- Contact section -->
 <div id="contacter">
     <div class="contact_section">
-        <form method="post">
+        <form method="post" action="/landing/contact">
             <div class="inner-width">
                 <h1> Nous Contacter</h1>
-                <input type="text" class="name" placeholder="Nom de la société">
-                <input type="email" class="email" placeholder="Adresse Mail">
-                <textarea rows="1" class="message" placeholder="Message"></textarea>
+                <input type="text" name="name" class="name" placeholder="Nom de la société">
+                <input type="email" name="email" class="email" placeholder="Adresse Mail">
+                <textarea rows="1" name="message" class="message" placeholder="Message"></textarea>
                 <button>Envoyer</button>
             </div>
         </form>

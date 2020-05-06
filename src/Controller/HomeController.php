@@ -43,6 +43,6 @@ class HomeController extends Controller
                 //TODO: handle Exception
             }
         }
-        return $this->render("/landing-page.php", [], null, false);
+        $this->redirect("/");
     }
 }
