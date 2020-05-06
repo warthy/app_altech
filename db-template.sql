@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `user`
     `picture`                          varchar(255),
     `address`                       varchar(255),
     `city`                          varchar(255),
-    `zipcode`                       int,
+    `zipcode`                       varchar(10),
     `phone`                         varchar(15),
     `email`                         varchar(255) UNIQUE                                    NOT NULL,
     `recover_token`                 varchar(255) UNIQUE,

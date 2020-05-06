@@ -8,25 +8,29 @@
         </div>
     </div>
     <div class="h-right">
-        <?php if($ticket->getAdmin()){ ?>
-        <div class="state">
-            <img src="<?= $ticket->getAdmin()->getPicture() ?>" /> <?= $ticket->getAdmin()->getName() ?>
-        </div>
+        <?php if ($ticket->getAdmin()) { ?>
+            <div class="state">
+                <img src="<?= $ticket->getAdmin()->getPicture() ?>"/> <?= $ticket->getAdmin()->getName() ?>
+            </div>
         <?php } ?>
         <div class="state">
             <h2>Etat :</h2> <?= $ticket->getState() ?>
         </div>
         <div class="state-buttons">
-            <?php if (is_null($ticket->getAdminId())) { ?>
-                <a href="/admin/ticket/<?= $ticket->getId() ?>/assign" class="default-btn">
-                    S'assigner le ticket
-                </a>
-            <?php } ?>
-            <?php if (!$ticket->isClosed() && Security::hasPermission(Security::ROLE_ADMIN)) { ?>
-            <a href="/admin/ticket/<?= $ticket->getId()?>/close" class="delete-btn">
-                Fermer le ticket
-            </a>
-            <?php } ?>
+            <?php
+            if (Security::hasPermission(Security::ROLE_ADMIN)) {
+                if (is_null($ticket->getAdminId())) { ?>
+                    <a href="/ticket/<?= $ticket->getId() ?>/assign" class="default-btn">
+                        S'assigner le ticket
+                    </a>
+                <?php } ?>
+                <?php if (!$ticket->isClosed()) { ?>
+                    <a href="/ticket/<?= $ticket->getId() ?>/close" class="delete-btn">
+                        Fermer le ticket
+                    </a>
+                <?php }
+            }
+            ?>
         </div>
     </div>
 </div>
@@ -46,15 +50,15 @@
             </div>
         <?php }
     }
-    if(!$ticket->isClosed()) { ?>
-    <div>
-        <form class="msg-form" method="post" action="/(client|admin)/ticket/<?= $ticket->getId() ?>/send">
-            <textarea placeholder="Entrez votre message..." class="msg-input" name="message"></textarea>
-            <button class="submit-msg">
-                Envoyer <i class="far fa-paper-plane"></i>
-            </button>
-        </form>
-    </div>
+    if (!$ticket->isClosed() && ($user->getId() == $ticket->getClientId() || $user->getId() == $ticket->getAdminId())) { ?>
+        <div>
+            <form class="msg-form" method="post" action="/ticket/<?= $ticket->getId() ?>/send">
+                <textarea placeholder="Entrez votre message..." class="msg-input" name="message"></textarea>
+                <button class="submit-msg">
+                    Envoyer <i class="far fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
     <?php } ?>
 </div>
 <script>

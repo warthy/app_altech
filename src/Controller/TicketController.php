@@ -144,7 +144,7 @@ class TicketController extends Controller
 
                 $repo->insert($message);
 
-                $this->redirect("/admin/ticket/$id");
+                $this->redirect("/ticket/$id");
             }
             throw new Exception("Invalid id: $id");
         }

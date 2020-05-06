@@ -25,8 +25,11 @@ class SecurityController extends Controller
                 $repository = $this->getRepository(UserRepository::class);
 
                 $user = $repository->findByEmail($form->get('email'));
-                if ($user && password_verify($form->get('password'), $user->getPassword()))
+                if ($user && password_verify($form->get('password'), $user->getPassword())){
+                    $_SESSION['auth'] = $user->getId();
+                    $_SESSION['role'] = $user->getRole();
                     $this->redirect('/');
+                }
             }
             $error = true;
         }

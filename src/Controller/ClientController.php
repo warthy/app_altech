@@ -68,7 +68,7 @@ class ClientController extends Controller
                     //TODO: handle Exception
                 }
 
-                $this->redirect("/admin/client/" . $client->getId());
+                $this->redirect("/client/" . $client->getId());
             }
         }
         return $this->render('/client/form.php', [
@@ -132,7 +132,7 @@ class ClientController extends Controller
             if($client->getPicture())
                 unlink(User::PICTURE_DIR.$client->getPicture());
             $repo->remove($client);
-            $this->redirect("/admin/client");
+            $this->redirect("/client");
         }
         throw new Exception("invalid user id: $id");
     }

@@ -223,7 +223,12 @@ class User implements EntityInterface
         return "/img/user/" . ($this->picture ?? "default.svg");
     }
 
-    public function setPicture(string $picture): self
+    public function getPictureFile(): ?string
+    {
+        return ($this->picture ?? "default.svg");
+    }
+
+    public function setPictureFile(string $picture): self
     {
         $this->picture = $picture;
         return $this;
