@@ -51,10 +51,10 @@
             <?php } ?>
             <?php
             if(Security::hasPermission("ROLE_CLIENT")) { ?>
-                <a href="/client/newmeasure">
+                <a href="/newmeasure">
                     <i class="material-icons">settings_remote</i> Effectuer une mesure
                 </a>
-                <a href="/client/measures">
+                <a href="/measures">
                     <i class="material-icons">backup</i> Consulter les mesures
                 </a>
                 <a href="/ticket">

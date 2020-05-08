@@ -23,6 +23,7 @@ class MeasureController extends Controller
         /** @var CandidateRepository $candidateRepo */
         $candidateRepo = $this->getRepository(CandidateRepository::class);
 
+        
         return $this->render('/measures/index.php',[
             'title' => 'Gestion des mesures',
             'measures' => $measureRepo->findAllOfUser($this->getUser()),
@@ -77,9 +78,21 @@ class MeasureController extends Controller
         }
     }
     
+
     
     public function init(){
-        return  $this->render('/client/newmeasure.php');
+        $req = $this->getRequest();
+        $form = $req->form;
+        /** @var CandidateRepository $candidateRepo */
+        $candidateRepo = $this->getRepository(CandidateRepository::class);
+        $candidates = $candidateRepo->findAllOfUser($this->getUser());
+        
+        
+        return  $this->render('/measures/form.php',[
+            'title' => 'Nouvelle mesure',
+            'candidates' => $candidates
+        
+        ]);
     }
     
 

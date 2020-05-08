@@ -46,10 +46,10 @@
   },
 
 
-  "/client/newmeasure": {
+  "/newmeasure": {
     "controller": "MeasureController::init"
   },
-  "/client/measures":{
+  "/measures":{
     "controller": "MeasureController::index"
   },
 

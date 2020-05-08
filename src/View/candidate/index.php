@@ -27,7 +27,7 @@
         </tbody>
     </table>
 
-    <a class="default-btn" href="/client/candidate/create">
+    <a class="default-btn" href="/candidate/create">
         Ajouter un candidat
     </a>
 </div>

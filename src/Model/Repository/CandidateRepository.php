@@ -14,7 +14,7 @@ class CandidateRepository extends Repository
     const ENTITY = Candidate::class;
 
     public function findAllOfUser(User $client) {
-        $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME .' WHERE client_id = :client_id');
+        $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME .' WHERE client_id = :client_id ORDER BY lastname ASC');
         $stmt->bindValue(':client_id', $client->getId(), PDO::PARAM_INT);
         $stmt->execute();
 
