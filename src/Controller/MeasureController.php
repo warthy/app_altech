@@ -104,49 +104,51 @@ class MeasureController extends Controller
         if ($req->is(Request::METHOD_POST)){
             $form = $req->form;
             
-            if(!empty($form->get("set")) && !empty($form->get("client_id")) && !empty($form->get("candidate_id"))){
-                $repo = $this->getRepository(MeasureRepository::class);
+            if(!empty($form->get("set")) && !empty($form->get("candidate"))){
+                /** @var MeasureRepository $measureRepo */
+                $measureRepo = $this->getRepository(MeasureRepository::class);
+                /** @var CandidateRepository $candidateRepo */
+                $candidateRepo = $this->getRepository(CandidateRepository::class);
                 $set = $form->get("set");
-                $candidate = $this->getUser()->getCandidateById($form->get("candidate_id"));
+                $candidate = $candidateRepo->findById($form->get("candidate_id"));
                 $measure = (new Measure())
                     ->setCandidate($candidate)
                     ->setCandidate_id($candidate->getId())
+                    ->setClient($this->getUser())
+                    ->setClient_id($this->getUser()->getId())
                     ->setDate_measured(date('YYYY-MM-DD'));
                     
 
-                //Making the measures (also see Set entity)
-                foreach($set as $key=>$value){
-                    switch($value){
-                       case 0:
+                    if(!empty($form->get("hearthbeat"))){
                         $measure->setHeartBeat(Measure::getValue());
-                       break;
-                       case 1:
-                        $measure->setTemperature(Measure::getValue());
-                       break;
-                       case 2:
-                        $measure->setConductivity(Measure::getValue());
-                       break;
-                       case 3:
-                        $measure->setVisualUnexpectedReflex(Measure::getValue());
-                       break;
-                       case 4:
-                        $measure->setVisualExpectedReflex(Measure::getValue());
-                       break;
-                       case 5:
-                        $measure->setSoundUnexpectedReflex(Measure::getValue());
-                       break;
-                       case 6:
-                        $measure->setSoundExpectedReflex(Measure::getValue());
-                       break;
-                       case 7:
-                        $measure->setTonalityRecognition(Measure::getValue());
-                       break;
                     }
+                    if(!empty($form->get("temperature"))){
+                        $measure->setTemperature(Measure::getValue());
+                    }
+                    if(!empty($form->get("conductivity"))){
+                        $measure->setConductivity(Measure::getValue());
+                    }
+                    if(!empty($form->get("visual_unexpected_reflex"))){
+                        $measure->setVisualUnexpectedReflex(Measure::getValue());
+                    }
+                    if(!empty($form->get("visual_expected_reflex"))){
+                        $measure->setVisualExpectedReflex(Measure::getValue());
+                    }
+                    if(!empty($form->get("sound_unexpected_reflex"))){
+                        $measure->setSoundUnexpectedReflex(Measure::getValue());
+                    }
+                    if(!empty($form->get("sound_expected_reflex"))){
+                        $measure->setSoundExpectedReflex(Measure::getValue());
+                    }
+                    if(!empty($form->get("tonality_recognition"))){
+                        $measure->setTonalityRecognition(Measure::getValue());
+                    }
+                    
 
-                    $repo->insert($measure);
+                    $measureRepo->insert($measure);
                     //TODO : redirect
-                }
             }
+            
 
             //TODO : return
         }

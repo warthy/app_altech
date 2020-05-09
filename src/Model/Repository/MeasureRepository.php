@@ -70,7 +70,8 @@ class MeasureRepository extends Repository
             'sound_expected_reflex' => $measure->getSoundExpectedReflex(),
             'tonality_recognition' => $measure->getTonalityRecognition(),
             'date_measured' => $measure->getDate_measured(),
-            'candidate_id' => $measure->getCandidate()->getId()
+            'candidate_id' => $measure->getCandidate()->getId(),
+            'client_id' => $measure->getClient_id()
         ]);
         
         $measure->setId($this->pdo->lastInsertId());
