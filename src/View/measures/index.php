@@ -1,4 +1,13 @@
 <div class="card">
+    <div class="searchwrap">
+            <div class="search">
+                <input type="search" class="searchTerm" placeholder="What are you looking for?">
+                <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+    </div>
+
     <table class="data-table">
         <thead>
             <th>ID</th>
@@ -7,6 +16,7 @@
             <th>Action</th>
         </thead>
         <tbody>
+
         <?php foreach($measures as $measure){ ?>
             <tr>
                 <td><?= $measure->getId() ?></td>

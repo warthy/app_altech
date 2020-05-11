@@ -49,6 +49,9 @@
   "/newmeasure": {
     "controller": "MeasureController::init"
   },
+  "/newmeasure/new":{
+    "controller": "MeasureController::create"
+  },
   "/measures":{
     "controller": "MeasureController::index"
   },

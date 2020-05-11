@@ -54,8 +54,8 @@ class MeasureRepository extends Repository
     {
         $stmt = $this->pdo->prepare(
             'INSERT INTO' . self::TABLE_NAME . 
-            '(heartbeat, temperature, conductivity, visual_unexpected_reflex, visual_expected_reflex, sound_unexpected_reflex, sound_expected_reflex, tonality_recognition, date_measured, candidate_id' .
-            'VALUES (:heartbeat, :temperature, :conductivity, :visual_unexpected_reflex, :visual_expected_reflex, :sound_unexpected_reflex, :sound_expected_reflex, :tonality_recognition, :date_measured, :candidate_id)'
+            '(heartbeat, temperature, conductivity, visual_unexpected_reflex, visual_expected_reflex, sound_unexpected_reflex, sound_expected_reflex, tonality_recognition, date_measured, candidate_id, client_id' .
+            'VALUES (:heartbeat, :temperature, :conductivity, :visual_unexpected_reflex, :visual_expected_reflex, :sound_unexpected_reflex, :sound_expected_reflex, :tonality_recognition, :date_measured, :candidate_id, :client_id)'
         );
 
         

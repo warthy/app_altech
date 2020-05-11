@@ -1,4 +1,4 @@
-<form method='post' enctype="multipart/form-data" action='measure.php'>
+<form method='post' enctype="multipart/form-data" action="/newmeasure/new">
     
     <fieldset>
     <legend><h2>Sélectionnez le candidat :</h2></legend>
@@ -63,8 +63,6 @@
 
   </fieldset>
 
-  <button class="submit-btn">
-      Lancer le test
-  </button>
+  <button class="submit-btn">Lancer le test</button>
 
 </form>

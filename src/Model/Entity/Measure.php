@@ -183,7 +183,7 @@ class Measure implements EntityInterface
     /**
      * Get the value of the measure
      */
-    public function getValue(): ?int
+    public static function getValue(): ?float
     {
         return 0;
     }

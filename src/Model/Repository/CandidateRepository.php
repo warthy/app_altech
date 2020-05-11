@@ -21,6 +21,20 @@ class CandidateRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
     }
 
+    
+    
+    public function findByName(String $name){
+        $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME ." WHERE lastname = :name 
+                                                                            OR firstname = :name 
+                                                                            OR CONCAT(CONCAT(firstname, ' '),lastname) = :name 
+                                                                            OR CONCAT(CONCAT(lastname, ' '),firstname) = :name 
+                                                                            ORDER BY lastname ASC");
+        $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
+    }
+
     /**
      * @param Candidate $candidate
      * @return void
