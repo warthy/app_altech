@@ -14,9 +14,27 @@ class HomeController extends Controller
     public function index()
     {
         $user = $this->getUser();
-        return $user ?
-            $this->render("/dashboard/index.php", []) :
-            $this->render("/landing-page.php", [], null, false);
+        if ($user){
+            if(Security::hasPermission(Security::ROLE_ADMIN)){
+                return  $this->render("/dashboard/admin.php", [
+                    "title" => "Dashboard admin",
+                    "clients" => 12,
+                    "candidates" => 45,
+                    "tests" => 1000,
+                    "admins" => 7
+                ]);
+            }
+
+            return  $this->render("/dashboard/client.php", [
+                "title" => "Dashboard client",
+                "candidates" => 45,
+                "tests" => 1000,
+                "score" => 15.20
+            ]);
+        }
+
+
+        return $this->render("/landing-page.php", [], null, false);
     }
 
     public function contact()

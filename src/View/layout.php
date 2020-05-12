@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/css/form.css" />
 
     <link rel="stylesheet" type="text/css" href="/css/faq.css" />
+    <link rel="stylesheet" type="text/css" href="/css/dashpanel.css" />
     <link rel="stylesheet" type="text/css" href="/css/profile.css" />
     <link rel="stylesheet" type="text/css" href="/css/ticket.css" />
     <link rel="stylesheet" type="text/css" href="/css/candidate.css" />

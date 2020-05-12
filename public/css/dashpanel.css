@@ -1,0 +1,28 @@
+.banner {
+    display: flex;
+    justify-content: space-around;
+    height: 150px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.banner-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-item i {
+    color: #E5B03C;
+    font-size: 60px;
+}
+
+.banner-item h3 {
+    color: #af822d;
+    margin-top: 10px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+}
