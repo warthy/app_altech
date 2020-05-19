@@ -53,25 +53,45 @@ class MeasureRepository extends Repository
     public function insert($measure): Measure
     {
         $stmt = $this->pdo->prepare(
-            'INSERT INTO' . self::TABLE_NAME . 
-            '(heartbeat, temperature, conductivity, visual_unexpected_reflex, visual_expected_reflex, sound_unexpected_reflex, sound_expected_reflex, tonality_recognition, date_measured, candidate_id, client_id' .
-            'VALUES (:heartbeat, :temperature, :conductivity, :visual_unexpected_reflex, :visual_expected_reflex, :sound_unexpected_reflex, :sound_expected_reflex, :tonality_recognition, :date_measured, :candidate_id, :client_id)'
+            'INSERT INTO ' . self::TABLE_NAME . 
+            ' (heartbeat, 
+                temperature, 
+                conductivity, 
+                visual_unexpected_reflex, 
+                visual_expected_reflex, 
+                sound_unexpected_reflex, 
+                sound_expected_reflex, 
+                tonality_recognition, 
+                date_measured, 
+                candidate_id, 
+                client_id)' .
+            ' VALUES (:heartbeat, 
+                        :temperature, 
+                        :conductivity, 
+                        :visual_unexpected_reflex, 
+                        :visual_expected_reflex, 
+                        :sound_unexpected_reflex, 
+                        :sound_expected_reflex, 
+                        :tonality_recognition, 
+                        CURRENT_TIMESTAMP, 
+                        :candidate_id, 
+                        :client_id)'
         );
 
         
 
         $stmt->execute([
-            'heartbeat' => $measure->getHeartBeat(),
-            'temperature' => $measure->getTemperature(),
-            'conductivity' => $measure->getConductivity(),
-            'visual_unexpected_reflex' => $measure->getVisualUnexpectedReflex(),
-            'visual_expected_reflex' => $measure->getVisualExpectedReflex(),
-            'sound_unexpected_reflex' => $measure->getSoundUnexpectedReflex(),
-            'sound_expected_reflex' => $measure->getSoundExpectedReflex(),
-            'tonality_recognition' => $measure->getTonalityRecognition(),
-            'date_measured' => $measure->getDate_measured(),
-            'candidate_id' => $measure->getCandidate()->getId(),
-            'client_id' => $measure->getClient_id()
+            'heartbeat' => htmlspecialchars($measure->getHeartBeat()),
+            'temperature' => htmlspecialchars($measure->getTemperature()),
+            'conductivity' => htmlspecialchars($measure->getConductivity()),
+            'visual_unexpected_reflex' => htmlspecialchars($measure->getVisualUnexpectedReflex()),
+            'visual_expected_reflex' => htmlspecialchars($measure->getVisualExpectedReflex()),
+            'sound_unexpected_reflex' => htmlspecialchars($measure->getSoundUnexpectedReflex()),
+            'sound_expected_reflex' => htmlspecialchars($measure->getSoundExpectedReflex()),
+            'tonality_recognition' => htmlspecialchars($measure->getTonalityRecognition()),
+            //'date_measured' => 'STR_TO_DATE(' . htmlspecialchars($measure->getDate_measured()) . ')',
+            'candidate_id' => htmlspecialchars($measure->getCandidate()->getId()),
+            'client_id' => htmlspecialchars($measure->getClient_id())
         ]);
         
         $measure->setId($this->pdo->lastInsertId());

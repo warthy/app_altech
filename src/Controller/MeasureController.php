@@ -103,24 +103,27 @@ class MeasureController extends Controller
         if ($req->is(Request::METHOD_POST)){
             $form = $req->form;
 
-            if(!empty($form->get("candidate"))){
+            if(!empty($form->get("candidate") && !empty($form->get("set")))){
                 /** @var MeasureRepository $measureRepo */
                 $measureRepo = $this->getRepository(MeasureRepository::class);
                 /** @var CandidateRepository $candidateRepo */
                 $candidateRepo = $this->getRepository(CandidateRepository::class);
 
                 $candidate = $candidateRepo->findById($form->get("candidate"));
+                $set = $form->get("set");
+
                 $measure = (new Measure())
                     ->setCandidate($candidate)
                     ->setCandidate_id($candidate->getId())
                     ->setClient($this->getUser())
                     ->setClient_id($this->getUser()->getId())
-                    ->setDate_measured(date('YYYY-MM-DD à h:i'));
+                    ->setDate_measured(date("Y-m-d H:i:s"));
                     
                     
-                    if(!empty($form->get("hearthbeat"))){
-                        $measure->setHeartBeat(0);
+                    if(in_array("heartbeat", $set) && !empty($form->get("results-value"))){
+                        $measure->setHeartBeat((float)$form->get("results-value"));
                     }
+                    /*
                     if(!empty($form->get("temperature"))){
                         $measure->setTemperature(0);
                     }
@@ -142,17 +145,19 @@ class MeasureController extends Controller
                     if(!empty($form->get("tonality_recognition"))){
                         $measure->setTonalityRecognition(Measure::getValue());
                     }
+                    */
                     
-                    /*
+                    
                     $measureRepo->insert($measure);
                     $this->redirect('/measures/measure/'.$measure->getId());
-                    */
+                    
             }
             
         }
         return $this->render('/measures/measure.php', [
             "title" => "Mesure : " . $candidate->getLastName(). ' ' . $candidate->getFirstName(),
             "candidate" => $candidate,
+            "set" => $set,
             "measure" => new Measure()
         ]);
     }     

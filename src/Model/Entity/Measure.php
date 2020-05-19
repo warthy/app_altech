@@ -49,7 +49,7 @@ class Measure implements EntityInterface
 
     public function setHeartBeat(float $heartbeat): self
     {
-        $this->hearbeat = $heartbeat;
+        $this->heartbeat = $heartbeat;
         return $this;
     }
 
