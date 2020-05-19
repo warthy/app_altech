@@ -85,7 +85,7 @@ form .form-group {
 
 
 /*style wrapper to give some space*/
-.wrapper {
+.form-wrapper {
     position: relative;
   margin-bottom: 1rem;
   margin-top: 1rem;
@@ -93,7 +93,7 @@ form .form-group {
 }
 
 /*style label to give some more space*/
-.wrapper label {
+.form-wrapper label {
   display: block;
   padding: 12px 0px 12px 69px;
   font-size: large;
@@ -101,7 +101,7 @@ form .form-group {
 }
 
 /*style and hide original checkbox*/
-.wrapper input {
+.form-wrapper input {
   height: 40px;
   left: 0;
   opacity: 0;
@@ -111,7 +111,7 @@ form .form-group {
 }
 
 /*position new box*/
-.wrapper input + label::before {
+.form-wrapper input + label::before {
   border: 2px solid;
   content: "";
   height: 40px;
@@ -122,7 +122,7 @@ form .form-group {
 }
 
 /*create check symbol with pseudo element*/
-.wrapper input + label::after {
+.form-wrapper input + label::after {
   content: "";
   border: 4px solid;
   border-left: 0;
@@ -139,13 +139,13 @@ form .form-group {
 }
 
 /*reveal check for 'on' state*/
-.wrapper input:checked + label::after {
+.form-wrapper input:checked + label::after {
   opacity: 1;
   color: #ffbf47;
 }
 
 /*focus styles—commented out for the tutorial, but you’ll need to add them for proper use*/
-.wrapper input:focus + label::before {
+.form-wrapper input:focus + label::before {
 
   box-shadow: 0 0 0 3px #ffbf47;  
 outline: 3px solid transparent;

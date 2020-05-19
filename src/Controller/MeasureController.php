@@ -120,33 +120,31 @@ class MeasureController extends Controller
                     ->setDate_measured(date("Y-m-d H:i:s"));
                     
                     
-                    if(in_array("heartbeat", $set) && !empty($form->get("results-value"))){
-                        $measure->setHeartBeat((float)$form->get("results-value"));
+                    if(in_array("heartbeat", $set) && !empty($form->get("heartbeat-results-value"))){
+                        $measure->setHeartBeat((float)$form->get("heartbeat-results-value"));
                     }
-                    /*
-                    if(!empty($form->get("temperature"))){
-                        $measure->setTemperature(0);
+                    if(in_array("temperature", $set) && !empty($form->get("temperature-results-value"))){
+                        $measure->setTemperature((float)$form->get("temperature-results-value"));
                     }
-                    if(!empty($form->get("conductivity"))){
-                        $measure->setConductivity(Measure::getValue());
+                    if(in_array("conductivity", $set) && !empty($form->get("conductivity-results-value"))){
+                        $measure->setConductivity((float)$form->get("conductivity-results-value"));
                     }
-                    if(!empty($form->get("visual_unexpected_reflex"))){
-                        $measure->setVisualUnexpectedReflex(Measure::getValue());
+                    if(in_array("visual_unexpected_reflex", $set) && !empty($form->get("visual_unexpected_reflex-results-value"))){
+                        $measure->setVisualUnexpectedReflex((float)$form->get("visual_unexpected_reflex-results-value"));
                     }
-                    if(!empty($form->get("visual_expected_reflex"))){
-                        $measure->setVisualExpectedReflex(Measure::getValue());
+                    if(in_array("visual_expected_reflex", $set) && !empty($form->get("visual_expected_reflex-results-value"))){
+                        $measure->setVisualExpectedReflex((float)$form->get("visual_expected_reflex-results-value"));
                     }
-                    if(!empty($form->get("sound_unexpected_reflex"))){
-                        $measure->setSoundUnexpectedReflex(Measure::getValue());
+                    if(in_array("sound_unexpected_reflex", $set) && !empty($form->get("sound_unexpected_reflex-results-value"))){
+                        $measure->setSoundUnexpectedReflex((float)$form->get("sound_unexpected_reflex-results-value"));
                     }
-                    if(!empty($form->get("sound_expected_reflex"))){
-                        $measure->setSoundExpectedReflex(Measure::getValue());
+                    if(in_array("sound_expected_reflex", $set) && !empty($form->get("sound_expected_reflex-results-value"))){
+                        $measure->setSoundExpectedReflex((float)$form->get("sound_expected_reflex-results-value"));
                     }
-                    if(!empty($form->get("tonality_recognition"))){
-                        $measure->setTonalityRecognition(Measure::getValue());
+                    if(in_array("tonality_recognition", $set) && !empty($form->get("tonality_recognition-results-value"))){
+                        $measure->setTonalityRecognition((float)$form->get("tonality_recognition-results-value"));
                     }
-                    */
-                    
+                                        
                     
                     $measureRepo->insert($measure);
                     $this->redirect('/measures/measure/'.$measure->getId());
