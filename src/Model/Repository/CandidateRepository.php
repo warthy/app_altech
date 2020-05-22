@@ -14,11 +14,22 @@ class CandidateRepository extends Repository
     const ENTITY = Candidate::class;
 
     public function findAllOfUser(User $client) {
-        $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME .' WHERE client_id = :client_id');
+        $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME .' WHERE client_id = :client_id ORDER BY lastname ASC');
         $stmt->bindValue(':client_id', $client->getId(), PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
+    }
+
+    
+    
+    public function findByName(String $name){
+        $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME ." WHERE :name IN (lastname, firstname, CONCAT(CONCAT(firstname, ' '),lastname), CONCAT(CONCAT(lastname, ' '),firstname)) 
+                                                                            ORDER BY lastname ASC");
+        $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchObject(self::ENTITY);
     }
 
     /**

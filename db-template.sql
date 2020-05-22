@@ -76,7 +76,8 @@ CREATE TABLE IF NOT EXISTS `measure`
     `sound_expected_reflex`    float(2),
     `tonality_recognition`     float(2),
     `date_measured`            datetime,
-    `candidate_id`             int NOT NULL
+    `candidate_id`             int NOT NULL,
+    `client_id`                int NOT NULL
 );
 
 

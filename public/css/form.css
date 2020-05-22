@@ -17,7 +17,7 @@ form .form-group {
     margin: 5px 20px;
 }
 
-.form-group label {
+.form-group .checkbox {
     color: #E5B03C;
     text-transform: uppercase;
     font-size: 15px;
@@ -47,7 +47,7 @@ form .form-group {
     margin: 20px 10px;
     text-align: center;
     color: #fff;
-    background-color: #2b862b;
+    background-color: #5CAB7D;
     border-radius: 5px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     padding: 0.75rem 30px;
@@ -56,7 +56,8 @@ form .form-group {
 
 .submit-btn:hover {
     cursor: pointer;
-    background-color: #329b32;
+    background-color: rgb(119, 143, 77);
+    ;
 }
 
 .delete-button {
@@ -81,3 +82,82 @@ form .form-group {
     display: flex;
     justify-content: center;
 }
+
+
+/*style wrapper to give some space*/
+.form-wrapper {
+    position: relative;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
+/*style label to give some more space*/
+.form-wrapper label {
+  display: block;
+  padding: 12px 0px 12px 69px;
+  font-size: large;
+  text-transform: uppercase;
+}
+
+/*style and hide original checkbox*/
+.form-wrapper input {
+  height: 40px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 40px;
+}
+
+/*position new box*/
+.form-wrapper input + label::before {
+  border: 2px solid;
+  content: "";
+  height: 40px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 40px;
+}
+
+/*create check symbol with pseudo element*/
+.form-wrapper input + label::after {
+  content: "";
+  border: 4px solid;
+  border-left: 0;
+  border-top: 0;
+  height: 20px;
+  left: 14px;
+  opacity: 0;
+  position: absolute;
+  top: 6px;
+  transform: rotate(45deg);
+  transition: opacity 0.2s ease-in-out;
+  width: 12px;
+  color: #ffbf47;
+}
+
+/*reveal check for 'on' state*/
+.form-wrapper input:checked + label::after {
+  opacity: 1;
+  color: #ffbf47;
+}
+
+/*focus styles—commented out for the tutorial, but you’ll need to add them for proper use*/
+.form-wrapper input:focus + label::before {
+
+  box-shadow: 0 0 0 3px #ffbf47;  
+outline: 3px solid transparent;
+}
+
+.wrapper-firsthalf{
+    position: relative;
+    float: left;
+}
+
+.wrapper-secondhalf{
+    position: relative;
+    float: right;
+}
+

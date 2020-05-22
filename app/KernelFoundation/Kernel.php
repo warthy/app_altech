@@ -59,11 +59,13 @@ class Kernel
 
     private function connectDatabase()
     {
+        
         $this->database = Database::getInstance(
-            $_ENV["DB_HOST"],
-            $_ENV["DB_DATABASE"],
-            $_ENV["DB_USERNAME"],
-            $_ENV["DB_PASSWORD"]
+            getenv("DB_HOST"),
+            getenv("DB_DATABASE"),
+            getenv("DB_USERNAME"),
+            ''
         );
+        
     }
 }

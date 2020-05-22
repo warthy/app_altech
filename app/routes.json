@@ -46,8 +46,28 @@
   },
 
 
-  "/client/measure": {
+  "/newmeasure": {
     "controller": "MeasureController::init"
+  },
+  "/newmeasure/new":{
+    "controller": "MeasureController::create"
+  },
+  "/measures":{
+    "controller": "MeasureController::index"
+  },
+
+
+  "/measures/candidate/:id": {
+    "controller": "MeasureController::candidatePanel",
+    "requirements": {
+      "id": "\\d+"
+    }
+  },
+  "/measures/measure/:id": {
+    "controller": "MeasureController::view",
+    "requirements": {
+      "id": "\\d+"
+    }
   },
 
 

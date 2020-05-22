@@ -14,7 +14,7 @@ class Candidate implements EntityInterface
     private $weight;
     private $sex;
     private $birthdate;
-    private $cgu_pprovement;
+    private $cgu_approvement;
 
 
     private $client_id;
@@ -109,7 +109,7 @@ class Candidate implements EntityInterface
     }
 
    
-    public function getClientId(): User
+    public function getClientId(): int
     {
         return $this->client_id;
     }

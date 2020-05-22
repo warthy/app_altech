@@ -2,6 +2,8 @@
 namespace Altech\Model\Entity;
 
 use App\KernelFoundation\Security;
+use Altech\Model\Entity\Candidate;
+
 
 class User implements EntityInterface
 {
@@ -27,6 +29,8 @@ class User implements EntityInterface
     private $legalrepresentative_phone;
 
     private $cgu_approvement;
+
+
 
     public function getId(): ?int
     {

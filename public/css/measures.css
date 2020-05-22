@@ -1,0 +1,115 @@
+.next-test {
+    position: relative;
+    width: 252px;
+    height: 43px;
+    left: 720px;
+    top: 0px;
+    
+
+
+    display: inline-block;
+    border-radius: 8px;
+    background-color: #E5B03C;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-family: 'Alegreya Sans', Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    width: 250px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  .next-test span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .next-test span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .next-test:hover span {
+    padding-right: 25px;
+  }
+
+  .next-test:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+  .make-test {
+    position: relative;
+    width: 179px;
+    height: 259px;
+    left: 611px;
+    bottom: 60px;
+  
+    background-repeat: no-repeat;
+    background-position: 15px 7px ;
+    background-size: 27px 27px;
+    padding-left: 36px;
+  
+  
+    display: inline-flex;
+    background-color: #FFFFFF;
+    align-items: center;
+    box-shadow: 0 4px 15px 0 rgba(0,0,0,0.1);
+    border: 2px solid #E5B03C;
+    border-radius: 30px;
+    height: 45px;
+    padding: 0 60px;
+    color: #808782;
+    font-family: 'Alegreya Sans', Arial, Helvetica, sans-serif;
+    font-style: bold;
+    font-size: 15px;
+    transition: transform .3s, box-shadow .3s;
+    will-change: transform;
+  }
+  
+  .make-test:hover {
+      box-shadow: 0 4px 17px rgba(0,0,0,0.2);
+      transform: translate3d(0, -2px, 0);
+    }
+  .make-test:active {
+      box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+      transform: translate3d(0, 1px, 0);
+    }
+
+#heartbeat-test
+{
+  background-image: url(../img/HeartIcon.png);
+}
+
+#temperature-test
+{
+  background-image: url(../img/TemperatureIcon.png);
+}
+
+#reflex-test
+{
+  background-image: url(../img/ReflexIcon.png);
+}
+
+#conductivity-test
+{
+  background-image: url(../img/ConductivityIcon.png);
+}
+
+#tonality-test
+{
+  background-image: url(../img/TonalityIcon.png);
+}
+
+.result-textbox
+{
+  display: none;
+}

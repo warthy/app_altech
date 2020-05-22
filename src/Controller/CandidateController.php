@@ -6,9 +6,12 @@ use Altech\Model\Repository\CandidateRepository;
 use App\Component\Controller;
 use App\KernelFoundation\Request;
 use Exception;
+use PDO;
 
 class CandidateController extends Controller
 {
+
+    
     public function index(){
         /** @var CandidateRepository $repo */
         $repo = $this->getRepository(CandidateRepository::class);
@@ -18,6 +21,12 @@ class CandidateController extends Controller
             'candidates' => $repo->findAllOfUser($this->getUser()),
         ]);
     }
+
+    public function findByName(string $name){
+        // TODO :implement findByEmail function
+    }
+
+    
 
     public function create(){
         $req = $this->getRequest();
