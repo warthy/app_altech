@@ -3,7 +3,7 @@
     width: 252px;
     height: 43px;
     left: 720px;
-    top: 30px;
+    top: 0px;
     
 
 
@@ -48,9 +48,10 @@
 
   .make-test {
     position: relative;
-    width: 479px;
+    width: 179px;
     height: 259px;
-    left: 271px;
+    left: 611px;
+    bottom: 60px;
   
     background-repeat: no-repeat;
     background-position: 15px 7px ;
@@ -69,7 +70,7 @@
     color: #808782;
     font-family: 'Alegreya Sans', Arial, Helvetica, sans-serif;
     font-style: bold;
-    font-size: 25px;
+    font-size: 15px;
     transition: transform .3s, box-shadow .3s;
     will-change: transform;
   }
@@ -83,7 +84,7 @@
       transform: translate3d(0, 1px, 0);
     }
 
-  #heartbeat-test
+#heartbeat-test
 {
   background-image: url(../img/HeartIcon.png);
 }
@@ -106,4 +107,9 @@
 #tonality-test
 {
   background-image: url(../img/TonalityIcon.png);
+}
+
+.result-textbox
+{
+  display: none;
 }

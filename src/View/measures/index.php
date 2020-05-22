@@ -1,10 +1,13 @@
 <div class="card">
     <div class="searchwrap">
             <div class="search">
-                <input type="search" class="searchTerm" placeholder="What are you looking for?">
-                <button type="submit" class="searchButton">
-                    <i class="fa fa-search"></i>
-                </button>
+                <form name="search-measure" method="POST">
+                    <input type="text" name="name" class="searchTerm" placeholder="Chercher un candidat">
+                    <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+                
             </div>
     </div>
 

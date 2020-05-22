@@ -64,7 +64,7 @@ class MeasureRepository extends Repository
                 tonality_recognition, 
                 date_measured, 
                 candidate_id, 
-                client_id)' .
+                client_id )' .
             ' VALUES (:heartbeat, 
                         :temperature, 
                         :conductivity, 
@@ -73,9 +73,9 @@ class MeasureRepository extends Repository
                         :sound_unexpected_reflex, 
                         :sound_expected_reflex, 
                         :tonality_recognition, 
-                        CURRENT_TIMESTAMP, 
+                        CURRENT_TIMESTAMP(), 
                         :candidate_id, 
-                        :client_id)'
+                        :client_id )'
         );
 
         
@@ -89,7 +89,6 @@ class MeasureRepository extends Repository
             'sound_unexpected_reflex' => htmlspecialchars($measure->getSoundUnexpectedReflex()),
             'sound_expected_reflex' => htmlspecialchars($measure->getSoundExpectedReflex()),
             'tonality_recognition' => htmlspecialchars($measure->getTonalityRecognition()),
-            //'date_measured' => 'STR_TO_DATE(' . htmlspecialchars($measure->getDate_measured()) . ')',
             'candidate_id' => htmlspecialchars($measure->getCandidate()->getId()),
             'client_id' => htmlspecialchars($measure->getClient_id())
         ]);

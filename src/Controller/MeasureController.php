@@ -18,15 +18,22 @@ use Exception;
 class MeasureController extends Controller
 {
     public function index(){
+        $req = $this->getRequest();
+        $form = $req->form;
         /** @var MeasureRepository $measureRepo */
         $measureRepo = $this->getRepository(MeasureRepository::class);
         /** @var CandidateRepository $candidateRepo */
         $candidateRepo = $this->getRepository(CandidateRepository::class);
 
+        if(!empty($form->get("name"))){
+            /** @var Candidate $candidate */
+            $candidate = $candidateRepo->findByName($form->get("name"));
+            $candidate_id = $candidate->getId();
+        }
         
         return $this->render('/measures/index.php',[
             'title' => 'Gestion des mesures',
-            'measures' => $measureRepo->findAllOfUser($this->getUser()),
+            'measures' => !empty($form->get("name")) ? $measureRepo->findAllByCandidateId($candidate_id) : $measureRepo->findAllOfUser($this->getUser()),
             'candidateRepo' => $candidateRepo
         ]);
     }
@@ -121,7 +128,7 @@ class MeasureController extends Controller
                     
                     
                     if(in_array("heartbeat", $set) && !empty($form->get("heartbeat-results-value"))){
-                        $measure->setHeartBeat((float)$form->get("heartbeat-results-value"));
+                        $measure->setHeartBeat($form->get("heartbeat-results-value"));
                     }
                     if(in_array("temperature", $set) && !empty($form->get("temperature-results-value"))){
                         $measure->setTemperature((float)$form->get("temperature-results-value"));
@@ -146,8 +153,8 @@ class MeasureController extends Controller
                     }
                                         
                     
-                    $measureRepo->insert($measure);
-                    $this->redirect('/measures/measure/'.$measure->getId());
+                    //$measureRepo->insert($measure);
+                    //$this->redirect('/measures/measure/'.$measure->getId());
                     
             }
             

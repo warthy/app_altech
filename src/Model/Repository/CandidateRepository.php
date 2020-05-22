@@ -24,15 +24,12 @@ class CandidateRepository extends Repository
     
     
     public function findByName(String $name){
-        $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME ." WHERE lastname = :name 
-                                                                            OR firstname = :name 
-                                                                            OR CONCAT(CONCAT(firstname, ' '),lastname) = :name 
-                                                                            OR CONCAT(CONCAT(lastname, ' '),firstname) = :name 
+        $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME ." WHERE :name IN (lastname, firstname, CONCAT(CONCAT(firstname, ' '),lastname), CONCAT(CONCAT(lastname, ' '),firstname)) 
                                                                             ORDER BY lastname ASC");
         $stmt->bindValue(':name', $name, PDO::PARAM_STR);
         $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
+        return $stmt->fetchObject(self::ENTITY);
     }
 
     /**
