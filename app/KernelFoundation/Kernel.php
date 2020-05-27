@@ -27,7 +27,7 @@ class Kernel
 
     public function handleException(Throwable $e)
     {
-        die(var_dump($e->getLine()));
+        die(var_dump($e->getFile(). ' | l.'.$e->getLine() . ': ' .$e->getMessage()));
     }
 
     private function loadConfig()
@@ -64,7 +64,7 @@ class Kernel
             getenv("DB_HOST"),
             getenv("DB_DATABASE"),
             getenv("DB_USERNAME"),
-            ''
+            getenv("DB_PASSWORD")
         );
         
     }

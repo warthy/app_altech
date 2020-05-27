@@ -26,8 +26,8 @@ class Database
             $this->PDOInstance = new PDO(
                 "mysql:dbname=$database;host=$host",
                 $username,
-                $password,
-                [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
+                $password
+                //[PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
             );
             $this->PDOInstance->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             $this->PDOInstance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

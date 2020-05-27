@@ -13,7 +13,7 @@ $request  = Request::createFromGlobals();
 $kernel = new Kernel();
 
 // Remove comment when deploying to prod
-//set_exception_handler([$kernel, 'handleException']);
+set_exception_handler([$kernel, 'handleException']);
 
 $response = $kernel->handle($request);
 $response->send();
