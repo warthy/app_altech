@@ -30,24 +30,7 @@ abstract class Repository
         return $stmt->fetchAll(PDO::FETCH_CLASS, static::ENTITY);
     }
 
-    public function findPageCount(int $size = self::DEFAULT_SIZE): int
-    {
-        $stmt = $this->pdo->prepare('SELECT COUNT(*)/(:size) as "count" FROM ' . static::TABLE_NAME);
-        $stmt->bindValue(':size', $size, PDO::PARAM_INT);
-        $stmt->execute();
 
-        return $stmt->fetch()["count"];
-    }
-
-    public function findAllPaginated(int $page, int $size = self::DEFAULT_SIZE): array
-    {
-        $stmt = $this->pdo->prepare('SELECT * FROM ' . static::TABLE_NAME . ' LIMIT :offset, :size');
-        $stmt->bindValue(':offset', $page * $size, PDO::PARAM_INT);
-        $stmt->bindValue(':size', $size, PDO::PARAM_INT);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_CLASS, static::ENTITY);
-    }
 
     public function remove(EntityInterface $entity)
     {

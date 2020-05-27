@@ -55,8 +55,6 @@
   "/measures":{
     "controller": "MeasureController::index"
   },
-
-
   "/measures/candidate/:id": {
     "controller": "MeasureController::candidatePanel",
     "requirements": {

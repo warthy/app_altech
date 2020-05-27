@@ -49,7 +49,7 @@ class Request
         $session = new ParameterBag($_SESSION);
         $files = new ParameterBag($_FILES);
 
-        $uri = rtrim($_SERVER["REQUEST_URI"], '/');
+        $uri = explode("?", rtrim($_SERVER["REQUEST_URI"], '/'))[0];
         if ($uri == "") {
             $uri = "/";
         }

@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `user`
     `legalrepresentative_email`     varchar(255),
     `legalrepresentative_phone`     varchar(15),
     `name`                          varchar(255),
-    `picture`                          varchar(255),
+    `picture`                       varchar(255),
     `address`                       varchar(255),
     `city`                          varchar(255),
     `zipcode`                       varchar(10),
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `ticket`
     `open_at`     datetime,
     `subject`     varchar(255) NOT NULL,
     `description` text         NOT NULL,
-    `admin_id`    int DEFAULT NULL,
+    `admin_id`    int     DEFAULT NULL,
     `client_id`   int          NOT NULL
 );
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `candidate`
     `sex`             boolean,
     `birthdate`       datetime,
     `tests_nb`        int,
-    `user_id`         int                 NOT NULL,
+    `client_id`       int                 NOT NULL,
     `cgu_approvement` varchar(255)        NOT NULL
 );
 
@@ -94,7 +94,7 @@ ALTER TABLE `ticket_message`
     ADD FOREIGN KEY (`author_id`) REFERENCES `user` (`id`);
 
 ALTER TABLE `candidate`
-    ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+    ADD FOREIGN KEY (`client_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `measure`
     ADD FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`) ON DELETE CASCADE;

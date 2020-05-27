@@ -14,11 +14,16 @@ class ClientController extends Controller
 {
     public function index()
     {
+        $filter = $this->getRequest()->get->get("search") ?? "";
+        $page = $this->getRequest()->get->get("page") ?? 0;
+
         /** @var UserRepository $repo */
         $repo = $this->getRepository(UserRepository::class);
-
         return $this->render('/client/index.php', [
-            'clients' => $repo->findAllByRole(Security::ROLE_CLIENT)
+            'clients' => $repo->findClientsWithFilter($filter, $page),
+            'page' => $page + 1,
+            'count' => $repo->findPageCountWithFilter($filter) + 1,
+            'filter' => $filter
         ]);
     }
 
@@ -103,10 +108,10 @@ class ClientController extends Controller
                         ->setEmail($form->get("email"));
 
 
-                    if($file["size"] > 0){
+                    if ($file["size"] > 0) {
                         //If there was a previous file we delete it
-                        if($client->getCguApprovement()){
-                            unlink(User::UPLOAD_DIR.$client->getCguApprovement());
+                        if ($client->getCguApprovement()) {
+                            unlink(User::UPLOAD_DIR . $client->getCguApprovement());
                         }
                         $client->setCguApprovement(self::checkAndUploadFile($file));
                     }
@@ -130,8 +135,8 @@ class ClientController extends Controller
 
         // We check that the user exists and that he isn't trying to delete his account by himself
         if ($client) {
-            if($client->getPicture())
-                unlink(User::PICTURE_DIR.$client->getPicture());
+            if ($client->getPicture())
+                unlink(User::PICTURE_DIR . $client->getPicture());
             $repo->remove($client);
             $this->redirect("/client");
         }
@@ -141,13 +146,13 @@ class ClientController extends Controller
     public static function checkAndUploadFile($file): string
     {
         $metadata = pathinfo($file['name']);
-        if (in_array($metadata['extension'], ['pdf', 'doc', 'docx', 'jpeg', 'png'])) {
+        if (in_array(strtolower($metadata['extension']), ['pdf', 'doc', 'docx', 'jpeg', 'png', 'jpg'])) {
             $random = bin2hex(random_bytes(20)) . '.' . $metadata['extension'];
             if (move_uploaded_file($file['tmp_name'], User::UPLOAD_DIR . $random)) {
                 return $random;
-            } else {
-                throw new Exception("Erreur d'upload du fichier");
             }
+            throw new Exception("Erreur d'upload du fichier");
         }
+        throw new Exception("Fichier invalide");
     }
 }

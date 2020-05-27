@@ -3,6 +3,7 @@
 
 namespace Altech\Controller;
 
+use Altech\Model\Entity\Candidate;
 use Altech\Model\Repository;
 use Altech\Model\Entity\Measure;
 use Altech\Model\Repository\CandidateRepository;
@@ -60,6 +61,7 @@ class MeasureController extends Controller
                 ]);
             }
         }
+        throw new Exception("Invalid request");
     }
 
     public function view($id){

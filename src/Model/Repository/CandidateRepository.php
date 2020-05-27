@@ -21,7 +21,28 @@ class CandidateRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
     }
 
-    
+    public function findPageCountWithFilter(int $client, string $filter, int $size = self::DEFAULT_SIZE): int
+    {
+        $stmt = $this->pdo->prepare('SELECT COUNT(*)/(:size) as "count" FROM ' . self::TABLE_NAME . ' WHERE CONCAT(firstname," ", lastname) LIKE :filter AND client_id = :client');
+        $stmt->bindValue(':size', $size, PDO::PARAM_INT);
+        $stmt->bindValue(':filter', $filter, PDO::PARAM_STR);
+        $stmt->bindValue(':client', $client, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch()["count"];
+    }
+
+    public function findCandidatesWithFilter(int $client, string $filter, int $page, int $size = self::DEFAULT_SIZE): array
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM ' . self::TABLE_NAME . ' WHERE CONCAT(firstname," ", lastname) LIKE :filter AND client_id = :client LIMIT :offset, :size');
+        $stmt->bindValue(':offset', $page * $size, PDO::PARAM_INT);
+        $stmt->bindValue(':size', $size, PDO::PARAM_INT);
+        $stmt->bindValue(':filter', "%$filter%", PDO::PARAM_STR);
+        $stmt->bindValue(':client', $client, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
+    }
     
     public function findByName(String $name){
         $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME ." WHERE :name IN (lastname, firstname, CONCAT(CONCAT(firstname, ' '),lastname), CONCAT(CONCAT(lastname, ' '),firstname)) 
@@ -51,7 +72,7 @@ class CandidateRepository extends Repository
             'sex' => htmlspecialchars($candidate->getSex()),
             'height' => htmlspecialchars($candidate->getHeight()),
             'weight' => htmlspecialchars($candidate->getWeight()),
-            'email' => htmlspecialchars($candidate->getLastname()),
+            'email' => htmlspecialchars($candidate->getEmail()),
             'phone' => htmlspecialchars($candidate->getPhone()),
         ]);
     }
@@ -64,8 +85,8 @@ class CandidateRepository extends Repository
     {
         $stmt = $this->pdo->prepare(
             'INSERT INTO ' . self::TABLE_NAME .
-            '(firstname, lastname, sex, height, weight,  email, phone, cgu_approvement, user_id )' .
-            'VALUES (:firstname, :lastname, :sex, :height, :weight,  :email, :phone, :cgu_approvement, :user_id )'
+            '(firstname, lastname, sex, height, weight,  email, phone, cgu_approvement, client_id )' .
+            'VALUES (:firstname, :lastname, :sex, :height, :weight,  :email, :phone, :cgu_approvement, :client_id )'
         );
 
         $stmt->execute([
@@ -74,10 +95,10 @@ class CandidateRepository extends Repository
             'sex' => htmlspecialchars($candidate->getSex()),
             'height' => htmlspecialchars($candidate->getHeight()),
             'weight' => htmlspecialchars($candidate->getWeight()),
-            'email' => htmlspecialchars($candidate->getLastname()),
+            'email' => htmlspecialchars($candidate->getEmail()),
             'phone' => htmlspecialchars($candidate->getPhone()),
             'cgu_approvement' => htmlspecialchars($candidate->getCguApprovement()),
-            'user_id' => htmlspecialchars($candidate->getClientId())
+            'client_id' => htmlspecialchars($candidate->getClientId())
         ]);
 
         $candidate->setId($this->pdo->lastInsertId());

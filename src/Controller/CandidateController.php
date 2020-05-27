@@ -10,15 +10,19 @@ use PDO;
 
 class CandidateController extends Controller
 {
-
     
     public function index(){
+        $filter = $this->getRequest()->get->get("search") ?? "";
+        $page = $this->getRequest()->get->get("page") ?? 0;
+
         /** @var CandidateRepository $repo */
         $repo = $this->getRepository(CandidateRepository::class);
-
         return $this->render('/candidate/index.php', [
             'title' => 'Gestion des candidats',
-            'candidates' => $repo->findAllOfUser($this->getUser()),
+            'candidates' => $repo->findCandidatesWithFilter($this->getUser()->getId(), $filter, $page),
+            'page' => $page+1,
+            'count' => $repo->findPageCountWithFilter($this->getUser()->getId(), $filter)+1,
+            'filter' => $filter
         ]);
     }
 
@@ -73,7 +77,7 @@ class CandidateController extends Controller
             //TODO: candidate edition
 
             return $this->render('/candidate/form.php', [
-                "title" => "Création d'un nouveau candidat",
+                "title" => "Candidat: ". $candidate->getFirstname().' '.strtoupper($candidate->getLastname()),
                 "candidate" => $candidate
             ]);
         }

@@ -30,6 +30,29 @@ class UserRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_CLASS, User::class);
     }
 
+    public function findPageCountWithFilter(string $filter, int $size = self::DEFAULT_SIZE): int
+    {
+        $stmt = $this->pdo->prepare('SELECT COUNT(*)/(:size) as "count" FROM ' . self::TABLE_NAME . ' WHERE name LIKE :filter AND role LIKE :role');
+        $stmt->bindValue(':size', $size, PDO::PARAM_INT);
+        $stmt->bindValue(':filter', $filter, PDO::PARAM_STR);
+        $stmt->bindValue(':role', Security::ROLE_CLIENT, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetch()["count"];
+    }
+
+    public function findClientsWithFilter(string $filter, int $page, int $size = self::DEFAULT_SIZE): array
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM ' . self::TABLE_NAME . ' WHERE name LIKE :filter AND role LIKE :role LIMIT :offset, :size');
+        $stmt->bindValue(':offset', $page * $size, PDO::PARAM_INT);
+        $stmt->bindValue(':size', $size, PDO::PARAM_INT);
+        $stmt->bindValue(':filter', "%$filter%", PDO::PARAM_STR);
+        $stmt->bindValue(':role', Security::ROLE_CLIENT, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
+    }
+
     public function findSuperAdminCount(): int
     {
         $stmt = $this->pdo->query('SELECT COUNT(id) FROM ' . self::TABLE_NAME . ' WHERE role = "ROLE_SUPER_ADMIN" ');
