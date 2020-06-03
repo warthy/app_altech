@@ -20,6 +20,14 @@ class TicketRepository extends Repository
         return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
     }
 
+    public function findAllByStatus(bool $status){
+        $stmt = $this->pdo->prepare('SELECT * FROM '. self::TABLE_NAME .' WHERE closed = :status ORDER BY open_at');
+        $stmt->bindValue(':status', $status, PDO::PARAM_BOOL);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, self::ENTITY);
+    }
+
     /**
      * @param Ticket $ticket
      */

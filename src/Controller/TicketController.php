@@ -23,7 +23,8 @@ class TicketController extends Controller
         return Security::hasPermission(Security::ROLE_ADMIN) ?
             $this->render('/ticket/admin.php', [
                 'title' => "Administration des tickets",
-                'tickets' => []
+                'opened' => $repo->findAllByStatus(false),
+                'closed' => $repo->findAllByStatus(true)
             ]) :
             $this->render('/ticket/client.php', [
                 'title' => 'Gestion des tickets',
