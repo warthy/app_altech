@@ -85,12 +85,12 @@ class Candidate implements EntityInterface
         return $this;
     }
 
-    public function getSex(): ?bool
+    public function getSex(): ?int
     {
         return $this->sex;
     }
 
-    public function setSex(bool $sex): self
+    public function setSex(int $sex): self
     {
         $this->sex = $sex;
         return $this;

@@ -5,7 +5,7 @@
                 <select name="sex" id="sexe">
                     <option value="1">Homme</option>
                     <option value="0">Femme</option>
-                    <option value="null">Non-divulgué</option>
+                    <option value="-1">Non-divulgué</option>
                 </select>
             </div>
         </div>
