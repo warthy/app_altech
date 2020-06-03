@@ -77,9 +77,31 @@ class CandidateController extends Controller
         $user = $this->getUser();
         /** @var Candidate $candidate */
         $candidate = $repo->findById($id);
+        $req = $this->getRequest();
+        $file = $req->files->get("cgu_approvement");
+        $form = $req->form;
 
         if($candidate && $user->getId() == $candidate->getClientId()){
-            //TODO: candidate edition
+            if($req->is(Request::METHOD_POST)) {
+                $candidate
+                    ->setEmail($form->get("email"))
+                    ->setPhone($form->get("phone"))
+                    ->setFirstname($form->get("firstname"))
+                    ->setLastname($form->get("lastname"))
+                    ->setHeight($form->get("height"))
+                    ->setWeight($form->get("weight"));
+                if (intval($form->get("sex")) >= 0) {
+                    $candidate->setSex(intval($form->get("sex")));
+                } else {
+                    $candidate->setSex(null);
+                }
+
+                if($file){
+                    $candidate->setCguApprovement(ClientController::checkAndUploadFile($file));
+                }
+                $repo->update($candidate);
+                $this->redirect("/candidate/".$candidate->getId());
+            }
 
             return $this->render('/candidate/form.php', [
                 "title" => "Candidat: ". $candidate->getFirstname().' '.strtoupper($candidate->getLastname()),
