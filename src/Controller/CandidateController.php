@@ -50,8 +50,12 @@ class CandidateController extends Controller
                     ->setLastname($form->get("lastname"))
                     ->setHeight($form->get("height"))
                     ->setWeight($form->get("weight"));
-                if(intval($form->get("sex")) >= 0)
+                if(intval($form->get("sex")) >= 0){
                     $candidate->setSex(intval($form->get("sex")));
+                }else {
+                    $candidate->setSex(null);
+                }
+                   
 
                 $candidate->setCguApprovement(ClientController::checkAndUploadFile($file));
 
