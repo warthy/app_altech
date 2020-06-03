@@ -96,7 +96,7 @@ class CandidateController extends Controller
                     $candidate->setSex(null);
                 }
 
-                if($file){
+                if(!file_exists($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])){
                     $candidate->setCguApprovement(ClientController::checkAndUploadFile($file));
                 }
                 $repo->update($candidate);
