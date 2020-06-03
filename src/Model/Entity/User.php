@@ -232,7 +232,7 @@ class User implements EntityInterface
         return ($this->picture ?? "default.svg");
     }
 
-    public function setPictureFile(string $picture): self
+    public function setPicture(string $picture): self
     {
         $this->picture = $picture;
         return $this;
