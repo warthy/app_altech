@@ -93,5 +93,6 @@ class UserController extends Controller
                 throw new Exception("Erreur d'upload du fichier");
             }
         }
+        throw new Exception("Fichier invalide");
     }
 }
