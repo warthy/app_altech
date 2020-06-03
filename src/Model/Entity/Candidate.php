@@ -90,7 +90,7 @@ class Candidate implements EntityInterface
         return $this->sex;
     }
 
-    public function setSex(int $sex): self
+    public function setSex(?int $sex): self
     {
         $this->sex = $sex;
         return $this;
