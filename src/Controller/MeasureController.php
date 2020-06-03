@@ -52,7 +52,7 @@ class MeasureController extends Controller
         // TODO : verify if measures belong to candidate ?
         if($measures){
             $user = $this->getUser();
-            if(($candidate && $candidate->getClientId() == $user->getId()) || Security::hasPermission(Security::ROLE_ADMIN))
+            if(($candidate && $candidate->getClientId() === $user->getId()) || Security::hasPermission(Security::ROLE_ADMIN))
             {
                 return $this->render('/measures/candidate-index.php', [
                     'title' => 'Gérer les mesures du candidat : ' . $candidate->getFirstName() . ' ' . $candidate->getLastName(),
