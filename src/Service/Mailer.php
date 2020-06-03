@@ -23,7 +23,7 @@ class Mailer
         $this->mailer->isSMTP();
         $this->mailer->SMTPAuth = true;
         $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $this->mailer->SMTPDebug = SMTP::DEBUG_SERVER;
+        $this->mailer->SMTPDebug = SMTP::DEBUG_OFF;
 
         $this->mailer->Host = getenv("MAILER_HOST");
         $this->mailer->Username = getenv("MAILER_USERNAME");
