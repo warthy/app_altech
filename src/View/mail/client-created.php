@@ -26,12 +26,12 @@
 <div class="img-box">
     <img src="<?= $host ?>/img/logo.png" height="150" alt="logo"/>
 </div>
-<h1 class="primary-color">Félicitation <?= $name ?>, </h1>
+<h1 class="primary-color">Félicitations <?= $name ?>, </h1>
 <p>
     Nous sommes ravis de vous accueillir parmi nous.
 </p>
 <p>
-    Suite à la signature du contrat, votre compte vient d'être créer sur la plateforme Infinite Measures de mesures psycotechnique !
+    Suite à la signature du contrat, votre compte vient d'être créer sur la plateforme Infinite Measures de mesures psychotechniques !
     Avant de pouvoir accéder à la plateforme et de pouvoir profiter pleinement de toutes ses fonctionnalités, il vous reste une dernière étape.
     Afin d'assure une sécurité maximum envers votre compte, vous devez choisir le mot de passe qui vous permettra de vous connecter à la plateforme.
 </p>
