@@ -26,7 +26,7 @@
     ?>
 
     <?php if(!$admin) { ?>
-    <a class="default-btn open-ticket" href="/ticket/new">
+    <a class="default-btn open-ticket" href="/ticket">
         <div>
             <span>Pas de réponse ?</span>
             <h2>Ouvrir un ticket +</h2>

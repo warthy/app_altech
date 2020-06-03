@@ -98,3 +98,7 @@ ALTER TABLE `candidate`
 
 ALTER TABLE `measure`
     ADD FOREIGN KEY (`candidate_id`) REFERENCES `candidate` (`id`) ON DELETE CASCADE;
+
+
+# Create default super admin user
+INSERT INTO `user` (name, email, password, role) VALUES ('super admin', 'admin@email.fr', '$2y$10$vfEygyp7MfOt67Lpy4w7Q.bgJSlxmtjlEMgxK6ACLfSsu4g/Npkku', 'ROLE_SUPER_ADMIN')
