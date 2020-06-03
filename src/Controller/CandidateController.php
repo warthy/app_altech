@@ -2,6 +2,7 @@
 namespace Altech\Controller;
 
 use Altech\Model\Entity\Candidate;
+use Altech\Model\Entity\User;
 use Altech\Model\Repository\CandidateRepository;
 use App\Component\Controller;
 use App\KernelFoundation\Request;
@@ -96,9 +97,13 @@ class CandidateController extends Controller
                     $candidate->setSex(null);
                 }
 
-                if(!file_exists($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])){
+                if ($file["size"] > 0) {
+                    //If there was a previous picture we delete it
+                    if ($user->getPicture())
+                        unlink(User::UPLOAD_DIR . $candidate->getCguApprovement());
                     $candidate->setCguApprovement(ClientController::checkAndUploadFile($file));
                 }
+
                 $repo->update($candidate);
                 $this->redirect("/candidate/".$candidate->getId());
             }

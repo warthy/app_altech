@@ -19,7 +19,6 @@ class TicketController extends Controller
     {
         /** @var TicketRepository $repo */
         $repo = $this->getRepository(TicketRepository::class);
-        $client = $this->getUser();
 
         return Security::hasPermission(Security::ROLE_ADMIN) ?
             $this->render('/ticket/admin.php', [
@@ -28,7 +27,7 @@ class TicketController extends Controller
             ]) :
             $this->render('/ticket/client.php', [
                 'title' => 'Gestion des tickets',
-                'tickets' => $repo->findAllByClient($client)
+                'tickets' => $repo->findAllByClient($this->getUser())
             ]);
     }
 
