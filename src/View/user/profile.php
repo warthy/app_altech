@@ -35,7 +35,7 @@ use App\KernelFoundation\Security;
                         <input name="firstname" id=firstname" value="<?= $firstname ?>" required/>
                     </div>
                     <div>
-                        <label for="lastname">Téléphone :</label>
+                        <label for="lastname">Nom :</label>
                         <input name="lastname" id="lastname" value="<?= $lastname ?>" required/>
                     </div>
                 </div>
