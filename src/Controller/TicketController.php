@@ -23,13 +23,13 @@ class TicketController extends Controller
 
         return Security::hasPermission(Security::ROLE_ADMIN) ?
             $this->render('/ticket/admin.php', [
-               'title' => "Administration des tickets"
-            ])
-            :
+                'title' => "Administration des tickets",
+                'tickets' => []
+            ]) :
             $this->render('/ticket/client.php', [
-            'title' => 'Gestion des tickets',
-            'tickets' => $repo->findAllByClient($client)
-        ]);
+                'title' => 'Gestion des tickets',
+                'tickets' => $repo->findAllByClient($client)
+            ]);
     }
 
     public function view($id)
