@@ -212,7 +212,11 @@ header {
     background-color: #8c2c29;
 }
 
-
+.cgu-link {
+    border: none !important;
+    position: fixed;
+    bottom: 0;
+}
 
 
 

@@ -86,6 +86,9 @@
                     <i class="material-icons">group</i> Gérer les administrateurs
                 </a>
             <?php }?>
+            <a class="cgu-link" href="/cgu.pdf" download>
+                CGU 2020
+            </a>
         </div>
         <div class="content">
             <h1 class="content-title"><?= $title ?? "" ?></h1>
