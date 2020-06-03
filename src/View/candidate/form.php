@@ -4,11 +4,11 @@
             <label for="sexe">Sexe :</label>
             <select name="sex" id="sexe">
                 <?php
-                    if($candidate->getSex() == 1){ ?>
+                    if($candidate->getSex() === 1){ ?>
                         <option value="1" selected>Homme</option>
                         <option value="0">Femme</option>
                         <option value="-1">Non-divulgué</option>
-                    <?php }elseif ($candidate->getSex() == 0){ ?>
+                    <?php }elseif ($candidate->getSex() === 0){ ?>
                         <option value="1">Homme</option>
                         <option value="0" selected>Femme</option>
                         <option value="-1">Non-divulgué</option>
