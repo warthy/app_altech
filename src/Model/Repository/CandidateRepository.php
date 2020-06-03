@@ -69,7 +69,7 @@ class CandidateRepository extends Repository
             'id' => htmlspecialchars($candidate->getId()),
             'firstname' => htmlspecialchars($candidate->getFirstname()),
             'lastname' => htmlspecialchars($candidate->getLastname()),
-            'sex' => $candidate->getSex() ?? "NULL",
+            'sex' => $candidate->getSex() ?? null,
             'height' => htmlspecialchars($candidate->getHeight()),
             'weight' => htmlspecialchars($candidate->getWeight()),
             'email' => htmlspecialchars($candidate->getEmail()),
