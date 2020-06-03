@@ -61,7 +61,7 @@ class MeasureController extends Controller
                 ]);
             }
         }
-        throw new Exception("Invalid request");
+        
     }
 
     public function view($id){
