@@ -20,6 +20,7 @@ class Mailer
     public function __construct()
     {
         $this->mailer = new PHPMailer();
+        $this->mailer->isSMTP();
         $this->mailer->SMTPAuth = true;
         $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $this->mailer->SMTPDebug = SMTP::DEBUG_SERVER;
@@ -113,12 +114,14 @@ class Mailer
     }
 
     /**
-     * @return bool
-     * @throws MailerException
+     * @return void
+     * @throws Exception
      */
-    public function send(): bool
+    public function send(): void
     {
-       return $this->mailer->send();
+       if(!$this->mailer->send()){
+           throw new Exception($this->mailer->ErrorInfo);
+       }
     }
 
     public static function getInstance(): self
