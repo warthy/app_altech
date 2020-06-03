@@ -47,7 +47,7 @@ class HomeController extends Controller
             try {
                 $mailer
                     ->from($form->get('email'), $form->get('name'))
-                    ->to($_ENV["MAILER_USERNAME"])
+                    ->to(getenv("MAILER_USERNAME"))
                     ->subject('Demande de contact: ' . $form->get('name'))
                     ->setBody('contact.php', [
                         'name' => $form->get('name'),

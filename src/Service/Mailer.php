@@ -24,15 +24,15 @@ class Mailer
         $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $this->mailer->SMTPDebug = SMTP::DEBUG_SERVER;
 
-        $this->mailer->Host = $_ENV["MAILER_HOST"];
-        $this->mailer->Username = $_ENV["MAILER_USERNAME"];
-        $this->mailer->Password = $_ENV["MAILER_PASSWORD"];
-        $this->mailer->Port = $_ENV["MAILER_PORT"];
+        $this->mailer->Host = getenv("MAILER_HOST");
+        $this->mailer->Username = getenv("MAILER_USERNAME");
+        $this->mailer->Password = getenv("MAILER_PASSWORD");
+        $this->mailer->Port = getenv("MAILER_PORT");
 
         $this->mailer->CharSet = 'utf-8';
         $this->mailer->Encoding = 'base64';
 
-        $this->mailer->setFrom($_ENV["MAILER_USERNAME"], "Infinite Measures");
+        $this->mailer->setFrom(getenv("MAILER_USERNAME"), "Infinite Measures");
         $this->mailer->isHTML(true);
     }
 
@@ -112,10 +112,13 @@ class Mailer
         throw new Exception("Email body's file can not be found at: " . self::TEMPLATE_DIR);
     }
 
-
+    /**
+     * @return bool
+     * @throws MailerException
+     */
     public function send(): bool
     {
-        return $this->mailer->send();
+       return $this->mailer->send();
     }
 
     public static function getInstance(): self
