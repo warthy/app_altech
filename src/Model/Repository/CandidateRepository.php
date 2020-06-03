@@ -61,8 +61,8 @@ class CandidateRepository extends Repository
     {
         $stmt = $this->pdo->prepare(
             'UPDATE ' . self::TABLE_NAME .
-            'SET firstname = :firstname, lastname = :lastname, sex = :sex, height = :height, weight = :weight,  email = :email, phone = :phone, cgu_approvement = :cgu_approvement ' .
-            'WHERE id = :id'
+            ' SET firstname = :firstname, lastname = :lastname, sex = :sex, height = :height, weight = :weight, email = :email, phone = :phone, cgu_approvement = :cgu_approvement' .
+            ' WHERE id = :id'
         );
 
         $stmt->execute([
