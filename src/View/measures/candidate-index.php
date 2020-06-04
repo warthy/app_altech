@@ -18,7 +18,7 @@
         </tbody>
     </table>
 
-    <a class="default-btn" href="/candidate/<?= $candidate_id ?>/newmeasure">
+    <a class="default-btn" href="/newmeasure">
         Lancer un nouveau test
     </a>
 </div>
