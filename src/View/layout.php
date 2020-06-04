@@ -82,7 +82,7 @@
                 </a>
             <?php }?>
             <?php if(Security::hasPermission("ROLE_SUPER_ADMIN")) {?>
-                <a href="admin/user">
+                <a href="/admin/user">
                     <i class="material-icons">group</i> Gérer les administrateurs
                 </a>
             <?php }?>
